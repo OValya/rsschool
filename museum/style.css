@@ -1,0 +1,93 @@
+/**************обнуление***********/
+a {
+text-decoration: none;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/**********************************/
+:root{
+    --maxWidthContainer: 1440px;
+    --colorFontGrey: 9d8665;
+    --colorFontLink: CAAA7D;
+    --colorFontBasic: black;
+    --colorFontWhite: white;
+
+}
+
+html, body {
+    height: 100%;
+    font-size: 22px;
+    font-family: Roboto;
+    font-weight: 400;
+    color: var(--colorFontBasic);
+
+
+}
+.wrapper {
+    min-height: 100%;
+    overflow: hidden;
+    background-color: var(--colorFontBasic);
+    
+}
+._container {
+    max-width: 1440px;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+
+/*------------------ШАПКА--------------------------------*/
+.header {
+    border: 3px solid red;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+.header__container {
+    display: flex;
+    min-height: 150px;
+    align-items: center;
+
+}
+.header-logo {
+    display: flex;
+    min-height: 33px;
+    align-items: center;
+}
+.header-logo__icon {
+}
+.header-logo__title {
+    margin: 0 0 0 25px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 28px;
+    font-family: Forum;
+    font-weight: 400;
+    color: var(--colorFontWhite);
+}
+.header__menu {
+    margin: 0 0 0 466px;
+}
+.menu {
+}
+.menu__list {
+    display:flex;
+}
+.menu_item{
+
+}
+.menu_item:not(:last-child) {
+    margin: 0 55px 0 0;
+}
+.menu_link {
+    color: var(--colorFontWhite);
+    font-weight: 200;
+    line-height: calc(24/22 * 100%);
+    letter-spacing: 2px;
+
+}
