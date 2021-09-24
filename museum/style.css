@@ -5,13 +5,17 @@ text-decoration: none;
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+li{
+    list-style: none;
 }
 
 /**********************************/
 :root{
     --maxWidthContainer: 1440px;
-    --colorFontGrey: 9d8665;
-    --colorFontLink: CAAA7D;
+    --colorFontGrey: #9d8665;
+    --colorFontLink: #CAAA7D;
     --colorFontBasic: black;
     --colorFontWhite: white;
 
@@ -29,29 +33,36 @@ html, body {
 .wrapper {
     min-height: 100%;
     overflow: hidden;
-    background-color: var(--colorFontBasic);
+   /* background-color: var(--colorFontBasic);*/
+    display: flex;
+    flex-direction: column;
     
 }
 ._container {
     max-width: 1440px;
     margin: 0 auto;
-    border: 1px solid red;
+    
+    
 }
 
 
 /*------------------ШАПКА--------------------------------*/
 .header {
-    border: 3px solid red;
-    position: absolute;
-    width: 100%;
+    
+    /*position: absolute;
+    
     left: 0;
-    top: 0;
+    top: 0;*/
+    width: 100%;
     z-index: 10;
 }
 .header__container {
     display: flex;
     min-height: 150px;
     align-items: center;
+    box-sizing: content-box;
+    padding: 0 15px;
+    background-color: var(--colorFontBasic);
 
 }
 .header-logo {
@@ -77,6 +88,7 @@ html, body {
 }
 .menu__list {
     display:flex;
+    flex-wrap: wrap;
 }
 .menu_item{
 
@@ -89,5 +101,192 @@ html, body {
     font-weight: 200;
     line-height: calc(24/22 * 100%);
     letter-spacing: 2px;
+}
+/*--------------------------------------------/
+/*---------------карусель---------------------*/
+.carousel{
+    
+}
+.item-container {
+}
+.item {
+}
+.description {
+}
+.project-name {
+}
+.control {
+}
+.left-control {
+}
+.arrow {
+}
+.left-arrow {
+}
+.right-control {
+}
+.right-arrow {
+}
+
+/*----------------------------------------------------------------------*/
+/***************main**********************/
+.page{
+    flex:1 1 auto;
+    
+    
+}
+.section {
+    padding: 75px 0;
+    
+}
+.section-title{
+    font-family: forum;
+    font-size: 80px;
+    font-weight: 400;
+    line-height: 112%;
+    text-transform: uppercase;
+    color: var(--colorFontGrey);
+    letter-spacing: 5px;
+}
+
+.section-dark-title{
+    color:var( --colorFontWhite);
+}
+
+.underline-title {
+    position: relative;
+  }
+
+.underline-title::after {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: #710707;
+  }
+
+.section-dark{
+    background-color: black;
+}
+/*---------------Welcome----------------*/
+.welcome {
+}
+
+.welcome__container {
+    border: 1px solid orangered;
+    min-height: 810px;
+}
+
+
+/*--------------------------------------*/
+/*--------------Virtual tour------------*/
+.tour {
+}
+.tour__container {
+    min-height: 1116px;
+    
+}
+
+.tour__body {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 75px -30px;
+}
+.tour__column {
+    padding: 0 30px;
+    flex: 0 1 33.333%;
+}
+.tour__item {
+    background-color: white;
+}
+.item-tour {
+}
+.item-tour__img {
+}
+.item-tour__title {
+    font-family: forum;
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    line-height: 35px;
+}
+.item-tour__text {
+    font-weight: 200;
+}
+.text-360 {
+    font-size: 22px;
+    line-height: 26px;
 
 }
+.text-panorama {
+    font-size: 18px;
+    line-height: 21px;
+}
+
+/*--------------------------------------*/
+/*-------------gallery---нет градиента сверху---------------*/
+
+
+.gallery__container {
+    overflow: hidden;
+    height: 2125px;
+    
+}
+/*.gallery__container::after{
+    content: "";
+	display: block;    
+	width: 100%;
+	height: 100%;    
+	position: absolute;
+	top: 0;      
+	left: 0;   
+	background: transparent;
+	background-image: linear-gradient(to left, #11de93, #0e7ad6);
+	opacity: 0.8;
+}*/
+
+	
+
+
+.gallery__inner-container {
+    padding: 100px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 2800px;
+    align-content: center;
+    column-gap: 18px;
+    row-gap: 24px;
+    width: 100%;
+  
+    
+
+}
+
+.gallery__item {
+    display: block;
+    width: 456px;
+    position: relative;
+}
+
+.gallery__item:nth-child(3n+1){order: 1;}
+.gallery__item:nth-child(3n+2){order: 2;bottom: 25px;}
+.gallery__item:nth-child(3n){order: 3;}
+
+.gallery__inner-container::before, .gallery__inner-container::after{
+    content: "";
+    flex-basis: 100%;
+    width: 0px;
+    order: 2;
+}
+
+
+/*--------------------------------------*/
+
+/*****************************************/
+/*------------------подвал----------------------------------------------*/
+
+/*--------------------------------------------------*/
