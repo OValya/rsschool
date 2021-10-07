@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Forum&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/style.css" />
     <link rel="icon" href="assets/favicon.ico">
 
     <title>Museum</title>
@@ -27,22 +27,22 @@
                 <nav class="header__menu menu">
                     <ul class="menu__list">
                         <li class="menu_item">
-                            <a href="" class="menu_link">Visiting</a> 
+                            <a href="#Visiting" class="menu_link">Visiting</a> 
                         </li>
                         <li class="menu_item">
-                            <a href="" class="menu_link">Explore</a> 
+                            <a href="#Explore" class="menu_link">Explore</a> 
                         </li>
                         <li class="menu_item">
-                            <a href="" class="menu_link">Video</a> 
+                            <a href="#Video" class="menu_link">Video</a> 
                         </li>
                         <li class="menu_item">
-                            <a href="" class="menu_link">Gallery</a> 
+                            <a href="#Gallery" class="menu_link">Gallery</a> 
                         </li>
                         <li class="menu_item">
-                            <a href="" class="menu_link">Tickets</a> 
+                            <a href="#Tickets" class="menu_link">Tickets</a> 
                         </li>
                         <li class="menu_item">
-                            <a href="" class="menu_link">Contacts</a> 
+                            <a href="#Contacts" class="menu_link">Contacts</a> 
                         </li>
                     </ul>
                 </nav>
@@ -99,7 +99,7 @@
                     <div class="welcome-text">
                         <h2 class="section-title section-dark-title"> welcome <br> to the louvre</h2>
                         <p>From the castle to the museum</p>
-                        <div class="welcome-button"><a href="https://www.google.com/maps/@48.8618159,2.3366818,3a,75y,81.55h,73.4t/data=!3m7!1e1!3m5!1sAF1QipOVxZQuSy3Bx9T_HpH_7FtBHDTXvI6SF-A10ocT!2e10!3e12!7i5472!8i2736"> Discover the Louvre </a></div>
+                        <div class="welcome-button"><a href="/tours/tour7.html"> Discover the Louvre </a></div>
                     </div>
                     <div class="slider-panel"> 
                         <div class="slide-number">
@@ -138,13 +138,13 @@
                 </div>
             </section>
 
-            <section class="tour section section">
+            <section class="tour-section section">
                 <div class="tour__container _container">
-                    <h2 class="section-title underline-title"> Virtual tour</h2>
+                    <h2 id = "Visiting" class="section-title underline-title"> Virtual tour</h2>
                     <div class="tour__body">
                        
                             <div class="tour__item ">
-                                <a class="item-tour__img">
+                                <a class="item-tour__img" href="tours/tour1.html" target="_blank">
                                     <img src="assets/img/virtual tour/1.jpg" alt="Royal Palace">
                                 </a>
                                 <h3 class="item-tour__title">Royal Palace</h3>
@@ -154,7 +154,7 @@
                     
                        
                             <div class="tour__item ">
-                                <a class="item-tour__img" href="">
+                                <a class="item-tour__img" href="/tours/tour2.html" target="_blank">
                                     <img src="assets/img/virtual tour/2.jpg" alt="Denon Wing">
                                 </a>
                                 <h3 class="item-tour__title">Denon Wing</h3>
@@ -164,7 +164,7 @@
                      
                        
                             <div class="tour__item ">
-                                <a class="item-tour__img" href="">
+                                <a class="item-tour__img" href="/tours/tour3.html" target="_blank">
                                     <img src="assets/img/virtual tour/3.jpg" alt="Colonnade Perrault">
                                 </a>
                                 <h3 class="item-tour__title">Colonnade Perrault</h3>
@@ -174,7 +174,7 @@
                        
                        
                             <div class="tour__item " >
-                                <a class="item-tour__img" href="">
+                                <a class="item-tour__img" href="/tours/tour4.html" target="_blank">
                                     <img src="assets/img/virtual tour/4.jpg" alt="Greek hall">
                                 </a>
                                 <h3 class="item-tour__title">Greek hall</h3>
@@ -184,7 +184,7 @@
                       
                       
                             <div class="tour__item ">
-                                <a class="item-tour__img" href="">
+                                <a class="item-tour__img" href="/tours/tour5.html" target="_blank">
                                     <img src="assets/img/virtual tour/5.jpg" alt="Mona Lisa">
                                 </a>
                                 <h3 class="item-tour__title">Mona Lisa</h3>
@@ -194,7 +194,7 @@
                         
                        
                             <div class="tour__item ">
-                                <a class="item-tour__img" href="">
+                                <a class="item-tour__img" href="/tours/tour6.html" target="_blank">
                                     <img src="assets/img/virtual tour/6.jpg" alt="Night Palace">
                                 </a>
                                 <h3 class="item-tour__title">Night Palace</h3>
@@ -210,14 +210,19 @@
             <section class="explore-section section section-dark "> Picture explore
                 <div class="explore-section__container _container">
                     <div class="title-text-block">
-                        <h2 class="section-explore-title section-title section-dark-title underline-title"> Picture explore</h2>
+                        <h2 id="Explore" class="section-explore-title section-title section-dark-title underline-title"> Picture explore</h2>
                         <p>Las Meninas is a 1656 painting by Diego Velázquez, the leading artist of the Spanish Golden Age.</p>
                         <p>It was cleaned in 1984 to remove a <span class="yellow">"yellow veil"</span> of dust that had gathered since the previous restoration in the 19th century.</p>
                         <p>The cleaning provoked furious protests, not because the picture had been damaged in any way, but because it looked different.</p>
 
                     </div>
-                    <div class="image-explore"> 
-                        <img class="image" src="assets/img/explore/half.jpg" alt="">
+                    <div class="image-explore-block"> 
+                        <div class="image-explore-item image-before">
+                            <img class="image-explore" src="assets/img/explore/before.jpg" alt="">
+                        </div>
+                        <div class="image-explore-item image-after">
+                            <img class="image-explore" src="assets/img/explore/after.jpg" alt="">
+                        </div>
                         <img class="line-image" src="assets/svg/explore/line.svg" alt="">
                     </div>
                 </div>
@@ -225,7 +230,7 @@
             <section class="video-section section">
                 <div class="video-section__container _container">
                     <div class="video-title-block"> 
-                        <h2 class="section-title video-section-title"> Video journey</h2>
+                        <h2 id="Video" class="section-title video-section-title"> Video journey</h2>
                         <p>Enter and visit one of the most famous museums in the world and enjoy masterpieces such as Mona Lisa or Hammurabi's Code</p>
                     </div> 
                     <div class="video-block">
@@ -272,6 +277,15 @@
                             </div>
                             
                         </div>
+                        <div class="video-bullets">
+                            <img src="assets/svg/video/stroke.svg" alt="">
+                            <a class="item-video-bullets active-video-bullet" href="#"></a>
+                            <a class="item-video-bullets" href="#"></a>
+                            <a class="item-video-bullets" href="#"></a>
+                            <a class="item-video-bullets" href="#"></a>
+                            <a class="item-video-bullets" href="#"></a>
+                            <img src="assets/svg/video/stroke-rev.svg" alt="">
+                        </div>
                         
                     <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/zp1BXPX8jcU?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --> 
                     </div>
@@ -280,7 +294,7 @@
             <section class="gallery-section section section-dark">
                 <div class="gallery__container _container">
                    
-                    <h2 class="section-title section-dark-title"> art gallery</h2>
+                    <h2 id="Gallery" class="section-title section-dark-title gallery-section-title"> art gallery</h2>
                     
                     <div class="gallery__inner-container">
                        <!-- <div class="gallery__column">-->
@@ -311,7 +325,7 @@
            
             <section class="tickets-section section">
                 <div class="tickets-section__container _container">
-                    <h2 class="section-title underline-title"> BUY TICKETS</h2>
+                    <h2 id="Tickets" class="section-title underline-title tickets-section-title"> BUY TICKETS</h2>
                     <div class="ticket-section-block">
                         <img src="assets/img/tickets/ticket_foto.jpg" alt="">
                         <div class="ticket-change-block">
@@ -346,12 +360,103 @@
             <div class="parallax"></div>
             <section class="contact-section section">
                 <div class="contact-section__container _container">
-                    <h2 class="section-title underline-title"> Contacts</h2>
+                    <h2 id="Contacts" class="section-title underline-title contact-section-title"> Contacts</h2>
+                    <div class="contact-block">
+                        <div class="contact-info">
+                            <h3>Palais Royal <br> Musee du Louvre</h3>
+                            <ul class="list-contacts">
+                                <li>
+                                    address: 75001 Paris, France
+                                </li>
+                                <li>
+                                    <span>phone:</span>
+                                    <a href="tel:+330140205050">+33(0) 1 40 20 50 50</a> 
+                                </li>
+                                <li>
+                                    <span>mail:</span>
+                                    <a href="mailto:info@louvre.fr">info@louvre.fr</a> 
+                                </li>
+                            </ul>
+                        </div>
+                        <img class = "img-map" src="assets/img/contacts/map.jpg" alt="">
+                    </div>
                 </div>
             </section>
         
         </main>
-        <footer class="footer"> footer </footer>
+        <footer class="footer"> 
+            <div class="footer-container _container">
+                
+                <div class="footer-first-block">
+                    <div class="header-logo">
+                        <div class="header-logo__icon">
+                            <img src="assets/svg/logo_luvr.svg" alt="">
+                        </div>
+                        <div class="header-logo__title">
+                            <p>Louvre</p>
+                        </div>
+                    </div>
+                    <nav class="footer-menu menu">
+                        <ul class="footer-menu__list">
+                            <li class="footer-menu_item">
+                                <a href="" class="menu_link">Visiting</a>
+                            </li>
+                            <li class="footer-menu_item">
+                                <a href="" class="menu_link">Explore</a>
+                            </li>
+                            <li class="footer-menu_item">
+                                <a href="" class="menu_link">Video</a>
+                            </li>
+                            <li class="footer-menu_item">
+                                <a href="" class="menu_link">Gallery</a>
+                            </li>
+                            <li class="footer-menu_item">
+                                <a href="" class="menu_link">Tickets</a>
+                            </li>
+                            <li class="footer-menu_item">
+                                <a href="" class="menu_link">Contacts</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="social-block">
+                        <ul class="social-list">
+                    
+                            <li class="social-item">
+                                <a class="social-link " href="" >
+                    
+                                    <img class="social-icon" src="assets/svg/social_icon/youtube.svg" alt="">
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a href="" class="social-link">
+                                    <img class="social-icon" src="assets/svg/social_icon/inst.svg" alt="">
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a href="" class="social-link">
+                                    <img class="social-icon" src="assets/svg/social_icon/fb.svg" alt="">
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a href="" class="social-link">
+                                    <img class="social-icon" src="assets/svg/social_icon/tvitter.svg" alt="">
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a href="" class="social-link">
+                                    <img class="social-icon" src="assets/svg/social_icon/pinterest.svg" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-second-block">
+                    <p>@2021</p>
+                    <a href="">Rolling Scope School</a>
+                    <a href="">GitHub</a>
+                </div>
+            </div>
+        </footer>
     </div> 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/slick.min.js"></script>
