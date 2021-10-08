@@ -41,7 +41,6 @@ body {
   margin: 0 auto;
 }
 
-
 /*------------------ШАПКА--------------------------------*/
 .header {
   width: 100%;
@@ -116,7 +115,6 @@ body {
   height: 128px;
 }
 .footer-menu__list {
-  
   display: contents;
   flex-direction: column;
 }
@@ -132,8 +130,6 @@ body {
   display: flex;
   justify-content: space-between;
 }
-
-
 
 .social-icon {
   height: 48px;
@@ -237,14 +233,13 @@ body {
   background-color: #030303;
 }
 
-.welcome__container {
+.welcome-container {
   width: 100%;
   min-height: 810px;
-  background: linear-gradient(to left, transparent 30%, #030303 70%),
-    url(/assets/img/welcome/1.jpg) 100% 0% no-repeat;
+  background: linear-gradient(to left, transparent 30%, #030303 70%);
+    /*url(/assets/img/welcome/1.jpg) 100% 0% no-repeat;*/
   position: relative;
 }
-
 
 .welcome-text {
   min-width: 598px;
@@ -310,8 +305,23 @@ body {
   margin: 0 0 0 60px;
   width: 80px;
   height: 8px;
-  background: url(/assets/svg/welcome/←-1.svg) left no-repeat,
-    url(/assets/svg/welcome/←.svg) right no-repeat;
+  display: flex;
+  /* background: url(/assets/svg/welcome/←-1.svg) left no-repeat,
+    url(/assets/svg/welcome/←.svg) right no-repeat;*/
+}
+.slide-prev {
+  height: 100%;
+  width: 50%;
+  background: url(/assets/svg/welcome/←-1.svg) left no-repeat;
+  background-color: #000000;
+  border-width: 0;
+}
+.slide-next {
+  height: 100%;
+  width: 50%;
+  background-color: #000000;
+  border-width: 0;
+  background: url(/assets/svg/welcome/←.svg) right no-repeat;
 }
 /* display: flex;  
     justify-content: space-between;
@@ -477,9 +487,9 @@ body {
 }
 
 .image-explore-block {
- /* min-width: 720px;background: url(/assets/img/explore/fon.jpg) 0px 0px no-repeat;*/
- width: 100%;
- height: 700px;  
+  /* min-width: 720px;background: url(/assets/img/explore/fon.jpg) 0px 0px no-repeat;*/
+  width: 100%;
+  height: 700px;
   position: relative;
 }
 
@@ -489,14 +499,14 @@ body {
   left: 0;
 }
 
-.image-after>img{
+.image-after > img {
   width: 50%;
   height: 100%;
 }
 .line-image {
   position: absolute;
   top: 0;
-  left: calc(100%/2);
+  left: calc(100% / 2);
 }
 /*--------------------------------------*/
 /*------------parallax-----------------*/
@@ -654,7 +664,6 @@ input[type="range"]::-webkit-slider-thumb {
 /*----------------------------------------*/
 /*-----------tickets----------------------*/
 
-
 .tickets-section-title {
   padding: 75px 0 0 0;
 }
@@ -696,7 +705,6 @@ h3 {
   line-height: 26px;
   padding: 0 0 25px 0;
 }
-
 
 /*****************************************/
 /*------------------подвал----------------------------------------------*/
