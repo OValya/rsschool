@@ -24,8 +24,6 @@ li {
 html,
 body {
   height: 100%;
-  
-  
   font-size: 22px;
   font-family: Roboto;
   font-weight: 300;
@@ -46,12 +44,7 @@ body {
 
 /*------------------ШАПКА--------------------------------*/
 .header {
-  /*position: absolute;
-    
-    left: 0;
-    top: 0;*/
   width: 100%;
-  z-index: 10;
   background-color: black;
 }
 .header__container {
@@ -67,8 +60,7 @@ body {
   min-height: 33px;
   align-items: center;
 }
-.header-logo__icon {
-}
+
 .header-logo__title {
   margin: 0 0 0 25px;
   text-transform: uppercase;
@@ -81,14 +73,12 @@ body {
 .header__menu {
   margin: 0 0 0 466px;
 }
-.menu {
-}
+
 .menu__list {
   display: flex;
   flex-wrap: wrap;
 }
-.menu_item {
-}
+
 .menu_item:not(:last-child) {
   margin: 0 55px 0 0;
 }
@@ -106,8 +96,7 @@ body {
   min-height: 392px;
   background-color: #000000;
 }
-.footer-container {
-}
+
 .footer-first-block {
   display: flex;
   justify-content: space-between;
@@ -131,8 +120,7 @@ body {
   display: contents;
   flex-direction: column;
 }
-.footer-menu_item {
-}
+
 .social-block {
   padding: 160px 0 0 0;
   min-width: calc(340 * 100% / 1440);
@@ -145,8 +133,7 @@ body {
   justify-content: space-between;
 }
 
-.social-link {
-}
+
 
 .social-icon {
   height: 48px;
@@ -171,17 +158,7 @@ body {
   display: flex;
   justify-content: flex-end;
 }
-.slick__item {
-}
-.slick-slide {
-}
-.slick-slide.slick-active {
-}
-.slick-slide.slick-current {
-}
 
-.slick-slide.slick-center {
-}
 .slick-arrow {
   position: absolute;
   bottom: 60px;
@@ -194,7 +171,7 @@ body {
 }
 
 /*--------------------------------------------*/
-/*---------------карусель---------------------*/
+/*---------------карусель---------------------
 .carousel {
 }
 .item-container {
@@ -217,15 +194,13 @@ body {
 }
 .right-arrow {
 }
-
+*/
 /*----------------------------------------------------------------------*/
 /***************main**********************/
 .page {
   flex: 1 1 auto;
 }
-.section {
-  margin: 0 0 0 0;
-}
+
 .section-title {
   font-family: forum;
   font-size: 80px;
@@ -259,7 +234,6 @@ body {
 }
 /*---------------Welcome----------------*/
 .welcome {
-  padding: 0;
   background-color: #030303;
 }
 
@@ -271,8 +245,7 @@ body {
   position: relative;
 }
 
-.welcome-image {
-}
+
 .welcome-text {
   min-width: 598px;
   padding: 150px 0 0 0;
@@ -356,7 +329,7 @@ body {
 /*--------------------------------------*/
 /*--------------Virtual tour------------*/
 .tour-section {
-  margin: 75px 0;
+  padding: 75px 0;
 }
 .tour__container {
   min-height: 1116px;
@@ -416,7 +389,7 @@ body {
 /*-------------gallery------------------*/
 
 .gallery-section-title {
-  padding: 75px 0 0 0;
+  padding: 75px 0;
 }
 .gallery__container {
   overflow: hidden;
@@ -475,7 +448,7 @@ body {
 /*--------------------------------------*/
 /*------------explore-------------------*/
 .explore-section {
-  padding: 75px 0 0 0;
+  padding: 75px 0;
   min-height: 865px;
 }
 .explore-section__container {
@@ -547,8 +520,7 @@ body {
   max-width: 720px;
   line-height: 175%;
 }
-.video-section-title {
-}
+
 .video-block {
   padding: 75px 0 0 0;
 }
@@ -582,8 +554,6 @@ body {
   width: 6.4%;
   /*  height: 120px;*/
   margin: -4.16% 0 0 -3%;
-}
-.round-element {
 }
 
 .video-panel {
@@ -683,11 +653,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 /*----------------------------------------*/
 /*-----------tickets----------------------*/
-.tickets-section {
-}
 
-.tickets-section__container {
-}
 
 .tickets-section-title {
   padding: 75px 0 0 0;
@@ -702,12 +668,7 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   justify-content: space-between;
 }
-.ticket-type-block {
-}
-.amount-block {
-}
-.total {
-}
+
 /*----------------------------------------*/
 /*---------contacts-----------------------*/
 .contact-section-title {
@@ -735,8 +696,7 @@ h3 {
   line-height: 26px;
   padding: 0 0 25px 0;
 }
-.img-map {
-}
+
 
 /*****************************************/
 /*------------------подвал----------------------------------------------*/
