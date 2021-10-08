@@ -2,6 +2,11 @@ const TIME = document.querySelector('.time');
 const DATE = document.querySelector('.date');
 const GREETING = document.querySelector('.greeting');
 const NAME = document.querySelector('.name');
+const BODY = document.getElementsByTagName('body')[0]
+let randomNum;
+const btnSlideNext = document.querySelector('.slide-next')
+const btnSlidePrev = document.querySelector('.slide-prev')
+
 
 function showTime(){
     const date = new Date();
@@ -22,15 +27,15 @@ function showDate(){
 
 showTime();
 
-function getTimeOfDay(h){
+function getTimeOfDay(){
+    const date = new Date();
+    const hour = date.getHours();
     const massiveTimes = ['night', 'morning', 'day', 'evening']
-    return massiveTimes[Math.floor(h/6)];
+    return massiveTimes[Math.floor(hour/6)];
 }
 
 function showGreeting(){
-    const date = new Date();
-    const hour = date.getHours();
-    GREETING.textContent = `Good ${getTimeOfDay(hour)}, `;
+    GREETING.textContent = `Good ${getTimeOfDay()}, `;
 }
 
 function setLocalStorage(){
@@ -47,6 +52,38 @@ function getLocalStorage(){
 
 window.addEventListener('load', getLocalStorage);
 
+function getRandomInt() {
+    randomNum = Math.ceil(Math.random() * 20); 
+  }
+
+getRandomInt();
+
+function changeBackground(){
+    const timeOfDay = getTimeOfDay();
+    const numberImg = String(randomNum).padStart(2,'0');
+    const img = new Image();
+    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${numberImg}.jpg`;
+    img.onload = ()=>{
+        BODY.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${numberImg}.jpg')`;
+    }
+}  
+
+changeBackground();
+
+function getSlideNext(){
+    (randomNum===20)?randomNum=1:randomNum++
+    changeBackground();
+}
+
+function getSlidePrev(){
+   if (randomNum===1) {randomNum=20} else {randomNum--};
+   changeBackground();
+}
+
+btnSlideNext.addEventListener('click', getSlideNext);
+btnSlidePrev.addEventListener('click', getSlidePrev);
 
 
-//TIME.textContent = date.getHours() +" "+date.getMinutes()+ " "+ date.getSeconds();
+
+
+
