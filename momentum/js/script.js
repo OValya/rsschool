@@ -6,7 +6,10 @@ const BODY = document.getElementsByTagName('body')[0]
 let randomNum;
 const btnSlideNext = document.querySelector('.slide-next')
 const btnSlidePrev = document.querySelector('.slide-prev')
-
+const city = document.querySelector('.city')
+const weatherIcon = document.querySelector('.weather-icon');
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
 
 function showTime(){
     const date = new Date();
@@ -40,13 +43,17 @@ function showGreeting(){
 
 function setLocalStorage(){
     localStorage.setItem('userName', NAME.value);
+    localStorage.setItem('city', city.value)
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
 
 function getLocalStorage(){
     if(localStorage.getItem('userName')){
-        NAME.value=localStorage.getItem('userName')
+        NAME.value=localStorage.getItem('userName');
+    }
+    if(localStorage.getItem('city')){
+        city.value=localStorage.getItem('city');
     }
 }
 
@@ -83,7 +90,21 @@ function getSlidePrev(){
 btnSlideNext.addEventListener('click', getSlideNext);
 btnSlidePrev.addEventListener('click', getSlidePrev);
 
+async function getWeather() {  
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=92be861a33f2edd35d1a39fd6838b1a2&units=metric&lang=ru`;
+    const res = await fetch(url);
+    const data = await res.json(); 
+    //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
+    temperature.textContent = data.main.temp +" \u{2103}";
+    weatherDescription.textContent = data.weather[0].description;
+    weatherIcon.className = 'weather-icon owf';
+    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+}
 
+city.addEventListener('change', getWeather);
+
+
+getWeather()
 
 
 
