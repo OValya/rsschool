@@ -1,3 +1,4 @@
+import playList from './playList.js';
 const TIME = document.querySelector('.time');
 const DATE = document.querySelector('.date');
 const GREETING = document.querySelector('.greeting');
@@ -13,6 +14,13 @@ const weatherDescription = document.querySelector('.weather-description');
 const QUOTE = document.querySelector('.quote');
 const AUTHOR = document.querySelector('.author');
 const changeQUOTE = document.querySelector('.change-quote');
+const AUDIO = document.querySelector('audio');
+let isPlay = false;
+const PLAY = document.querySelector('.play');
+const btnPlayPREV = document.querySelector('.play-prev')
+const btnPlayNEXT = document.querySelector('.play-next')
+let numPlay = 0;
+const PLAYLIST = document.querySelector('.play-list')
 
 function showTime(){
     const date = new Date();
@@ -120,5 +128,53 @@ async function getQuote(){
 window.addEventListener('load', getQuote);
 
 changeQUOTE.addEventListener('click', getQuote);
+
+//-----------audio--------
+function playAudio(){
+   AUDIO.currentTime = 0;
+   if(isPlay){AUDIO.pause(); isPlay = false; PLAY.classList.remove('pause')}
+   else {AUDIO.play(); isPlay = true; PLAY.classList.add('pause')}
+}
+
+//function togglePlay(){
+ //   PLAY.classList.toggle('pause')
+//}
+
+PLAY.addEventListener('click', playAudio);
+
+function changePlay(){
+   AUDIO.currentTime = 0;
+   AUDIO.src = playList[numPlay].src;
+   AUDIO.play(); 
+   isPlay = true; 
+   PLAY.classList.add('pause');
+}
+function playNext(){
+    if(numPlay===playList.length-1) {numPlay=0;}
+    else numPlay++; 
+    changePlay();
+}
+function playPrev(){
+    if(numPlay===0) {numPlay=playList.length-1;}
+    else numPlay--; 
+    changePlay();
+}
+
+
+btnPlayNEXT.addEventListener('click', playNext);
+btnPlayPREV.addEventListener('click', playPrev);
+
+//console.log(playList[1].src);
+
+playList.forEach(el => {
+    const LI = document.createElement('li');
+    LI.classList.add('.play-item');
+    LI.textContent = el.title;
+    PLAYLIST.append(LI);
+})
+
+
+
+//------------------------
 
 
