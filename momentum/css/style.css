@@ -258,29 +258,38 @@ body {
   height: 30vh;
   min-height: 160px;  
 }
-.language{
+
+.language, .settings{
   width: 70px;
   height: 50px;
-  font-size: 25px;
-  color: #fff;
   background-color: transparent;
   border-radius: 30%;
   border-width: 3px;
   align-self: flex-end;
-  margin: 20px;
-  
+
 }
 
-.language:hover{
+.language{
+  font-size: 25px;
+  color: #fff;
+  margin: 20px;
+}
+
+.language:hover, .settings-icon:hover{
   border-color: #fff;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.language:active{
+.language:active, .settings-icon:active{
   transform: scale(1.1);
   transition: 0.3s;
 
+}
+.settings-icon{
+  background: url('/assets/svg/settings.svg') no-repeat center/contain;
+  padding: 5px;
+  margin: 20px 20px 20px 0;
 }
 
 .quote-container{

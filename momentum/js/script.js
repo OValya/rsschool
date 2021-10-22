@@ -33,7 +33,7 @@ function showTime(){
     TIME.textContent = currentTime;
     setTimeout(showTime, 1000);
     showDate();
-    showGreeting();
+    showGreeting();  
 }
 
 function showDate(){
@@ -59,7 +59,9 @@ function getTimeOfDay(){
 //-----------приветствие-------------------
 
 function showGreeting(){
-    if(!isRussian) {GREETING.textContent = `Good ${getTimeOfDay()}, `;}
+    if(!isRussian) {
+        GREETING.textContent = `Good ${getTimeOfDay()}, `;
+    }
     else{
         switch (getTimeOfDay()) {
             case 'night':
@@ -80,9 +82,20 @@ function showGreeting(){
     }
 }
 
+function setName(){
+    if(!localStorage.getItem('userName')){
+        (isRussian)?NAME.value='Незнакомец':NAME.value='Stranger';
+    }
+}
+
+NAME.addEventListener('change', setUserNametoLocalStorage);
+
+function setUserNametoLocalStorage(){
+  localStorage.setItem('userName', NAME.value);  
+}
+
 function setLocalStorage(){
-    localStorage.setItem('userName', NAME.value);
-    localStorage.setItem('city', city.value)
+    localStorage.setItem('city', city.value);
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
@@ -97,6 +110,7 @@ function getLocalStorage(){
 }
 
 window.addEventListener('load', getLocalStorage);
+window.addEventListener('load', setName);
 
 
 //---------------фон--------------------------
@@ -119,7 +133,7 @@ function changeBackground(){
     }
 }  
 
-changeBackground();
+//changeBackground();
 
 function getSlideNext(){
     (randomNum===20)?randomNum=1:randomNum++
@@ -136,11 +150,30 @@ btnSlidePrev.addEventListener('click', getSlidePrev);
 
 
 //-----------------погода----------------------
+async function getImageAPI(){
+    const tag = 'outdoor';
+    const url =  `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=ba3a5977285474bbc874bea7cdf167bc&tags=${tag}&extras=url_l&format=json&nojsoncallback=1`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const bg = new Image();
+    //console.log(data.photos.photo[0].url_l);
+    //BODY.style.backgroundColor = "#000000"
+    bg.src = data.photos.photo[0].url_l; 
+    bg.onload = ()=>{
+        BODY.style.background = `url(${bg.src}) 0 0/cover no-repeat `;
+
+        //BODY.style.backgroundColor = '#555555'
+    }
+    //console.log(BODY.style.backgroundImage.url);
+}
+
+getImageAPI();
 
 async function getWeather() {  
     let languageOption;
     if(isRussian) {languageOption='ru'}
     else{languageOption='en'}
+    
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=92be861a33f2edd35d1a39fd6838b1a2&units=metric&lang=${languageOption}`;
     const res = await fetch(url);
     const data = await res.json(); 
@@ -222,7 +255,12 @@ playList.forEach(el => {
 })
 
 //-------change language----------
-LANGUAGE.addEventListener('click', changeLanguage);
+function changeDefaultCity(){
+ //   if(city.value=== 'Минск'){city.value='Minsk'}
+ // if(city.value==='Minsk'){city.value='Минск'}
+}
+
+//LANGUAGE.addEventListener('click', changeLanguage);
 
 function changeLanguage(){
     if(isRussian){isRussian=false; LANGUAGE.value='RU'}
@@ -231,6 +269,8 @@ function changeLanguage(){
     showDate();
     getQuote();
     getWeather();
+    setName();
+    changeDefaultCity();
     
     
 }
