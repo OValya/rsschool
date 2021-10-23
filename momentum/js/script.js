@@ -11,6 +11,8 @@ const city = document.querySelector('.city')
 const weatherIcon = document.querySelector('.weather-icon');
 const temperature = document.querySelector('.temperature');
 const weatherDescription = document.querySelector('.weather-description');
+const WIND = document.querySelector('.wind');
+const HUMIDITY = document.querySelector('.humidity');
 const QUOTE = document.querySelector('.quote');
 const AUTHOR = document.querySelector('.author');
 const changeQUOTE = document.querySelector('.change-quote');
@@ -98,7 +100,7 @@ function setLocalStorage(){
     localStorage.setItem('city', city.value);
 }
 
-window.addEventListener('beforeunload', setLocalStorage);
+//window.addEventListener('beforeunload', setLocalStorage);
 
 function getLocalStorage(){
     if(localStorage.getItem('userName')){
@@ -127,13 +129,13 @@ function changeBackground(){
     const numberImg = String(randomNum).padStart(2,'0');
     const img = new Image();
     //BODY.style.backgroundColor = "#000000"
-    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${numberImg}.jpg`;
+    img.src = `https://raw.githubusercontent.com/OValya/stage1-tasks/assets/images/${timeOfDay}/${numberImg}.jpg`;
     img.onload = ()=>{
-        BODY.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${numberImg}.jpg')`;
+        BODY.style.backgroundImage = `url('${img.src}')`;
     }
 }  
 
-//changeBackground();
+changeBackground();
 
 function getSlideNext(){
     (randomNum===20)?randomNum=1:randomNum++
@@ -149,41 +151,73 @@ btnSlideNext.addEventListener('click', getSlideNext);
 btnSlidePrev.addEventListener('click', getSlidePrev);
 
 
-//-----------------погода----------------------
-async function getImageAPI(){
+//---------------image API---------------------
+//-----------flickr
+/*async function getImageAPI(){
     const tag = 'outdoor';
     const url =  `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=ba3a5977285474bbc874bea7cdf167bc&tags=${tag}&extras=url_l&format=json&nojsoncallback=1`;
     const res = await fetch(url);
     const data = await res.json();
     const bg = new Image();
-    //console.log(data.photos.photo[0].url_l);
-    //BODY.style.backgroundColor = "#000000"
+    
     bg.src = data.photos.photo[0].url_l; 
     bg.onload = ()=>{
         BODY.style.background = `url(${bg.src}) 0 0/cover no-repeat `;
 
-        //BODY.style.backgroundColor = '#555555'
+        
     }
-    //console.log(BODY.style.backgroundImage.url);
+    
+} */
+
+
+
+//-----------Unsplash
+async function getLinkToImage() {
+    const url = 'https://api.unsplash.com/photos/random?orientation=landscape&query=morning&client_id=zIUtuSsMRo0XlHKB6bBp_akSfrXMKWcgp-QYw1v4YMw';
+    const res = await fetch(url);
+    const data = await res.json();
+    const bg = new Image();
+    bg.src = data.urls.regular;
+    console.log(bg.src);
+    bg.onload = ()=>
+    {
+        BODY.style.background = `url(${bg.src}) 0 0/cover`;
+    }
 }
+    
+//getLinkToImage();
 
-getImageAPI();
-
+//-----------------погода----------------------
 async function getWeather() {  
     let languageOption;
     if(isRussian) {languageOption='ru'}
     else{languageOption='en'}
     
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=92be861a33f2edd35d1a39fd6838b1a2&units=metric&lang=${languageOption}`;
+    
     const res = await fetch(url);
-    const data = await res.json(); 
-    //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
-    temperature.textContent = data.main.temp +" \u{2103}";
-    weatherDescription.textContent = data.weather[0].description;
-    weatherIcon.className = 'weather-icon owf';
-    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-    //wind
-    //humidity
+    if(res.ok){
+        const data = await res.json(); 
+        //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
+        temperature.textContent = Math.round(data.main.temp) +" \u{2103}";
+        weatherDescription.textContent = data.weather[0].description;
+        if(isRussian){ 
+            WIND.textContent = `Скорость ветра: ${Math.round(data.wind.speed)} м/с`;
+            HUMIDITY.textContent =`Влажность: ${data.main.humidity} %`;
+        }else{
+            WIND.textContent = `Wind speed: ${Math.round(data.wind.speed)} m/s`;
+            HUMIDITY.textContent =`Humidity: ${data.main.humidity} %`;
+        }
+        weatherIcon.className = 'weather-icon owf';
+        weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+    } else{
+        weatherDescription.textContent = "Error: enter correct city!";
+        temperature.textContent ='';
+        WIND.textContent ='';
+        HUMIDITY.textContent = '';
+        weatherIcon.classList.add(`owf-962`);
+
+    }
 }
 
 city.addEventListener('change', getWeather);
@@ -260,7 +294,7 @@ function changeDefaultCity(){
  // if(city.value==='Minsk'){city.value='Минск'}
 }
 
-//LANGUAGE.addEventListener('click', changeLanguage);
+LANGUAGE.addEventListener('click', changeLanguage);
 
 function changeLanguage(){
     if(isRussian){isRussian=false; LANGUAGE.value='RU'}
@@ -270,7 +304,7 @@ function changeLanguage(){
     getQuote();
     getWeather();
     setName();
-    changeDefaultCity();
+   // changeDefaultCity();
     
     
 }
