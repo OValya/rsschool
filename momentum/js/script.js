@@ -84,10 +84,10 @@ function showGreeting(){
     }
 }
 
-function setName(){
+function getName(){
     if(!localStorage.getItem('userName')){
         (isRussian)?NAME.value='Незнакомец':NAME.value='Stranger';
-    }
+    } else {NAME.value=localStorage.getItem('userName');}
 }
 
 NAME.addEventListener('change', setUserNametoLocalStorage);
@@ -96,24 +96,27 @@ function setUserNametoLocalStorage(){
   localStorage.setItem('userName', NAME.value);  
 }
 
-function setLocalStorage(){
+function setCityToLocalStorage(){
     localStorage.setItem('city', city.value);
 }
 
-//window.addEventListener('beforeunload', setLocalStorage);
-
+function getCity(){
+    console.log(localStorage.getItem('city'));
+    if(localStorage.getItem('city')||localStorage.getItem('city')==='')
+        {city.value=localStorage.getItem('city');}
+    else {(isRussian)?city.value='Минск':NAME.value='Minsk';} 
+}
+getName();
+getCity();
+/*
 function getLocalStorage(){
-    if(localStorage.getItem('userName')){
-        NAME.value=localStorage.getItem('userName');
-    }
-    if(localStorage.getItem('city')){
-        city.value=localStorage.getItem('city');
-    }
+    getName();
+    getCity();
 }
 
 window.addEventListener('load', getLocalStorage);
-window.addEventListener('load', setName);
-
+//window.addEventListener('load', setName);
+*/
 
 //---------------фон--------------------------
 
@@ -194,8 +197,31 @@ async function getWeather() {
     else{languageOption='en'}
     
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=92be861a33f2edd35d1a39fd6838b1a2&units=metric&lang=${languageOption}`;
-    
-    const res = await fetch(url);
+    try {
+        const res = await fetch(url);
+        const data = await res.json(); 
+        //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
+        temperature.textContent = Math.round(data.main.temp) +" \u{2103}";
+        weatherDescription.textContent = data.weather[0].description;
+        if(isRussian){ 
+            WIND.textContent = `Скорость ветра: ${Math.round(data.wind.speed)} м/с`;
+            HUMIDITY.textContent =`Влажность: ${data.main.humidity} %`;
+        }else{
+            WIND.textContent = `Wind speed: ${Math.round(data.wind.speed)} m/s`;
+            HUMIDITY.textContent =`Humidity: ${data.main.humidity} %`;
+        }
+        weatherIcon.className = 'weather-icon owf';
+        weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+        
+    } catch (error) {
+        weatherDescription.textContent = "Error: enter correct city!";
+        temperature.textContent ='';
+        WIND.textContent ='';
+        HUMIDITY.textContent = '';
+        weatherIcon.classList.add(`owf-962`);
+        
+    }
+   /* 
     if(res.ok){
         const data = await res.json(); 
         //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
@@ -217,11 +243,18 @@ async function getWeather() {
         HUMIDITY.textContent = '';
         weatherIcon.classList.add(`owf-962`);
 
-    }
+    } */
 }
 
-city.addEventListener('change', getWeather);
-getWeather()
+getWeather();
+
+city.addEventListener('change', changeCity);
+
+function changeCity(){
+   getWeather();
+   setCityToLocalStorage(); 
+}
+
 
 
 //-------------цитаты-------------
@@ -289,10 +322,7 @@ playList.forEach(el => {
 })
 
 //-------change language----------
-function changeDefaultCity(){
- //   if(city.value=== 'Минск'){city.value='Minsk'}
- // if(city.value==='Minsk'){city.value='Минск'}
-}
+
 
 LANGUAGE.addEventListener('click', changeLanguage);
 
