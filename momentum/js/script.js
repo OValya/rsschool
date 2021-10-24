@@ -25,6 +25,17 @@ let numPlay = 0;
 const PLAYLIST = document.querySelector('.play-list');
 const LANGUAGE = document.querySelector('.language');
 let isRussian = true;
+const iconSettings = document.querySelector('.settings-icon');
+const containerSettings = document.querySelector('.settings-container');
+const dateVisibility = document.getElementById('date-cb');
+const timeVisibility = document.getElementById('time-cb');
+const weatherVisibility = document.getElementById('weather-cb');
+const greetingVisibility = document.getElementById('greeting-cb');
+const quoteVisibility = document.getElementById('quote-cb');
+const playerVisibility = document.getElementById('player-cb');
+const PLAYER = document.querySelector('.player');
+const nameAndGreeting = document.querySelector('.greeting-container');
+const WEATHER = document.querySelector('.weather');
 
 
 //----------------дата-время-----------------
@@ -265,8 +276,8 @@ async function getQuote(){
     else {srcQuete = 'js/quotes_En.json'}
     const res = await fetch(srcQuete);
     const quotes = await res.json();
-    let randomQuote = Math.ceil(Math.random() * 11);
-    //console.log(randomQuote);
+    let randomQuote = Math.floor(Math.random() * 11);
+    console.log(randomQuote);
     QUOTE.textContent = quotes[randomQuote].quote;
     AUTHOR.textContent = quotes[randomQuote].source;
 }
@@ -333,11 +344,51 @@ function changeLanguage(){
     showDate();
     getQuote();
     getWeather();
-    setName();
-   // changeDefaultCity();
-    
-    
+   // setName();
+   // changeDefaultCity();  
 }
+
+//------------settings
+
+iconSettings.addEventListener('click', (e) => {
+    containerSettings.classList.toggle('_show');
+});
+
+
+
+dateVisibility.addEventListener('change', (e) => {
+    if(dateVisibility.checked) {DATE.classList.remove('_hidden');}
+    else {DATE.classList.add('_hidden');}
+});
+timeVisibility.addEventListener('change', (e) => {
+    if(timeVisibility.checked) {TIME.classList.remove('_hidden');}
+    else {TIME.classList.add('_hidden');}
+});
+playerVisibility.addEventListener('change', (e) => {
+    if(playerVisibility.checked) {PLAYER.classList.remove('_hidden');}
+    else {PLAYER.classList.add('_hidden');}
+});
+greetingVisibility.addEventListener('change', (e) => {
+    if(greetingVisibility.checked) {nameAndGreeting.classList.remove('_hidden');}
+    else {nameAndGreeting.classList.add('_hidden');}
+});
+weatherVisibility.addEventListener('change', (e) => {
+    if(weatherVisibility.checked) {WEATHER.classList.remove('_hidden');}
+    else {WEATHER.classList.add('_hidden');}
+});
+quoteVisibility.addEventListener('change', (e) => {
+    if(quoteVisibility.checked) {
+        QUOTE.classList.remove('_hidden'); 
+        AUTHOR.classList.remove('_hidden'); 
+        changeQUOTE.classList.remove('_hidden'); 
+    }
+    else {
+        QUOTE.classList.add('_hidden'); 
+        AUTHOR.classList.add('_hidden'); 
+        changeQUOTE.classList.add('_hidden'); }
+});
+
+
 
 //------------------------
 
