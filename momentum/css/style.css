@@ -47,6 +47,7 @@ body {
 
 .play-list {
   text-align: left;
+  list-style: none;
 }
 
 .play-item {
@@ -71,8 +72,18 @@ body {
   font-weight: 900;
 }
 
+/*
+._sound::before{
+  content: "";  
+  position: absolute;
+  left: 0;
+  top: 2px;
+  background-image: url('../assets/svg/inactive_song.svg');
+}
+*/
 .item-active::before {
   color: #C5B358;
+  /*color: brown;*/
 }
 
 .player-icon,
@@ -304,13 +315,13 @@ body {
 
 .settings-container {
   display: flex;
-  width: 45%;
-  height: 35%;
+  width: 40%;
+  height: 45%;
   background-color: rgb(218, 217, 216);
   position: absolute;
   bottom:70px;
-  left:160px;
-  border-bottom-right-radius: 20px;
+  right:90px;
+  border-bottom-left-radius: 20px;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   opacity: 0;
@@ -356,7 +367,7 @@ body {
 
 .settings-values {
   width: 57%;
-  margin: 15px 15px 5px 0;
+  margin: 15px 15px 10px 0;
   background-color: darkseagreen;
   position: relative;
 }
@@ -400,9 +411,7 @@ body {
   width: 18px;
 }
 
-._disabled{
 
-}
 .check-box::before{
   content: '';
   position: absolute;
@@ -514,4 +523,10 @@ body {
     font-size: 32px;
     padding: 5px;
   }
+
+  .settings-container {
+    width: 80%;
+    height: 50%;
+  }
+
 }

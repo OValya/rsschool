@@ -11,7 +11,7 @@
 <body>
   <header class="header">
     <div class="player">
-      <audio src="/assets/sounds/Aqua Caelestis.mp3"></audio>
+      <audio src="/assets/sounds/Elton John - Your Song.mp3"></audio>
       <div class="player-controls">
         <button class="play-prev player-icon"></button>
         <button class="play player-icon"></button>
@@ -44,29 +44,39 @@
     </div>
   </main>
   <footer class="footer">
+
     <input class="language" type="button" value="EN">
+
+    <div class="quote-container">
+      <button class="change-quote"></button>
+      <div>
+        <div class="quote"></div>
+        <div class="author"></div>
+      </div>
+    </div>
+
     <input class="settings-icon" type="button" value="">
     <div class="settings-container">
       <ul class="settings">
         <li >
-          <a class="settings-option visible-option" href="#">Видимость</a>
+          <a class="settings-option visible-option" href="#"></a>
         </li>
         <li >
-          <a class="settings-option language-option" href="#">Язык</a>
+          <a class="settings-option language-option" href="#"></a>
         </li>
         <li >
-          <a class="settings-option photos-options" href="#">Фотографии</a>
+          <a class="settings-option photos-options" href="#"></a>
         </li>
       </ul>
       <div class="settings-values">
         <div class="settings-values-visibility">
         <p>Показывать на экране</p>
-        <label class="check" for="time-cb">
+        <label class="check " for="time-cb">
           Время
           <input class="check-input" type="checkbox" name="" id="time-cb" checked>
           <span class="check-box"></span>
         </label>
-        <label class="check" for="date-cb">
+        <label class="check " for="date-cb">
           <input class="check-input" type="checkbox" name="" id="date-cb" checked>
           <span class="check-box"></span>
           Дата
@@ -107,22 +117,22 @@
       <div class="settings-values-photos">
         <p> Выберите источник фотонового изображения</p>
         <label class="radio" for="github"> GitHub
-          <input type="radio" name="picture" id="github">
+          <input type="radio" name="picture" id="github" checked>
           <span class="radio-btn"></span>
         </label>
         <label class="radio" for="unsplash"> Unsplash.com
-          <input type="radio" name="picture" id="unsplash">
+          <input type="radio" name="picture" id="unsplash" disabled>
           <span class="radio-btn"></span>
         </label>
         <div class="images-tag _disabled">
-          тут будут какие-то теги, если Выберите этот источник
+          
         </div>
         <label class="radio" for="flickr"> Flickr.com
-          <input type="radio" name="picture" id="flickr">
+          <input type="radio" name="picture" id="flickr" disabled>
           <span class="radio-btn"></span>
         </label>
         <div class="images-tag _disabled" >
-          тут будут какие-то теги, если Выберите этот источник
+          
         </div>
       </div>
   
@@ -132,14 +142,8 @@
       </div>
     </div>
     
-    <div class="quote-container">
-      <button class="change-quote"></button>
-      <div>
-        <div class="quote"></div>
-        <div class="author"></div>
-      </div>
-    </div>
-    <input class="todo" type="button" value="">
+    
+   
 
 
   </footer>
