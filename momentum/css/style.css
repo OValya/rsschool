@@ -1,21 +1,21 @@
 @font-face {
-  font-family: 'Arial-MT';
+  font-family: "Arial-MT";
   src: url("../assets/fonts/Arial-MT.woff"); /* Путь к файлу со шрифтом */
- }
+}
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-a{
+a {
   text-decoration: none;
 }
 
 body {
   min-width: 480px;
   min-height: 100vh;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 16px;
   color: #fff;
   text-align: center;
@@ -30,11 +30,11 @@ body {
   align-items: flex-start;
   width: 100%;
   height: 30vh;
-  min-height: 220px;  
+  min-height: 220px;
   padding: 20px;
 }
 
-.player{
+.player {
   transition: 1s;
 }
 .player-controls {
@@ -55,9 +55,9 @@ body {
   padding: 5px;
   padding-left: 20px;
   list-style: none;
-  opacity: .8;
+  opacity: 0.8;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .play-item:hover {
@@ -65,7 +65,7 @@ body {
 }
 
 .play-item::before {
-  content: "\2713";  
+  content: "\2713";
   position: absolute;
   left: 0;
   top: 2px;
@@ -82,7 +82,7 @@ body {
 }
 */
 .item-active::before {
-  color: #C5B358;
+  color: #c5b358;
   /*color: brown;*/
 }
 
@@ -97,9 +97,9 @@ body {
   background-color: transparent;
   border: 0;
   outline: 0;
-  opacity: .8;
+  opacity: 0.8;
   cursor: pointer;
-  transition: .3s;  
+  transition: 0.3s;
 }
 
 .player-icon:hover,
@@ -112,7 +112,7 @@ body {
 .slider-icon:active,
 .change-quote:active {
   border: 0;
-  outline: 0;  
+  outline: 0;
   transform: scale(1.1);
 }
 
@@ -142,7 +142,7 @@ body {
   align-items: flex-start;
   row-gap: 5px;
   width: 180px;
-  min-height: 180px;  
+  min-height: 180px;
   text-align: left;
   transition: 1s;
 }
@@ -169,17 +169,17 @@ body {
   padding: 5px;
   font-size: 20px;
   line-height: 24px;
-  color: #fff;  
+  color: #fff;
   border: 0;
   outline: 0;
   border-bottom: 1px solid #fff;
   background-color: transparent;
 }
 
-.city::placeholder {  
+.city::placeholder {
   font-size: 20px;
   color: #fff;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .main {
@@ -190,7 +190,7 @@ body {
   align-items: center;
   width: 100%;
   height: 40vh;
-  min-height: 260px;  
+  min-height: 260px;
   padding: 20px;
 }
 
@@ -214,17 +214,17 @@ body {
 .time {
   min-height: 124px;
   margin-bottom: 10px;
-  font-family: 'Arial-MT';
+  font-family: "Arial-MT";
   font-size: 100px;
-  letter-spacing: -4px; 
-  transition: 1s; 
+  letter-spacing: -4px;
+  transition: 1s;
 }
 
 .date {
   min-height: 28px;
   font-size: 24px;
   margin-bottom: 20px;
-  transition: 1s; 
+  transition: 1s;
 }
 
 .greeting-container {
@@ -239,7 +239,7 @@ body {
 }
 
 .greeting {
-  flex: 1;  
+  flex: 1;
   padding: 10px;
   text-align: right;
 }
@@ -258,10 +258,11 @@ body {
 
 .name::placeholder {
   color: #fff;
-  opacity: .6;
+  opacity: 0.6;
 }
 
-.footer {/*
+.footer {
+  /*
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -272,43 +273,44 @@ body {
   padding: 20px;*/
 
   display: flex;
-  
+
   justify-content: center;
-  
+
   width: 100%;
   height: 30vh;
-  min-height: 160px;  
+  min-height: 160px;
 }
 
-.language, .settings-icon{
+.language,
+.settings-icon {
   width: 70px;
   height: 50px;
   background-color: transparent;
   border-radius: 30%;
   border-width: 3px;
   align-self: flex-end;
-
 }
 
-.language{
+.language {
   font-size: 25px;
   color: #fff;
   margin: 20px;
 }
 
-.language:hover, .settings-icon:hover{
+.language:hover,
+.settings-icon:hover {
   border-color: #fff;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.language:active, .settings-icon:active{
+.language:active,
+.settings-icon:active {
   transform: scale(1.1);
   transition: 0.3s;
-
 }
-.settings-icon{
-  background: url('../assets/svg/settings.svg') no-repeat center/contain;
+.settings-icon {
+  background: url("./assets/svg/settings.svg") no-repeat center/contain;
   padding: 5px;
   margin: 20px 20px 20px 0;
 }
@@ -319,31 +321,29 @@ body {
   height: 45%;
   background-color: rgb(218, 217, 216);
   position: absolute;
-  bottom:70px;
-  right:90px;
+  bottom: 70px;
+  right: 90px;
   border-bottom-left-radius: 20px;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   opacity: 0;
   transition: 0.6s;
-  
 }
-.settings-container._show{
+.settings-container._show {
   opacity: 1;
 }
 .settings {
   padding: 10px;
   list-style: none;
-  height: 100% ;
+  height: 100%;
   width: 40%;
   z-index: 5;
 }
-.settings>li{
+.settings > li {
   height: 32%;
   margin: 5px;
   background-color: cadetblue;
 }
-
 
 .settings-option {
   color: rgb(252, 250, 250);
@@ -354,12 +354,12 @@ body {
   padding: 10%;
 }
 
-.settings-option:not(:active):hover{
+.settings-option:not(:active):hover {
   font-size: 23px;
   transition: 0.3s;
 }
 
-.settings-option._active{
+.settings-option._active {
   background-color: darkseagreen;
   font-size: 23px;
   transition: 0.3s;
@@ -371,8 +371,9 @@ body {
   background-color: darkseagreen;
   position: relative;
 }
- 
-.check, .radio{
+
+.check,
+.radio {
   display: block;
   text-align: start;
   font-size: 18px;
@@ -383,22 +384,23 @@ body {
   user-select: none;
 }
 
-.radio{
+.radio {
   padding-left: 2em;
 }
 
- .check input, .radio input{
+.check input,
+.radio input {
   opacity: 0;
   position: absolute;
   cursor: pointer;
 }
 
-
-.check-box, .radio-btn{
-  content: '';
+.check-box,
+.radio-btn {
+  content: "";
   position: absolute;
-  left:10px;
-  top:0;
+  left: 10px;
+  top: 0;
   width: 36px;
   height: 18px;
   border: 1px solid #ffffff;
@@ -407,16 +409,15 @@ body {
   transition: all 0.3s ease 0s;
 }
 
-.radio-btn{
+.radio-btn {
   width: 18px;
 }
 
-
-.check-box::before{
-  content: '';
+.check-box::before {
+  content: "";
   position: absolute;
-  left:0;
-  top:-5px;
+  left: 0;
+  top: -5px;
   width: 22px;
   height: 22px;
   border: 1px solid #ffffff;
@@ -424,64 +425,65 @@ body {
   background-color: wheat;
 }
 
-.check input:checked ~ .check-box:before{
+.check input:checked ~ .check-box:before {
   background-color: teal;
-  left:10px;
+  left: 10px;
 }
 
-.check input:checked ~ .check-box{
+.check input:checked ~ .check-box {
   background-color: teal;
 }
 
-.check input:hover:not(:checked) ~ .check-box:before{
+.check input:hover:not(:checked) ~ .check-box:before {
   background-color: teal;
-  left:0;
+  left: 0;
 }
-.check input:hover:not(:checked) ~ .check-box{
+.check input:hover:not(:checked) ~ .check-box {
   border: 1px solid teal;
 }
 
-.radio-btn::before{
-  content: '';
+.radio-btn::before {
+  content: "";
   position: absolute;
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
   width: 16px;
   height: 16px;
   border-radius: 50%;
   background-color: wheat;
 }
 
-.radio input:checked ~ .radio-btn::before{
+.radio input:checked ~ .radio-btn::before {
   background-color: teal;
 }
 
-.setting-value{
+.setting-value {
   border: 1px solid cadetblue;
 }
-.settings-values p{
+.settings-values p {
   font-size: 20px;
   border-bottom: 1px solid #ffffff;
   margin: 10px 40px 15px;
 }
 
-.settings-values-photos, .settings-values-language{
+.settings-values-photos,
+.settings-values-language {
   position: absolute;
   left: 0;
-  top:0;
+  top: 0;
 }
 
-._inactive{
-  display:none;
+._inactive {
+  display: none;
   transition: 0.5s;
 }
 
-._hidden{
+._hidden {
   opacity: 0;
   z-index: -5;
   transition: 0.5s;
 }
-.quote-container{
+.quote-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -489,11 +491,10 @@ body {
   width: 100%;
   height: 30vh;
   padding: 20px;
-
 }
 .change-quote {
   margin-bottom: 30px;
-  background-image: url("../assets/svg/reload.svg");  
+  background-image: url("../assets/svg/reload.svg");
 }
 
 .quote {
@@ -507,7 +508,7 @@ body {
 @media (max-width: 768px) {
   .time {
     min-height: 80px;
-    font-size: 72px;    
+    font-size: 72px;
   }
 
   .greeting-container {
@@ -528,5 +529,4 @@ body {
     width: 80%;
     height: 50%;
   }
-
 }
