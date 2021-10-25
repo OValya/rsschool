@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/favicon.ico" rel="shortcut icon" />
+  <link rel="stylesheet" href="css/owfont-regular.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>momentum</title>
+</head>
+<body>
+  <header class="header">
+    <div class="player">
+      <audio src="/assets/sounds/Elton John - Your Song.mp3"></audio>
+      <div class="player-controls">
+        <button class="play-prev player-icon"></button>
+        <button class="play player-icon"></button>
+        <button class="play-next player-icon"></button>
+      </div>
+      <ul class="play-list"></ul>
+    </div>
+    <div class="weather">
+      <input type="text" class="city" />
+      <i class="weather-icon owf"></i>
+      <div class="weather-error"></div>
+      <div class="description-container">
+        <span class="temperature"></span>
+        <span class="weather-description"></span>
+      </div>
+      <div class="wind"></div>
+      <div class="humidity"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="slider-icons">
+      <button class="slide-prev slider-icon"></button>
+      <button class="slide-next slider-icon"></button>
+    </div>
+    <time class="time"></time>
+    <date class="date "></date>
+    <div class="greeting-container">
+      <span class="greeting"></span>
+      <input type="text" class="name"/>
+    </div>
+  </main>
+  <footer class="footer">
+
+    <input class="language" type="button" value="EN">
+
+    <div class="quote-container">
+      <button class="change-quote"></button>
+      <div>
+        <div class="quote"></div>
+        <div class="author"></div>
+      </div>
+    </div>
+
+    <input class="settings-icon" type="button" value="">
+    <div class="settings-container">
+      <ul class="settings">
+        <li >
+          <a class="settings-option visible-option" href="#"></a>
+        </li>
+        <li >
+          <a class="settings-option language-option" href="#"></a>
+        </li>
+        <li >
+          <a class="settings-option photos-options" href="#"></a>
+        </li>
+      </ul>
+      <div class="settings-values">
+        <div class="settings-values-visibility">
+        <p>Показывать на экране</p>
+        <label class="check " for="time-cb">
+          Время
+          <input class="check-input" type="checkbox" name="" id="time-cb" checked>
+          <span class="check-box"></span>
+        </label>
+        <label class="check " for="date-cb">
+          <input class="check-input" type="checkbox" name="" id="date-cb" checked>
+          <span class="check-box"></span>
+          Дата
+        </label>
+        <label class="check" for="greeting-cb">
+          <input class="check-input" type="checkbox" name="" id="greeting-cb" checked>
+          <span class="check-box"></span>
+          Приветсвие
+        </label>
+        <label class="check" for="weather-cb">
+          <input class="check-input" type="checkbox" name="" id="weather-cb" checked>
+          <span class="check-box"></span>
+          Погода
+        </label>
+        <label class="check" for="player-cb">
+          <input class="check-input" type="checkbox" name="" id="player-cb" checked >
+          <span class="check-box"></span>
+          Плеер
+        </label>
+        <label class="check" for="quote-cb">
+          <input class="check-input" type="checkbox" name="" id="quote-cb" checked >
+          <span class="check-box"></span>
+          Цитата
+        </label>
+      </div>
+      <div class="settings-values-language">
+        <p> Выберите язык приложения</p>
+        <label class ="radio" for="value-russian"> Русский
+          <input type="radio" name="language" id="value-russian">
+          <span class="radio-btn"></span>
+        </label>
+        <label class="radio" for="value-engish"> Английский
+          <input type="radio" name="language" id="value-engish">
+          <span class="radio-btn"></span>
+        </label>
+      </div>
+  
+      <div class="settings-values-photos">
+        <p> Выберите источник фотонового изображения</p>
+        <label class="radio" for="github"> GitHub
+          <input type="radio" name="picture" id="github" checked>
+          <span class="radio-btn"></span>
+        </label>
+        <label class="radio" for="unsplash"> Unsplash.com
+          <input type="radio" name="picture" id="unsplash" disabled>
+          <span class="radio-btn"></span>
+        </label>
+        <div class="images-tag _disabled">
+          
+        </div>
+        <label class="radio" for="flickr"> Flickr.com
+          <input type="radio" name="picture" id="flickr" disabled>
+          <span class="radio-btn"></span>
+        </label>
+        <div class="images-tag _disabled" >
+          
+        </div>
+      </div>
+  
+
+
+
+      </div>
+    </div>
+    
+    
+   
+
+
+  </footer>
+  <!--<script src="js/quotes.json"></script>-->
+  <script type="module" src="js/script.js"></script>
+ <!-- <script src="js/time.js"></script>
+  <script src="js/greeting.js"></script>-->
+</body>
+</html>
