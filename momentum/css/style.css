@@ -310,7 +310,7 @@ body {
   transition: 0.3s;
 }
 .settings-icon {
-  background: url("./assets/svg/settings.svg") no-repeat center/contain;
+  background: url("../assets/svg/settings.svg") no-repeat center/contain;
   padding: 5px;
   margin: 20px 20px 20px 0;
 }
