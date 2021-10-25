@@ -36,8 +36,14 @@ const playerVisibility = document.getElementById('player-cb');
 const PLAYER = document.querySelector('.player');
 const nameAndGreeting = document.querySelector('.greeting-container');
 const WEATHER = document.querySelector('.weather');
-
-
+const optionVisibility = document.querySelector('.visible-option');
+const optionLanguage = document.querySelector('.language-option');
+const optionPhotos = document.querySelector('.photos-options');
+const containerVisibilityValues = document.querySelector('.settings-values-visibility');
+const containerLanguageValues = document.querySelector('.settings-values-language')
+const containerPhotosValues = document.querySelector('.settings-values-photos');
+const languageRussian = document.getElementById('value-russian');
+const languageEnglish = document.getElementById('value-engish');
 //----------------дата-время-----------------
 
 function showTime(){
@@ -97,7 +103,7 @@ function showGreeting(){
 
 function getName(){
     if(!localStorage.getItem('userName')){
-        (isRussian)?NAME.value='Незнакомец':NAME.value='Stranger';
+        (isRussian)?NAME.value='[Введите ваше имя]':NAME.value='[Enter your name]';
     } else {NAME.value=localStorage.getItem('userName');}
 }
 
@@ -338,8 +344,9 @@ playList.forEach(el => {
 LANGUAGE.addEventListener('click', changeLanguage);
 
 function changeLanguage(){
-    if(isRussian){isRussian=false; LANGUAGE.value='RU'}
+    if(isRussian){isRussian=false; LANGUAGE.value='RU';}
     else {isRussian=true;LANGUAGE.value='EN'}
+    setRbtnLanguage();
     showGreeting();
     showDate();
     getQuote();
@@ -352,9 +359,50 @@ function changeLanguage(){
 
 iconSettings.addEventListener('click', (e) => {
     containerSettings.classList.toggle('_show');
+    setOptionVisibility();
+    
 });
 
+function setOptionVisibility(){
+    if(!optionVisibility.classList.contains('._active')){
+        optionVisibility.classList.add('_active');
+        optionLanguage.classList.remove('_active');
+        optionPhotos.classList.remove('_active');
+        containerVisibilityValues.classList.remove('_inactive');
+        containerPhotosValues.classList.add('_inactive');
+        containerLanguageValues.classList.add('_inactive');
+       }
+}
 
+optionVisibility.addEventListener('click', setOptionVisibility);
+
+optionPhotos.addEventListener('click', (e)=>{
+    if(!optionPhotos.classList.contains('._active')){
+         optionVisibility.classList.remove('_active');
+         optionLanguage.classList.remove('_active');
+         optionPhotos.classList.add('_active');
+         containerVisibilityValues.classList.add('_inactive');
+         containerPhotosValues.classList.remove('_inactive');
+         containerLanguageValues.classList.add('_inactive');
+        }
+});
+
+optionLanguage.addEventListener('click', (e)=>{
+    if(!optionLanguage.classList.contains('._active')){
+         optionVisibility.classList.remove('_active');
+         optionLanguage.classList.add('_active');
+         optionPhotos.classList.remove('_active');
+         containerVisibilityValues.classList.add('_inactive');
+         containerPhotosValues.classList.add('_inactive');
+         containerLanguageValues.classList.remove('_inactive');
+        setRbtnLanguage();
+    }
+});
+
+function setRbtnLanguage(){
+    if(isRussian) {languageRussian.checked = 'true';}
+        else {languageEnglish.checked='true';}
+}
 
 dateVisibility.addEventListener('change', (e) => {
     if(dateVisibility.checked) {DATE.classList.remove('_hidden');}
@@ -387,6 +435,9 @@ quoteVisibility.addEventListener('change', (e) => {
         AUTHOR.classList.add('_hidden'); 
         changeQUOTE.classList.add('_hidden'); }
 });
+
+languageRussian.addEventListener('change', changeLanguage);
+languageEnglish.addEventListener('change', changeLanguage);
 
 
 

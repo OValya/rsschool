@@ -332,10 +332,7 @@ body {
   margin: 5px;
   background-color: cadetblue;
 }
-.settings>li:hover{
-  background-color: darkseagreen;
-  
-}
+
 
 .settings-option {
   color: rgb(252, 250, 250);
@@ -346,13 +343,25 @@ body {
   padding: 10%;
 }
 
+.settings-option:not(:active):hover{
+  font-size: 23px;
+  transition: 0.3s;
+}
+
+.settings-option._active{
+  background-color: darkseagreen;
+  font-size: 23px;
+  transition: 0.3s;
+}
+
 .settings-values {
   width: 57%;
   margin: 15px 15px 5px 0;
   background-color: darkseagreen;
+  position: relative;
 }
  
-.check{
+.check, .radio{
   display: block;
   text-align: start;
   font-size: 18px;
@@ -363,14 +372,18 @@ body {
   user-select: none;
 }
 
- .check input{
+.radio{
+  padding-left: 2em;
+}
+
+ .check input, .radio input{
   opacity: 0;
   position: absolute;
   cursor: pointer;
 }
 
 
-.check-box{
+.check-box, .radio-btn{
   content: '';
   position: absolute;
   left:10px;
@@ -383,6 +396,13 @@ body {
   transition: all 0.3s ease 0s;
 }
 
+.radio-btn{
+  width: 18px;
+}
+
+._disabled{
+
+}
 .check-box::before{
   content: '';
   position: absolute;
@@ -412,6 +432,21 @@ body {
   border: 1px solid teal;
 }
 
+.radio-btn::before{
+  content: '';
+  position: absolute;
+  left:0;
+  top:0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: wheat;
+}
+
+.radio input:checked ~ .radio-btn::before{
+  background-color: teal;
+}
+
 .setting-value{
   border: 1px solid cadetblue;
 }
@@ -421,9 +456,21 @@ body {
   margin: 10px 40px 15px;
 }
 
+.settings-values-photos, .settings-values-language{
+  position: absolute;
+  left: 0;
+  top:0;
+}
+
+._inactive{
+  display:none;
+  transition: 0.5s;
+}
+
 ._hidden{
   opacity: 0;
-  transition: 1s;
+  z-index: -5;
+  transition: 0.5s;
 }
 .quote-container{
   display: flex;

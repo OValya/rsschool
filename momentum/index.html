@@ -49,16 +49,17 @@
     <div class="settings-container">
       <ul class="settings">
         <li >
-          <a class="settings-option" href="#">General</a>
+          <a class="settings-option visible-option" href="#">Видимость</a>
         </li>
         <li >
-          <a class="settings-option" href="#">Language</a>
+          <a class="settings-option language-option" href="#">Язык</a>
         </li>
         <li >
-          <a class="settings-option" href="#">Photos</a>
+          <a class="settings-option photos-options" href="#">Фотографии</a>
         </li>
       </ul>
       <div class="settings-values">
+        <div class="settings-values-visibility">
         <p>Показывать на экране</p>
         <label class="check" for="time-cb">
           Время
@@ -91,9 +92,46 @@
           Цитата
         </label>
       </div>
+      <div class="settings-values-language">
+        <p> Выберите язык приложения</p>
+        <label class ="radio" for="value-russian"> Русский
+          <input type="radio" name="language" id="value-russian">
+          <span class="radio-btn"></span>
+        </label>
+        <label class="radio" for="value-engish"> Английский
+          <input type="radio" name="language" id="value-engish">
+          <span class="radio-btn"></span>
+        </label>
+      </div>
+  
+      <div class="settings-values-photos">
+        <p> Выберите источник фотонового изображения</p>
+        <label class="radio" for="github"> GitHub
+          <input type="radio" name="picture" id="github">
+          <span class="radio-btn"></span>
+        </label>
+        <label class="radio" for="unsplash"> Unsplash.com
+          <input type="radio" name="picture" id="unsplash">
+          <span class="radio-btn"></span>
+        </label>
+        <div class="images-tag _disabled">
+          тут будут какие-то теги, если Выберите этот источник
+        </div>
+        <label class="radio" for="flickr"> Flickr.com
+          <input type="radio" name="picture" id="flickr">
+          <span class="radio-btn"></span>
+        </label>
+        <div class="images-tag _disabled" >
+          тут будут какие-то теги, если Выберите этот источник
+        </div>
+      </div>
+  
 
+
+
+      </div>
     </div>
-
+    
     <div class="quote-container">
       <button class="change-quote"></button>
       <div>
