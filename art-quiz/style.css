@@ -84,15 +84,19 @@ a {
   color: white;
   font-size: 24px; 
 }
-button:hover{
+.button-settings{
+  width: 30%;
+}
+.button:hover{
   color: black;
   background-color: white;
   transition: 0.5s;
 }
 
-button:active{
+.button:active{
   background-color: #FFBCA2;
 }
+
 /************* settings************/
 
 
@@ -272,7 +276,11 @@ button:active{
 
 
 
-.button-container {
+.button-container-settings {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
 }
 .default-settings-btn {
 }
