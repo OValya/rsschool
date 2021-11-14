@@ -1,0 +1,149 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+
+.wrapper {
+  position: relative;
+  width: 360px;
+  height: 100vh;
+  margin: 0 auto;
+  font-family: "Comfortaa", cursive;
+}
+.start-page {
+  width: 100%;
+  height: 100%;
+  background: url("/assets/img/start-page/fon.jpg") no-repeat center/cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.settings-button-container {
+  align-self: flex-end;
+  
+}
+.settings-icon {
+  background: url("/assets/svg/start-page/carbon_settings.svg") no-repeat center/contain;
+  width: 30px;
+  padding: 5px;
+  margin: 20px 20px 20px 0;
+  border-width:0 ;
+}
+
+.settings-icon:hover{
+  transform: scale(1.5);
+  
+}
+
+.logo {
+  width: 46%;
+  align-self: center;
+  margin: 0 0 230px 0;
+}
+
+
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.category-artist-btn,
+.category-pictures-btn {
+  width: 75%;
+  height: 56px;
+  margin: 20px 0;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 56px;
+  color: white;
+  font-size: 24px; 
+}
+
+.category-artist-btn:hover,
+.category-pictures-btn:hover {
+  color: black;
+  background-color: white;
+  transition: 0.5s;
+}
+
+/************* settings************/
+
+
+.settings-page {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0; 
+  background-color: rgba(0, 0, 0);
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+}
+.settings-title-container {
+
+}
+
+.back-to-start-page {
+  color:#ffffff
+}
+.settings {
+
+}
+
+._show{
+  display: block;
+}
+.volume-container {
+  margin: 70px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.settings-item{
+  margin-left: 30px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.volume-range {
+  width: 100%;
+  margin: 10px 30px;
+}
+
+.volume-mute-icon, .volume-up-icon {
+  background: url("/assets/svg/settings-page/volume-mute.svg") no-repeat center/contain;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  margin: 0 70px;
+  border-width:0 ;
+}
+.volume-up-icon {
+  background: url("/assets/svg/settings-page/bi_volume-down.svg") no-repeat center/contain;;
+}
+
+.timer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.timer-radio {
+}
+.timer-num {
+}
+.button-container {
+}
+.default-settings-btn {
+}
+.save-settings-btn {
+}
+.footer {
+}
