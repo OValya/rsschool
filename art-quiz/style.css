@@ -54,6 +54,7 @@ a {
   align-items: center;
   width: 100%;
 }
+/*
 .category-artist-btn,
 .category-pictures-btn {
   width: 75%;
@@ -72,7 +73,26 @@ a {
   background-color: white;
   transition: 0.5s;
 }
+*/
+.button{
+  width: 75%;
+  height: 56px;
+  margin: 20px 0;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 56px;
+  color: white;
+  font-size: 24px; 
+}
+button:hover{
+  color: black;
+  background-color: white;
+  transition: 0.5s;
+}
 
+button:active{
+  background-color: #FFBCA2;
+}
 /************* settings************/
 
 
@@ -87,12 +107,29 @@ a {
   color: #ffffff;
 }
 .settings-title-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
 
 }
 
 .back-to-start-page {
-  color:#ffffff
+  /*color:#ffffff*/
+  width: 30px;
+  height: 25px;
+  background: url('/assets/svg/settings-page/back.svg') center/contain no-repeat;
 }
+
+.back-to-start-page:hover{
+  background: url('/assets/svg/settings-page/back-hover.svg') center/contain no-repeat;
+  transition: 0.5s;
+ }
+.back-to-start-page:active{
+  background: url('/assets/svg/settings-page/back-active.svg') center/contain no-repeat;
+  transition: 0.5s;
+}
+
+
 .settings {
 
 }
@@ -108,7 +145,8 @@ a {
 }
 
 .settings-item{
-  margin-left: 30px;
+  width: 100%;
+  text-align: center;
   font-size: 24px;
   font-weight: 700;
 }
@@ -131,14 +169,109 @@ a {
 }
 
 .timer-container {
+  
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-.timer-radio {
+.timer-on-off-container{
+  position: relative;
+  margin: 20px 0 70px -20px;
 }
-.timer-num {
+
+.check input {
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
 }
+
+.radio{
+  
+  
+}
+.check-box {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  width: 36px;
+  height: 18px;
+  border: 1px solid #ffffff;
+  border-radius: 18px;
+  background-color: wheat;
+  transition: all 0.3s ease 0s;
+}
+
+.check-box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -5px;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  background-color: wheat;
+}
+
+.check input:checked ~ .check-box:before {
+  background-color: teal;
+  left: 10px;
+}
+
+.check input:checked ~ .check-box {
+  background-color: teal;
+}
+
+.check input:hover:not(:checked) ~ .check-box:before {
+  background-color: teal;
+  left: 0;
+}
+.check input:hover:not(:checked) ~ .check-box {
+  border: 1px solid teal;
+}
+
+.number {
+ margin: 20px;
+}
+
+.minus, .plus{
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  font-size: 25px;
+  line-height: 25px;
+  font-weight: 700;
+  border: 1px solid white;
+  text-align: center;
+}
+
+.minus:hover, .plus:hover{
+  background-color: teal;
+  transition: 0.5s;
+}
+
+.minus:active, .plus:active{
+ transform: scale(1.3);
+}
+
+.timer-value{
+  width: 50px;
+  height: 30px;
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+  line-height: 25px;
+  border-width: 0;
+  text-align: center;
+  -webkit-appearance: textfield;
+}
+.timer-value::-webkit-inner-spin-button,
+.timer-value::-webkit-outer-spin-button {
+  display: none;
+}
+
+
+
 .button-container {
 }
 .default-settings-btn {

@@ -19,14 +19,14 @@
         </div>
             <img class = "logo" src="/assets/svg/start-page/logo_art-quiz.svg" alt="">
             <div class="button-container">
-                <button class="category-artist-btn">Artists quiz</button>
-                <button class="category-pictures-btn">Pictures quiz</button>
+                <button class="category-artist-btn button">Artists quiz</button>
+                <button class="category-pictures-btn button">Pictures quiz</button>
             </div>
         </div>
         <div class="settings-page">
-        <div class="settings-title-container">
+            <div class="settings-title-container">
                 <a class = "back-to-start-page" href="">
-                        << Back
+                        
                 </a>
                 <p>Settings</p>
             </div> 
@@ -41,16 +41,25 @@
                 </div>
                 <div class="timer-container">
                     <p class="settings-item"> Time game </p>
-                    <label for="">On</label>
-                    <input class = "timer-radio" type="radio">
-                    <label class = "settings-item" for="">Time to answer </label>
-                    <input class = "timer-num" type="number">
-                        
-                    
+                    <div class="timer-on-off-container">
+                        <label class ="check" for="timer"> On
+                            <input class="check-input" type="checkbox"  id="timer" checked>
+                            <span class="check-box"></span>
+                        </label>
+                    </div>
+                  <!--  <label for="">On</label>
+                    <input class = "timer-radio" type="radio">-->
+                    <p class="settings-item"> Time to answer </p>
+                    <div class="number">
+                        <button class="minus" type="button" > - </button>
+                        <input class="timer-value" type="number" min="0" value="30" readonly step="5">
+                        <button class="plus" type="button" >+</button>
+                    </div>
+                   <!-- <input class = "timer-num" type="number">  -->     
                 </div>
                 <div class="button-container">
-                    <button class="default-settings-btn"> Default </button>
-                    <button class="save-settings-btn"> Save </button>
+                    <button class="default-settings-btn button"> Default </button>
+                    <button class="save-settings-btn button"> Save </button>
                 </div>
             </div>
         </div>
