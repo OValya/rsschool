@@ -11,11 +11,19 @@ class Category {
                 <span class="correct-answers">${this.score}/10</span>
                 
             </div>
-            <div class="card-image">
-                <img  src=${this.urlCover}  alt="">
-            </div>
+            <a class = "ref-to-questions" href="/#/picture-quiz/${this.numberCategory}">
+              <div class="card-image-container">
+                <img class = "category-image-card" src=${this.urlCover}  alt="">
+              </div>
+            </a>
         </div>`
     }
+    setScore(score) {
+        this.score = score;
+    } 
+    getScore(){
+        return this.score;
+    }  
 }
 
 

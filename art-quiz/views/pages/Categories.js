@@ -31,8 +31,10 @@ let Categories = {
        // let request = Utils.parseRequestURL()
        // let post = await getPost(request.id)
         let category = '';
+        let arrayOFCategory = [];
         for (let i = 0; i < questionsPicture.length/12; i++) {
             let item =  new Category(i, `https://raw.githubusercontent.com/OValya/image-data/master/img/${i * 10}.jpg`);
+            arrayOFCategory.push(item);
             category += item.view + '\n'; 
         }
         let view = ` 
@@ -44,7 +46,7 @@ let Categories = {
                 <input class="settings-icon" type="button" value="">
                 <!--<a class = "button-settings" href=""></a>-->
               </div>
-              <p class = "title-category">Picture Quiz. Let's go!</p>
+              <p class = "title">Picture Quiz. Let's go!</p>
               <div class = "categories">
               ${category}
               </div>
@@ -62,6 +64,13 @@ let Categories = {
         `*/
     }
     , after_render: async () => {
+       /* let container = document.querySelector('.categories');
+        container.addEventListener('click', (e)=>{
+            if(e.target === 'img'){
+                console.log()
+            }
+        }
+        )*/
 
     }
 }
