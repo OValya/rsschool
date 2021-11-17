@@ -1,22 +1,10 @@
 class Category {
-    constructor(number, cover, score = 0, title = 'Set'  ){
+    constructor(number, cover, category, score = 0, title = 'Set'  ){
         this.numberCategory = number;
-        this.urlCover =  cover;
+        this.urlCover =  cover; 
+        this.category = category;
         this.score = score;
         this.title = title;
-        this.view = 
-        `<div class = "category">
-            <div class="category-discription">
-                <p class="number-category">${this.title} ${this.numberCategory}</p>
-                <span class="correct-answers">${this.score}/10</span>
-                
-            </div>
-            <a class = "ref-to-questions" href="/#/picture-quiz/${this.numberCategory}">
-              <div class="card-image-container">
-                <img class = "category-image-card" src=${this.urlCover}  alt="">
-              </div>
-            </a>
-        </div>`
     }
     setScore(score) {
         this.score = score;
@@ -24,6 +12,29 @@ class Category {
     getScore(){
         return this.score;
     }  
+
+    renderCategory(type) {
+        let numberQuetion;
+        if(type==='picture'){numberQuetion=this.numberCategory*12}
+        if(type==='author'){numberQuetion=120+this.numberCategory*12}
+      
+        let view = 
+            `<div class = "category">
+                <div class="category-discription">
+                    <p class="number-category">${this.title} ${this.numberCategory}</p>
+                    <span class="correct-answers">${this.score}/10</span>
+                    
+                </div>
+                <a class = "ref-to-questions" href="/#/${this.category}/${numberQuetion}">
+                  <div class="card-image-container">
+                    <img class = "category-image-card" src=${this.urlCover}  alt="">
+                  </div>
+                </a>
+            </div>`   
+        return view;
+        
+       
+    }
 }
 
 

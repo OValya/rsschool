@@ -40,12 +40,16 @@ let Home = {
     , after_render: async () => {
         let iconSettings = document.querySelector('.settings-icon');
         let categoryPictureQuiz = document.querySelector('.category-pictures-btn');
+        let categoryArtistsQuiz = document.querySelector('.category-artist-btn');
         iconSettings.addEventListener('click', (e) => {
             window.location.href = "/#/settings";             
          });
 
         categoryPictureQuiz.addEventListener('click', (e) => {
-            window.location.href = "/#/picture-quiz";
+            window.location.href = "/#/picture";
+        });
+        categoryArtistsQuiz.addEventListener('click', (e) => {
+            window.location.href = "/#/author";
         });
 
 

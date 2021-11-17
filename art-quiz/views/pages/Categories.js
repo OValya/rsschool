@@ -19,23 +19,42 @@ import Category     from '../components/Category.js'
    }
 }
 */
+/*
+let getQuestions = (type) => {
+       
+       //  = 
+        if(type==='picture'){ 
+            let pictureQuestions = images.slice(0,120);
+            console.log(pictureQuestions);
+            return pictureQuestions;
+        } else if(type==='author'){let authorQuestions = images.slice(120, 240);console.log(authorQuestions);return authorQuestions}
+        else(console.log('ошибка!!!'))
+      
+}*/
+
 
 let Categories = {
-    
+
+   // questions: getQuestions(Utils.parseRequestURL().resource),
+     
     render : async () => {
-        let questionsPicture = [];
-        questionsPicture = images;
-        questionsPicture.length = 120;
+        
 
-
+      //  let questions = questionsPicture();
        // let request = Utils.parseRequestURL()
        // let post = await getPost(request.id)
+        
         let category = '';
         let arrayOFCategory = [];
-        for (let i = 0; i < questionsPicture.length/12; i++) {
-            let item =  new Category(i, `https://raw.githubusercontent.com/OValya/image-data/master/img/${i * 10}.jpg`);
-            arrayOFCategory.push(item);
-            category += item.view + '\n'; 
+        let typeCategory = Utils.parseRequestURL().resource;
+        let startImage;
+        if(typeCategory==='picture'){ startImage = 0; }
+        if(typeCategory==='author'){  startImage = 120 }  
+        for (let i = 0; i < 10; i++) {
+            
+            let item =  new Category(i, `https://raw.githubusercontent.com/OValya/image-data/master/img/${i *12 + startImage}.jpg`, typeCategory);
+            arrayOFCategory.push(item.renderCategory(typeCategory));
+            category += item.renderCategory(typeCategory) + '\n'; 
         }
         let view = ` 
             <div class = "page-category">
@@ -46,12 +65,11 @@ let Categories = {
                 <input class="settings-icon" type="button" value="">
                 <!--<a class = "button-settings" href=""></a>-->
               </div>
-              <p class = "title">Picture Quiz. Let's go!</p>
+              <p class = "title">${typeCategory.toUpperCase()} QUIZ. Let's go!</p>
               <div class = "categories">
               ${category}
               </div>
             </div>
-
             `
         return view
             
