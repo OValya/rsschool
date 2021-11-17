@@ -21,6 +21,7 @@ const routes = {
     , '/picture'      : Categories
     , '/author'      : Categories
     , '/picture/:id'          :Question  
+    , '/author/:id'          :Question  
    // , '/register'   : Register
 };
 
