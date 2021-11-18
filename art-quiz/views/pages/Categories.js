@@ -81,7 +81,7 @@ let Categories = {
             </section>
         `*/
     }
-    , after_render: async () => {
+    , afterRender: async () => {
        /* let container = document.querySelector('.categories');
         container.addEventListener('click', (e)=>{
             if(e.target === 'img'){

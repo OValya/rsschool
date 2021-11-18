@@ -7,6 +7,9 @@ a {
   text-decoration: none;
 }
 
+.hide{
+  display: none;
+}
 .wrapper {
   position: relative;
   width: 360px;
@@ -187,6 +190,7 @@ a {
 .check input {
   opacity: 0;
   position: absolute;
+ 
   cursor: pointer;
 }
 
@@ -194,15 +198,19 @@ a {
   
   
 }
+.check{
+ 
+  
+}
 .check-box {
   position: absolute;
-  left: 30px;
-  top: 0;
+   left: 40px;
+   top: 0;
   width: 36px;
   height: 18px;
   border: 1px solid #ffffff;
   border-radius: 18px;
-  background-color: wheat;
+  background-color: transparent;
   transition: all 0.3s ease 0s;
 }
 
@@ -380,6 +388,10 @@ padding: 10px;
   color:white;
 }
 
+.timer-container{
+
+}
+
 .timer{
 
 }
@@ -389,26 +401,34 @@ padding: 10px;
   height: 300px;
   display: block;
   margin: 0 auto;
+ 
   border-radius: 15px;
   background-size: contain;
 }
 .answers-container {
   display: flex;
   flex-wrap: wrap;
-  
+  justify-content: space-between;
 }
+
 
 .answer-picture{
-  width: 170px;
+  position: relative;
+  width: 180px;
   height: 170px;
-  
-  margin: 5px;
-	
-
+  border: 5px solid black;
+  /*margin: 5px;*/
   border-radius: 10px;
   background-size: cover;
+  cursor: pointer;
 }
 .image-card{
+  width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
 	
 }
 
@@ -420,6 +440,39 @@ padding: 10px;
   background-size: contain;
 }
 
+/*********answer************/
+.page-answer{
+  position: absolute;
+  top: 100px;
+  left:50px;
+  width: 260px;
+  padding: 15px;
+  background-color: white;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2{
+  padding: 10px 0px;
+  text-align: center;
+}
+
+.next-button{
+  background-color: #FFBCA2;
+  height: 35px;
+  transition: 0.5s;
+}
+.next-button:hover{
+  background-color: transparent;
+  color: black;
+  border: 2px solid black;
+  transition: 0.5s;
+}
+.image-icon{
+  position: absolute;
+  top: 100px;
+  left:50px;
+}
 
 .footer {
 }

@@ -37,7 +37,7 @@ let Home = {
         `
         return view
     }
-    , after_render: async () => {
+    , afterRender: async () => {
         let iconSettings = document.querySelector('.settings-icon');
         let categoryPictureQuiz = document.querySelector('.category-pictures-btn');
         let categoryArtistsQuiz = document.querySelector('.category-artist-btn');

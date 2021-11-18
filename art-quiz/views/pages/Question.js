@@ -16,16 +16,17 @@ let getPicture = (id, wrong, type, box) =>{
     let src = `https://raw.githubusercontent.com/OValya/image-data/master/img/${wrong}.jpg`;
     img.src = src;
     img.onload = ()=>{
-        let a = document.createElement('a');
-        a.href= `/#/author/${ +id + 1}`;
-        a.style.order = `${Math.floor(Math.random() * 4)}`;
-        a.classList.add(`${type}`)
+       // let a = document.createElement('a');
+       // a.href= `/#/author/${id}-${type}`;
+       // 
+       // a.classList.add(`${type}`)
         let div = document.createElement('div');
-        div.classList.add('answer-picture');
+        div.style.order = `${Math.floor(Math.random() * 4)}`;
+        div.classList.add('answer-picture', `${type}`);
         div.style.backgroundImage = `url('${img.src}')`; 
        // div.appendChild(img);
-        a.appendChild(div);
-        box.append(a);
+      //  a.appendChild(div);
+        box.append(div);
         //let image = document.createElement('img');
         //image.classList.add('image-card');
         //image.src = src;
@@ -85,15 +86,42 @@ let getWrongAnswers =(box) =>{
 let Question = {
 
     render : async () => {
-        if(Utils.parseRequestURL().resource==="picture"){
-            return /*html*/` 
-            <div class = "page-question">
-                <div class="timer"> timer </div>
+        if(Utils.parseRequestURL().resource==="picture"){/*
+            let fragment = new DocumentFragment();
+            let entry = document.createElement('div');
+            entry.classList.add('container', 'pageEntry');
+            entry.id = "page_container"; 
+         //   <div id="page_container" class="container pageEntry"></div>
+            let page = document.createElement('div');
+            page.classList.add('page-question');
+            let timerBox = document.createElement('div');
+            timerBox.classList.add('timer-container');
+            let timer = document.createElement('span');
+            timer.classList.add('timer');
+            timerBox.appendChild(timer);
+            page.innerHTML = `
                 <p class = "title"> Кто автор картины "${images[Utils.parseRequestURL().id].name}"? </p>
                 <div class="question-picture"></div>
-                <div class="answers-container">
+                <div class="answers-container"></div>`
+           // let title = document.querySelector('.title');
+            page.insertAdjacentElement('beforebegin', timerBox);
+            entry.appendChild(page);
+            fragment.append(page);
+
+            return fragment;*/
+
+
+
+        return `
+            <div class = "page-question">
+                <div class="timer-container"> 
+                    <span id="timer"></span>
                 </div>
-            </div> `
+                <p class = "title"> Кто автор картины "${images[Utils.parseRequestURL().id].name}"? </p>
+                <div class="question-picture"></div>
+                <div class="answers-container"></div>
+            </div> 
+            <div class = "page-answer"></div>`
         }
         if(Utils.parseRequestURL().resource==="author"){
             return /*html*/` 
@@ -101,29 +129,58 @@ let Question = {
                 <div class="timer"> timer </div>
                 <p class = "title"> Какую картину написал ${images[Utils.parseRequestURL().id].author} ? </p>
                 <div class="answers-container">
-                    
-                
                 </div>
-            </div> `
+            </div>
+            <div class = "page-answer"></div>
+             `
         }
 
 
     }
-    , after_render: async () => {let request = Utils.parseRequestURL()
+    , afterRender: async () => {
+        let form = document.querySelector('.page-answer');
+        form.style.display = 'none';
+        let request = Utils.parseRequestURL();
+        let answerBox = document.querySelector('.answers-container');
+        form.innerHTML = `
+            <div class="answer-picture">
+                <img class = "image-card" src = 'https://raw.githubusercontent.com/OValya/image-data/master/img/${request.id}.jpg' >
+                <img class = "image-icon">
+            </div>
+            <h2>${images[request.id].name}</h2>
+            <p>${images[request.id].author}, ${images[request.id].year}</p>
+            <button class ="next-button button"> Next </button>`
+        
         if(Utils.parseRequestURL().resource==="picture"){
             await getImage(request.id)
-            let answerBox = document.querySelector('.answers-container');
             getRightAnswer(request.id, answerBox);        
             getWrongAnswers(answerBox);
         }
         if(Utils.parseRequestURL().resource==="author"){
-           // await getImage(request.id)
-            let answerBox = document.querySelector('.answers-container');
-           await getRightImage(Utils.parseRequestURL().id,  answerBox );
-           await getWrongImages(Utils.parseRequestURL().id, answerBox)
+           // await getImage(request.id) 
+           await getWrongImages(request.id, answerBox);
+           await getRightImage(request.id,  answerBox );
+          
            // getRightImage(request.id, answerBox);        
             //getWrongAnswers(answerBox);
         }
+
+        answerBox.addEventListener('click', (e)=>{
+                let img = document.querySelector('.image-icon');
+               
+                if(e.target.classList.contains('correct')){ 
+                  img.src = '../../assets/svg/answer-page/correct.svg'
+                  form.style.display = 'flex';
+                }else{
+                    img.src = '../../assets/svg/answer-page/wrong.svg'
+                    form.style.display = 'flex';
+                }
+                
+          //  }
+        })
+    //   let answer = document
+
+
 
     }
 }
