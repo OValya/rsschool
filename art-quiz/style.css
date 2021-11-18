@@ -177,7 +177,6 @@ a {
 }
 
 .timer-container {
-  
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -388,12 +387,16 @@ padding: 10px;
   color:white;
 }
 
-.timer-container{
-
+.timer-box{
+  display: block;
+  text-align: center;
+  padding-top: 20px;
 }
 
-.timer{
-
+#timer{
+  color: white;
+  height: 40px;
+  font-size: 20px;
 }
 
 .question-picture {

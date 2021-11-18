@@ -115,7 +115,7 @@ let Question = {
         return `
             <div class = "page-question">
                 <div class="timer-container"> 
-                    <span id="timer"></span>
+                    <span id="timer">Время: </span>
                 </div>
                 <p class = "title"> Кто автор картины "${images[Utils.parseRequestURL().id].name}"? </p>
                 <div class="question-picture"></div>
@@ -126,7 +126,9 @@ let Question = {
         if(Utils.parseRequestURL().resource==="author"){
             return /*html*/` 
             <div class = "page-question">
-                <div class="timer"> timer </div>
+                <div class="timer-box"> 
+                    <span id="timer"> Время: </span>
+                </div>
                 <p class = "title"> Какую картину написал ${images[Utils.parseRequestURL().id].author} ? </p>
                 <div class="answers-container">
                 </div>
@@ -138,6 +140,7 @@ let Question = {
 
     }
     , afterRender: async () => {
+        //----------окно ответа------------//
         let form = document.querySelector('.page-answer');
         form.style.display = 'none';
         let request = Utils.parseRequestURL();
@@ -150,6 +153,29 @@ let Question = {
             <h2>${images[request.id].name}</h2>
             <p>${images[request.id].author}, ${images[request.id].year}</p>
             <button class ="next-button button"> Next </button>`
+        //---------Timer-----//
+        let timerView = document.getElementById('timer');
+
+        //!!! сделать проверку на localstorage!!
+        let end =  Date.now() + localStorage.getItem('time') * 1000;
+        let timer = setInterval( function() {
+          let start = Date.now();
+          let diff = end - start;
+          if (diff >= 0) {
+           let secs = Math.ceil((diff % (1000 * 60)) / 1000)+1;
+           if(secs <= 5) {timerView.style.color = 'red'; timerView.style.fontSize = '24px';}
+           timerView.innerHTML = `Время: ${("0"+secs).slice(-2)} секунд`;
+          } else {
+              timerView.style.color = 'red'; 
+              timerView.style.fontSize = '24px';
+              timerView.innerHTML = "Упс...Время вышло!";
+              clearInterval(timer);
+              showWrongAnswerPage();
+             }
+         
+        }, 1000);
+
+        
         
         if(Utils.parseRequestURL().resource==="picture"){
             await getImage(request.id)
@@ -161,23 +187,28 @@ let Question = {
            await getWrongImages(request.id, answerBox);
            await getRightImage(request.id,  answerBox );
           
-           // getRightImage(request.id, answerBox);        
-            //getWrongAnswers(answerBox);
+        }
+
+        function showWrongAnswerPage(){
+            let img = document.querySelector('.image-icon');
+            img.src = '../../assets/svg/answer-page/wrong.svg'
+            form.style.display = 'flex';
+        }
+
+        function showCorrectAnswerPage(){
+            let img = document.querySelector('.image-icon');
+            img.src = '../../assets/svg/answer-page/correct.svg'
+            form.style.display = 'flex';
         }
 
         answerBox.addEventListener('click', (e)=>{
-                let img = document.querySelector('.image-icon');
-               
-                if(e.target.classList.contains('correct')){ 
-                  img.src = '../../assets/svg/answer-page/correct.svg'
-                  form.style.display = 'flex';
-                }else{
-                    img.src = '../../assets/svg/answer-page/wrong.svg'
-                    form.style.display = 'flex';
-                }
-                
-          //  }
+                clearTimeout(timer);
+                (e.target.classList.contains('correct')) ? 
+                    showCorrectAnswerPage() :
+                    showWrongAnswerPage(); 
         })
+
+        
     //   let answer = document
 
 
