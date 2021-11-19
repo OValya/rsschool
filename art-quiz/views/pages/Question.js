@@ -114,8 +114,11 @@ let Question = {
 
         return `
             <div class = "page-question">
-                <div class="timer-container"> 
-                    <span id="timer">Время: </span>
+                <div class = "header-page-question">
+                    <input class="cancel-icon" type="button" value="X">
+                    <div class="timer-box"> 
+                        <span id="timer">Время: </span>
+                    </div>
                 </div>
                 <p class = "title"> Кто автор картины "${images[Utils.parseRequestURL().id].name}"? </p>
                 <div class="question-picture"></div>
@@ -146,13 +149,15 @@ let Question = {
         let request = Utils.parseRequestURL();
         let answerBox = document.querySelector('.answers-container');
         form.innerHTML = `
-            <div class="answer-picture">
+        <div class ="page-content">
+            <div class="answer-image">
                 <img class = "image-card" src = 'https://raw.githubusercontent.com/OValya/image-data/master/img/${request.id}.jpg' >
                 <img class = "image-icon">
             </div>
             <h2>${images[request.id].name}</h2>
             <p>${images[request.id].author}, ${images[request.id].year}</p>
-            <button class ="next-button button"> Next </button>`
+            <button class ="next-button button"> Next </button>
+        </div>`
         //---------Timer-----//
         let timerView = document.getElementById('timer');
 

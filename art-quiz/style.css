@@ -1,10 +1,16 @@
+:root {
+  --active-color: #FFBCA2;
+  --hover-color: white;
+}
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 a {
+  color:white;
   text-decoration: none;
+  font-size: 20px;
 }
 
 .hide{
@@ -12,7 +18,7 @@ a {
 }
 .wrapper {
   position: relative;
-  width: 360px;
+  max-width: 520px;
   height: 100%;
   margin: 0 auto;
   background-color: black;
@@ -33,21 +39,20 @@ a {
 }
 .settings-icon {
   background: url("./assets/svg/start-page/carbon_settings.svg") no-repeat center/contain;
-  width: 30px;
-  padding: 5px;
+  width: 34px;
+  height: 34px;
   margin: 20px 20px 20px 0;
   border-width:0 ;
 }
 
 .settings-icon:hover{
   transform: scale(1.5);
-  
 }
 
 .logo {
   width: 46%;
   align-self: center;
-  margin: 0 0 230px 0;
+  margin: 320px 0 32px 0;
 }
 
 
@@ -81,7 +86,7 @@ a {
 .button{
   width: 75%;
   height: 56px;
-  margin: 20px 0;
+  margin: 10px 0;
   background-color: transparent;
   border: 1px solid #ffffff;
   border-radius: 56px;
@@ -89,16 +94,16 @@ a {
   font-size: 24px; 
 }
 .button-settings{
-  width: 30%;
+  
 }
 .button:hover{
   color: black;
-  background-color: white;
+  background-color: var(--hover-color);
   transition: 0.5s;
 }
 
 .button:active{
-  background-color: #FFBCA2;
+  background-color: var(--active-color);
 }
 
 /************* settings************/
@@ -168,8 +173,6 @@ a {
   background: url("../assets/svg/settings-page/volume-mute.svg") no-repeat center/contain;
   width: 30px;
   height: 30px;
-  padding: 5px;
-  margin: 0 70px;
   border-width:0 ;
 }
 .volume-up-icon {
@@ -183,13 +186,12 @@ a {
 }
 .timer-on-off-container{
   position: relative;
-  margin: 20px 0 70px -20px;
+  margin: 20px 0px 70px -20px;
 }
 
 .check input {
   opacity: 0;
   position: absolute;
- 
   cursor: pointer;
 }
 
@@ -203,8 +205,8 @@ a {
 }
 .check-box {
   position: absolute;
-   left: 40px;
-   top: 0;
+  left: 40px;
+  top: 0;
   width: 36px;
   height: 18px;
   border: 1px solid #ffffff;
@@ -222,24 +224,24 @@ a {
   height: 22px;
   border: 1px solid #ffffff;
   border-radius: 50%;
-  background-color: wheat;
+  background-color: white;
 }
 
 .check input:checked ~ .check-box:before {
-  background-color: teal;
+  background-color: var(--active-color);
   left: 10px;
 }
 
 .check input:checked ~ .check-box {
-  background-color: teal;
+  background-color: var(--active-color);
 }
 
 .check input:hover:not(:checked) ~ .check-box:before {
-  background-color: teal;
+  background-color: var(--active-color);
   left: 0;
 }
 .check input:hover:not(:checked) ~ .check-box {
-  border: 1px solid teal;
+  border: 1px solid var(--active-color);
 }
 
 .number {
@@ -258,12 +260,13 @@ a {
 }
 
 .minus:hover, .plus:hover{
-  background-color: teal;
+  background-color: var(--hover-color) ;
   transition: 0.5s;
 }
 
 .minus:active, .plus:active{
  transform: scale(1.3);
+ background-color: var(--active-color)
 }
 
 .timer-value{
@@ -295,14 +298,17 @@ a {
 
 /******category***********/
 .page-category{
-  
   color: white;
+  height: 100%;
+  background-color: black;
+
 }
 
 .categories-button-container{
   display: flex;
   padding: 20px;
   justify-content: space-between;
+  align-items: center;
   height: 110px;
 }
 .categories-button-container > .settings-icon{
@@ -311,6 +317,26 @@ a {
 .category-logo{
   margin: 0px;
 } 
+
+.score-icon{
+  background: url("./assets/svg/category-page/score.svg") no-repeat center/contain;
+  width: 34px;
+  height: 34px;
+  margin:  0;
+  border-width:0 ;
+  color: black;
+  font-size: 0px;
+  transition: 0.3s;
+}
+
+
+.score-icon:active{
+  background: url("./assets/svg/category-page/score-active.svg") no-repeat center/contain ;
+  transform: scale(1.5);
+  transition: 0.3s;
+}
+
+
 
 .title{
   text-align: center;
@@ -321,6 +347,7 @@ a {
 .categories{
   display: flex;
   flex-wrap: wrap;
+  padding: 10px;
 
 }
 .category{
@@ -333,7 +360,7 @@ padding: 10px;
   display: flex;
   justify-content: space-between;
   margin: 0 5px;
-  border-bottom: 1px solid ;
+  font-size: 20px;
 }
 .number-category{
 
@@ -363,7 +390,6 @@ padding: 10px;
 }
 
 .card-image-container:after {
-
 	content: "";
 	display: block;    
 	width: 100%;
@@ -372,7 +398,7 @@ padding: 10px;
 	top: 0;      
 	left: 0;   
 	background: transparent;
-	background-image: linear-gradient(to left, black, #FFBCA2);
+	background-image: linear-gradient(to left, black, var(--active-color));
 	opacity: 0.6;
   cursor: pointer;
 }
@@ -386,11 +412,15 @@ padding: 10px;
   width: 100%;
   color:white;
 }
+.header-page-question{
+  display: flex;
+  justify-content: space-between;
+}
 
 .timer-box{
   display: block;
   text-align: center;
-  padding-top: 20px;
+  padding: 20px;
 }
 
 #timer{
@@ -399,16 +429,23 @@ padding: 10px;
   font-size: 20px;
 }
 
+.cancel-icon{
+  background-color: black;
+  color: #ffffff;
+  font-size: 24px;
+  padding: 20px;
+  border: 0px;
+}
 .question-picture {
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   display: block;
   margin: 0 auto;
- 
   border-radius: 15px;
   background-size: contain;
 }
 .answers-container {
+  padding: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -417,7 +454,7 @@ padding: 10px;
 
 .answer-picture{
   position: relative;
-  width: 180px;
+  width: 50%;
   height: 170px;
   border: 5px solid black;
   /*margin: 5px;*/
@@ -437,6 +474,7 @@ padding: 10px;
 
 .button-answer {
   width: 45%;
+  font-size: 20px;
 }
 .button-picture{
   height: 160px;
@@ -446,36 +484,218 @@ padding: 10px;
 /*********answer************/
 .page-answer{
   position: absolute;
-  top: 100px;
-  left:50px;
-  width: 260px;
-  padding: 15px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  
+}
+
+.page-content{
+  width: 280px;
+  height: 400px;
+  margin: 30px auto;
+  padding: 20px;
   background-color: white;
+  display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 20px;
 }
 
 h2{
-  padding: 10px 0px;
+  padding: 20px 0px 10px;
   text-align: center;
 }
 
 .next-button{
-  background-color: #FFBCA2;
+  margin: 40px 0 0 0;
+  background-color: var(--active-color);
   height: 35px;
   transition: 0.5s;
+  cursor: pointer;
 }
 .next-button:hover{
-  background-color: transparent;
+  background-color: var(--hover-color);
   color: black;
-  border: 2px solid black;
+  border: 1px solid black;
   transition: 0.5s;
 }
+.next-button:active{
+  background-color: var(--active-color);
+  color: black;
+  border: 1px solid var(--active-color);
+  transition: 0.5s;
+}
+
+.answer-image{
+  position: relative;
+  width: 100%;
+  height: 170px;
+  border: 5px solid black;
+  /*margin: 5px;*/
+  border-radius: 10px;
+  background-size: cover;
+  cursor: pointer;
+}
+
 .image-icon{
   position: absolute;
-  top: 100px;
-  left:50px;
+  top: 0;
+  left:0;
 }
 
 .footer {
+}
+/*--------520px-768px---------*/
+@media (min-width: 520px) and (max-width:768px) {
+  .wrapper{
+    max-width: 100%;
+    max-height: 100vh;
+  }
+  
+  .start-page {
+    height: 100vh;
+  }
+
+  .logo {
+   /* width: calc(320px * 100% / 768px);
+    align-self: center;*/
+    margin: 50% 0 20% 0;
+  }
+
+  .button{
+    width: 35%;
+    height: 56px;
+  }
+
+  .settings-title-container {
+    justify-content: start;
+    padding: 20px;
+  }
+  
+  .settings-title-container p{
+    margin-left: 30px;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .volume-container {
+    justify-content: space-between;
+  }
+
+  .settings{
+    padding: 0 80px;
+  }
+
+  .settings-item{
+    margin-top: 80px;
+    text-align: left;
+    font-size: 28px;
+
+  }
+
+  .volume-range {
+    width: 100%;
+    margin: 20px 0px 10px;
+  }
+  
+  .volume-mute-icon, .volume-up-icon {
+    width: 40px;
+    height: 40px;
+   
+  }
+
+  .volume-container {
+    margin: 0;
+  }
+
+  .timer-container {
+    justify-content: start;
+  }
+
+  .timer-on-off-container{
+    margin-left:0px;
+  }
+
+  .number{
+    margin-left: 0;
+  }
+
+  .timer-value{
+    font-size: 24px;
+  }
+
+  .button-container-settings {
+    padding: 130px 0 0 0;
+    justify-content: space-between;
+  }
+  .default-settings-btn, .save-settings-btn{
+    width: 49%;
+    
+  }
+
+  .title{
+    text-align: left;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 70px 20px;
+  }
+
+  .score-icon{
+    background-position:  0;
+    padding: 0 0 0 25px;
+    width: 150px;
+    height: 35px;
+    color: white;
+    font-size: 30px;
+    transition: 0.3s;
+  }
+ 
+  .score-icon:active{
+    color: var(--active-color);
+    text-decoration: none;
+    background-position:  0;
+    padding: 0 0 0 25px;
+    width: 150px;
+    height: 35px;
+  }
+
+  .category{
+    width: 33%;
+  }
+  .category-discription{
+    font-size: 24px;
+  }
+  
+  .question-picture {
+    width: 480px;
+    height: 480px;
+    display: block;
+    margin: 0 auto 3vh;
+    border-radius: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .answer-picture{
+    width: 47%;
+    height: 300px;
+    margin: 1.5%;
+  }
+
+  .page-content{
+    width: 500px;
+    height: 680px;
+  }
+
+  .answer-image{
+    height: 400px;
+  }
+
+  .button-answer{
+    width: 45%;
+    
+  }
 }

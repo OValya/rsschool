@@ -62,7 +62,10 @@ let Categories = {
                 <a class = "button-settings" href="/#/">
                     <img class = "category-logo" src="./assets/svg/start-page/logo_art-quiz.svg" alt="">
                 </a>
+               <!-- <a href ="#" ><h2 class = "score-icon">Score</h2></a>-->
+                <input class="score-icon" type="button" value="Score">
                 <input class="settings-icon" type="button" value="">
+
                 <!--<a class = "button-settings" href=""></a>-->
               </div>
               <p class = "title">${typeCategory.toUpperCase()} QUIZ. Let's go!</p>
@@ -82,6 +85,7 @@ let Categories = {
         `*/
     }
     , afterRender: async () => {
+        
        /* let container = document.querySelector('.categories');
         container.addEventListener('click', (e)=>{
             if(e.target === 'img'){
