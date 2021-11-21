@@ -6,7 +6,9 @@ import Error404     from './views/pages/Error404.js'
 import Categories     from './views/pages/Categories.js'
 import Question     from './views/pages/Question.js'
 
-import Register     from './views/pages/Register.js'
+import  {pictureCategory}  from './js/getAllSetsOfCategory.js';
+import  {authorCategory}  from './js/getAllSetsOfCategory.js';
+//import Register     from './views/pages/Register.js'
 
 
 import Navbar       from './views/components/Navbar.js'
@@ -26,6 +28,7 @@ const routes = {
 };
 
 
+ 
 // The router code. Takes a URL, checks against the list of supported routes and then renders the corresponding content page.
 const router = async () => {
 
@@ -39,7 +42,7 @@ const router = async () => {
     await Navbar.after_render();
     footer.innerHTML = await Bottombar.render();
     await Bottombar.after_render();*/
-
+ 
 
     // Get the parsed URl from the addressbar
     let request = Utils.parseRequestURL()
@@ -63,3 +66,5 @@ window.addEventListener('hashchange', router);
 
 // Listen on page load:
 window.addEventListener('load', router);
+window.addEventListener('load', pictureCategory)
+window.addEventListener('load', authorCategory)

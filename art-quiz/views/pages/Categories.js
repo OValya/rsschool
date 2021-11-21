@@ -1,6 +1,8 @@
 import Utils        from '../../services/Utils.js'
 import {images}         from '../../data/images.js'
 import Category     from '../components/Category.js'
+import  {pictureCategory}  from '../../js/getAllSetsOfCategory.js';
+import  {authorCategory}  from '../../js/getAllSetsOfCategory.js';
 
 /*let getPost = async (id) => {
     const options = {
@@ -32,30 +34,49 @@ let getQuestions = (type) => {
       
 }*/
 
+let getAllSetsOfCategory = (type) => {
+    
+    let startImage;
+    let arrayOFCategory = [];
+    if(type==='picture'){startImage = 0; }
+    if(type==='author') {startImage = 120 }  
+    for (let i = 0; i < 12; i++) {
+        let item =  new Category(i, `https://raw.githubusercontent.com/OValya/image-data/master/img/${i *10 + startImage}.jpg`, type);
+        arrayOFCategory.push(item);
+        
+       // category += item.renderCategory(type) + '\n'; 
+    }
+    return arrayOFCategory;
+}
+
 
 let Categories = {
+    render : async () => {   
+        let allSets =[];
+        let typeCategory = Utils.parseRequestURL().resource; //author || picture
+        if(typeCategory==='picture'){
+             allSets = pictureCategory;
+             console.log(allSets);
 
-   // questions: getQuestions(Utils.parseRequestURL().resource),
-     
-    render : async () => {
+        } else allSets = authorCategory;
         
-
-      //  let questions = questionsPicture();
-       // let request = Utils.parseRequestURL()
-       // let post = await getPost(request.id)
+        let allSetsView = allSets.reduce((view, current) => view + current.renderCategory(typeCategory) + '\n', '');
         
-        let category = '';
+       /* let category = '';
         let arrayOFCategory = [];
         let typeCategory = Utils.parseRequestURL().resource;
         let startImage;
-        if(typeCategory==='picture'){ startImage = 0; }
-        if(typeCategory==='author'){  startImage = 120 }  
-        for (let i = 0; i < 10; i++) {
+        if(typeCategory==='picture'){startImage = 0; }
+        if(typeCategory==='author') {startImage = 120 }  
+        for (let i = 0; i < 12; i++) {
             
-            let item =  new Category(i, `https://raw.githubusercontent.com/OValya/image-data/master/img/${i *12 + startImage}.jpg`, typeCategory);
-            arrayOFCategory.push(item.renderCategory(typeCategory));
+            let item =  new Category(i, `https://raw.githubusercontent.com/OValya/image-data/master/img/${i *10 + startImage}.jpg`, typeCategory);
+            arrayOFCategory.push(item);
+            console.log(item);
             category += item.renderCategory(typeCategory) + '\n'; 
-        }
+        }*/
+        
+
         let view = ` 
             <div class = "page-category">
              <div class="categories-button-container">
@@ -70,7 +91,7 @@ let Categories = {
               </div>
               <p class = "title">${typeCategory.toUpperCase()} QUIZ. Let's go!</p>
               <div class = "categories">
-              ${category}
+              ${allSetsView}
               </div>
             </div>
             `

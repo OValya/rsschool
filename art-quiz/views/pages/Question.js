@@ -1,6 +1,8 @@
 import Utils        from '../../services/Utils.js'
 import {images}         from '../../data/images.js'
 import Categories     from '../pages/Categories.js'
+import  {pictureCategory}  from '../../js/getAllSetsOfCategory.js';
+import  {authorCategory}  from '../../js/getAllSetsOfCategory.js';
 
 let getImage = async (id) => {
     let image = document.querySelector('.question-picture');
@@ -22,7 +24,7 @@ let getPicture = (id, wrong, type, box) =>{
        // a.classList.add(`${type}`)
         let div = document.createElement('div');
         div.style.order = `${Math.floor(Math.random() * 4)}`;
-        div.classList.add('answer-picture', `${type}`);
+        div.classList.add('answer-picture', `${type}`, 'answer');
         div.style.backgroundImage = `url('${img.src}')`; 
        // div.appendChild(img);
       //  a.appendChild(div);
@@ -64,7 +66,7 @@ let getWrongImages = async (id, box) =>{
 let getRightAnswer = (id, box) =>{
     let answer = images[id].author;
     let button = document.createElement('button');
-    button.classList.add('button-answer', 'button', 'right-answer');
+    button.classList.add('button-answer', 'button', 'correct', 'answer');
     button.textContent=answer;
     box.append(button); 
 
@@ -74,7 +76,7 @@ let getRightAnswer = (id, box) =>{
 let getWrongAnswers =(box) =>{
     for (let i = 0; i < 3; i++) {
         let button = document.createElement('button');
-        button.classList.add('button-answer', 'button');
+        button.classList.add('button-answer', 'button', 'wrong', 'answer');
         let num = Math.floor(Math.random() * 240);
         //console.log(num);
         button.textContent = images[num].author;  
@@ -82,6 +84,13 @@ let getWrongAnswers =(box) =>{
     }
 }
 
+function clickNext() {
+    if(request.resource = 'picture') {
+        let numberCategory = Math.ceil(request.id/12);
+
+    }
+
+};
 
 let Question = {
 
@@ -145,7 +154,9 @@ let Question = {
     , afterRender: async () => {
         //----------окно ответа------------//
         let form = document.querySelector('.page-answer');
-        form.style.display = 'none';
+        //form.style.display = 'none';
+        form.style.opacity = '0';
+        form.style.zIndex = '-3';
         let request = Utils.parseRequestURL();
         let answerBox = document.querySelector('.answers-container');
         form.innerHTML = `
@@ -156,7 +167,7 @@ let Question = {
             </div>
             <h2>${images[request.id].name}</h2>
             <p>${images[request.id].author}, ${images[request.id].year}</p>
-            <button class ="next-button button"> Next </button>
+            <button class ="next-button button" > Next </button>
         </div>`
         //---------Timer-----//
         let timerView = document.getElementById('timer');
@@ -181,40 +192,89 @@ let Question = {
         }, 1000);
 
         
-        
-        if(Utils.parseRequestURL().resource==="picture"){
+        if(request.resource==="picture"){
             await getImage(request.id)
             getRightAnswer(request.id, answerBox);        
             getWrongAnswers(answerBox);
         }
-        if(Utils.parseRequestURL().resource==="author"){
+        if(request.resource==="author"){
            // await getImage(request.id) 
            await getWrongImages(request.id, answerBox);
            await getRightImage(request.id,  answerBox );
-          
         }
 
         function showWrongAnswerPage(){
             let img = document.querySelector('.image-icon');
             img.src = '../../assets/svg/answer-page/wrong.svg'
-            form.style.display = 'flex';
+            form.style.zIndex = '1';
+            form.style.opacity = '1';
+
         }
 
         function showCorrectAnswerPage(){
             let img = document.querySelector('.image-icon');
             img.src = '../../assets/svg/answer-page/correct.svg'
-            form.style.display = 'flex';
+            form.style.zIndex = '1';
+            form.style.opacity = '1';
+        }
+
+        function changeScore(){
+            if(request.resource === 'picture') {
+                let numberCategory = Math.floor(request.id/10);
+                let score = pictureCategory[numberCategory].getScore();
+                pictureCategory[numberCategory].setScore(++score);
+                console.log(pictureCategory[numberCategory].end())
+            }
+
+            if(request.resource === 'author') {
+                let numberCategory = Math.floor((request.id-120)/10);
+                let score = authorCategory[numberCategory].getScore();
+                authorCategory[numberCategory].setScore(++score);
+            }
+
         }
 
         answerBox.addEventListener('click', (e)=>{
-                clearTimeout(timer);
-                (e.target.classList.contains('correct')) ? 
-                    showCorrectAnswerPage() :
-                    showWrongAnswerPage(); 
+               
+                if((e.target.nodeName === 'BUTTON'|| e.target.nodeName === 'DIV') && e.target.classList.contains('answer')){
+                    clearTimeout(timer);
+                    if(e.target.classList.contains('correct')) { 
+                        showCorrectAnswerPage(); changeScore();  
+                    }else {
+                        showWrongAnswerPage(); 
+                    }
+                }
         })
 
+
+        let next = document.querySelector('.next-button');
+        next.addEventListener('click', (e) => 
+         {  
+            if(request.resource === 'picture') {
+                let numberCategory = Math.floor(request.id/10);
+                let endCategory = pictureCategory[numberCategory].end();
+                if(+request.id < endCategory ){
+                  window.location.href = `/#/picture/${+request.id + 1}`;
+                } else console.log('ваш результат:' +  pictureCategory[numberCategory].getScore() );
+                
+            }
+
+            if(request.resource === 'author') {
+                let numberCategory = Math.floor((request.id-120)/10);
+                let endCategory = authorCategory[numberCategory].end();
+                if(+request.id < endCategory ){
+                  window.location.href = `/#/author/${+request.id + 1}`;
+                } else console.log('ваш результат:' +  authorCategory[numberCategory].getScore() );
+            }
+
+
+
+        });
+
+
+
         
-    //   let answer = document
+     //   let answer = document
 
 
 

@@ -403,6 +403,9 @@ padding: 10px;
   cursor: pointer;
 }
 
+.played.card-image-container::after{
+  opacity: 0;
+}
 
 
 

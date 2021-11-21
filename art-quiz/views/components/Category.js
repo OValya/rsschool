@@ -1,11 +1,25 @@
 class Category {
-    constructor(number, cover, category, score = 0, title = 'Set'  ){
+    constructor(number, cover, category, score = 0, title = 'Set'){
         this.numberCategory = number;
         this.urlCover =  cover; 
         this.category = category;
         this.score = score;
         this.title = title;
+        
     }
+
+    end() {
+            if(this.category==='picture'){return 9 + this.numberCategory*10 }
+            if(this.category==='author'){return 129 + this.numberCategory*10}
+        }
+
+    isPlayed = () =>{
+            if(localStorage.getItem(`isPlayed${category}`)){
+                if(localStorage.getItem(`isPlayed${category}`).split(',')[number] === '1'){
+                    return 'played'
+                }
+            }else return ''
+        }
     setScore(score) {
         this.score = score;
     } 
@@ -15,8 +29,8 @@ class Category {
 
     renderCategory(type) {
         let numberQuetion;
-        if(type==='picture'){numberQuetion=this.numberCategory*12}
-        if(type==='author'){numberQuetion=120+this.numberCategory*12}
+        if(type==='picture'){numberQuetion=this.numberCategory*10}
+        if(type==='author'){numberQuetion=120+this.numberCategory*10}
       
         let view = 
             `<div class = "category">
@@ -26,7 +40,7 @@ class Category {
                     
                 </div>
                 <a class = "ref-to-questions" href="/#/${this.category}/${numberQuetion}">
-                  <div class="card-image-container">
+                  <div class="card-image-container ${this.isPlayed}">
                     <img class = "category-image-card" src=${this.urlCover}  alt="">
                   </div>
                 </a>
