@@ -3,6 +3,7 @@ import {images}         from '../../data/images.js'
 import Categories     from '../pages/Categories.js'
 import  {pictureCategory}  from '../../js/getAllSetsOfCategory.js';
 import  {authorCategory}  from '../../js/getAllSetsOfCategory.js';
+import playList from '../../data/sounds.js'
 
 let getImage = async (id) => {
     let image = document.querySelector('.question-picture');
@@ -126,26 +127,29 @@ let Question = {
                 <div class = "header-page-question">
                     <input class="cancel-icon" type="button" value="X">
                     <div class="timer-box"> 
-                        <span id="timer">Время: </span>
+                        <span id="timer">Время: 00 секунд </span>
                     </div>
                 </div>
                 <p class = "title"> Кто автор картины "${images[Utils.parseRequestURL().id].name}"? </p>
                 <div class="question-picture"></div>
                 <div class="answers-container"></div>
             </div> 
-            <div class = "page-answer"></div>`
+            <div class = "page-answer"></div>
+            <div class = "page-result"></div>`
         }
         if(Utils.parseRequestURL().resource==="author"){
             return /*html*/` 
             <div class = "page-question">
                 <div class="timer-box"> 
-                    <span id="timer"> Время: </span>
+                    <span id="timer"> Время: 00 секунд</span>
                 </div>
                 <p class = "title"> Какую картину написал ${images[Utils.parseRequestURL().id].author} ? </p>
                 <div class="answers-container">
                 </div>
             </div>
             <div class = "page-answer"></div>
+            <div class = "page-result"></div>
+            
              `
         }
 
@@ -154,11 +158,10 @@ let Question = {
     , afterRender: async () => {
         //----------окно ответа------------//
         let form = document.querySelector('.page-answer');
-        //form.style.display = 'none';
         form.style.opacity = '0';
         form.style.zIndex = '-3';
         let request = Utils.parseRequestURL();
-        let answerBox = document.querySelector('.answers-container');
+        
         form.innerHTML = `
         <div class ="page-content">
             <div class="answer-image">
@@ -169,6 +172,7 @@ let Question = {
             <p>${images[request.id].author}, ${images[request.id].year}</p>
             <button class ="next-button button" > Next </button>
         </div>`
+
         //---------Timer-----//
         let timerView = document.getElementById('timer');
 
@@ -187,11 +191,65 @@ let Question = {
               timerView.innerHTML = "Упс...Время вышло!";
               clearInterval(timer);
               showWrongAnswerPage();
+              timeOutSound();
              }
          
         }, 1000);
 
+        const audio = new Audio();
+
+        //-------------результаты----------//
+        function renderResultPage(resultImageSrc, resultTitle, resultScore){
+            let result = document.querySelector('.page-result');
+            result.style.opacity = '0';
+            result.style.zIndex = '-10';     
+            result.innerHTML = `
+            <div class ="page-content">
+                <div class="result-image">
+                    <img class = "result-image-card" src = ${resultImageSrc} >
+                </div>
+                <h2>${resultTitle}</h2>
+                <p>Ваш результат: ${resultScore} / 10 </p>
+                <button class ="result-button button" > Продолжить </button>
+            </div>`
+            result.style.opacity = '1';
+            result.style.zIndex = '3';
+        }
         
+        //----------
+
+
+        function congratulationsSound() {
+            audio.src = playList[0].src; // ссылка на аудио-файл;
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        function wrongSound(){
+            audio.src = playList[2].src; // ссылка на аудио-файл;
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        function correctSound(){
+            audio.src = playList[1].src; // ссылка на аудио-файл;
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        function gameOverSound(){
+            audio.src = playList[3].src; // ссылка на аудио-файл;
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        function timeOutSound(){
+            audio.src = playList[4].src; // ссылка на аудио-файл;
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        let answerBox = document.querySelector('.answers-container');
         if(request.resource==="picture"){
             await getImage(request.id)
             getRightAnswer(request.id, answerBox);        
@@ -208,6 +266,7 @@ let Question = {
             img.src = '../../assets/svg/answer-page/wrong.svg'
             form.style.zIndex = '1';
             form.style.opacity = '1';
+            wrongSound();
 
         }
 
@@ -216,6 +275,7 @@ let Question = {
             img.src = '../../assets/svg/answer-page/correct.svg'
             form.style.zIndex = '1';
             form.style.opacity = '1';
+            correctSound();
         }
 
         function changeScore(){
@@ -223,7 +283,7 @@ let Question = {
                 let numberCategory = Math.floor(request.id/10);
                 let score = pictureCategory[numberCategory].getScore();
                 pictureCategory[numberCategory].setScore(++score);
-                console.log(pictureCategory[numberCategory].end())
+              
             }
 
             if(request.resource === 'author') {
@@ -246,6 +306,24 @@ let Question = {
                 }
         })
 
+        function setParamForRender(score){
+            form.style.opacity = '0';
+            form.style.zIndex = '-3';
+            switch (score) {
+                case 0:
+                    renderResultPage('./../assets/svg/finish-page/gameover.svg', 'Вы проиграли...', score);
+                    gameOverSound();
+                    break;
+                case 10:
+                    renderResultPage('./../assets/svg/finish-page/grand.svg', 'Топ результат! Ура!', score);
+                    congratulationsSound();
+                    break;
+                default:
+                    renderResultPage('./../assets/svg/finish-page/score.svg', 'Отличный результат!', score);
+                    congratulationsSound();
+                    break;
+            }
+        }
 
         let next = document.querySelector('.next-button');
         next.addEventListener('click', (e) => 
@@ -255,7 +333,7 @@ let Question = {
                 let endCategory = pictureCategory[numberCategory].end();
                 if(+request.id < endCategory ){
                   window.location.href = `/#/picture/${+request.id + 1}`;
-                } else console.log('ваш результат:' +  pictureCategory[numberCategory].getScore() );
+                } else { setParamForRender(pictureCategory[numberCategory].getScore())}
                 
             }
 
@@ -264,25 +342,21 @@ let Question = {
                 let endCategory = authorCategory[numberCategory].end();
                 if(+request.id < endCategory ){
                   window.location.href = `/#/author/${+request.id + 1}`;
-                } else console.log('ваш результат:' +  authorCategory[numberCategory].getScore() );
+                } else setParamForRender(authorCategory[numberCategory].getScore());
             }
-
-
-
         });
 
+        function setLocalStorage(){
+            
+        }
 
-
-        
-     //   let answer = document
-
-
+        let continueButton = document.querySelector('.result-button');
+        continueButton.addEventListener('click', (e) => 
+         {  
+            if(request.resource === 'picture') {}
+         });
 
     }
 }
- //<button class="button-answer button">Answer1</button>
-   //             <button class="button-answer button">Answer1</button>
-     //           <button class="button-answer button">Answer1</button>
-       //         <button class="button-answer button">Answer1</button>
 
 export default Question;

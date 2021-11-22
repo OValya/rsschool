@@ -455,7 +455,7 @@ padding: 10px;
 }
 
 
-.answer-picture{
+.answer-picture, .result-image{
   position: relative;
   width: 50%;
   height: 170px;
@@ -465,7 +465,7 @@ padding: 10px;
   background-size: cover;
   cursor: pointer;
 }
-.image-card{
+.image-card, .result-image-card{
   width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -485,13 +485,15 @@ padding: 10px;
 }
 
 /*********answer************/
-.page-answer{
+.page-answer, .page-result{
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: -3;
+  opacity: 0;
   
 }
 
@@ -512,20 +514,20 @@ h2{
   text-align: center;
 }
 
-.next-button{
+.next-button, .result-button{
   margin: 40px 0 0 0;
   background-color: var(--active-color);
   height: 35px;
   transition: 0.5s;
   cursor: pointer;
 }
-.next-button:hover{
+.next-button:hover, .result-button:hover{
   background-color: var(--hover-color);
   color: black;
   border: 1px solid black;
   transition: 0.5s;
 }
-.next-button:active{
+.next-button:active, .result-button:active{
   background-color: var(--active-color);
   color: black;
   border: 1px solid var(--active-color);
@@ -548,6 +550,24 @@ h2{
   top: 0;
   left:0;
 }
+/*---------результат--------*/
+
+.result-image{
+  width: 90%;
+  height: 200px;
+  border: 0px solid black;
+  /*margin: 5px;*/
+  border-radius: 10px;
+  /*background-size: auto 100%;*/
+  cursor: unset;
+}
+
+.result-image-card{
+  object-fit: contain;
+}
+
+
+
 
 .footer {
 }

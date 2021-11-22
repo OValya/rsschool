@@ -35,7 +35,7 @@ let Settings = {
                 <p class="settings-item"> Time to answer </p>
                 <div class="number">
                     <button class="minus" type="button" > - </button>
-                    <input class="timer-value" type="number" min="5" max="60" value="${time}" readonly step="5">
+                    <input class="timer-value" type="number" min="5" max="30" value="${time}" readonly step="5">
                     <button class="plus" type="button" >+</button>
                 </div>
                <!-- <input class = "timer-num" type="number">  -->     
