@@ -80,11 +80,11 @@ let Categories = {
         let view = ` 
             <div class = "page-category">
              <div class="categories-button-container">
-                <a class = "button-settings" href="/#/">
+                <a class = "button-settings" href="./#/">
                     <img class = "category-logo" src="./assets/svg/start-page/logo_art-quiz.svg" alt="">
                 </a>
                <!-- <input class="score-icon" type="button" value="Score">-->
-                <input class="settings-icon" type="button" value="" onclick="window.location.href='/#/settings'">
+                <input class="settings-icon" type="button" value="" onclick="window.location.href='./#/settings'">
               </div>
               <p class = "title">${typeCategory.toUpperCase()} QUIZ. Let's go!</p>
               <div class = "categories">
