@@ -21,36 +21,14 @@ let getPicture = (id, wrong, type, box) =>{
     let src = `https://raw.githubusercontent.com/OValya/image-data/master/img/${wrong}.jpg`;
     img.src = src;
     img.onload = ()=>{
-       // let a = document.createElement('a');
-       // a.href= `/#/author/${id}-${type}`;
-       // 
-       // a.classList.add(`${type}`)
         let div = document.createElement('div');
         div.style.order = `${Math.floor(Math.random() * 4)}`;
         div.classList.add('answer-picture', `${type}`, 'answer');
         div.style.backgroundImage = `url('${img.src}')`; 
-       // div.appendChild(img);
-      //  a.appendChild(div);
         box.append(div);
-        //let image = document.createElement('img');
-        //image.classList.add('image-card');
-        //image.src = src;
     }
-    
-    
-    //
-    
-   
-    /*let view = `
-                <a class = "ref " href="/#/author/${ +id + 1}" order = ${Math.floor(Math.random() * 4)}>
-                  <div class="answer-picture">
-                    <img class = "image-card" src=${src}  alt="">
-                  </div>
-                </a> ` */
-
-    //console.log(view)
-    //return view;
 }
+
 let getRightImage = async (id, box) => {
     getPicture(id, id, 'correct', box);
 }
@@ -73,8 +51,6 @@ let getRightAnswer = (id, box) =>{
     button.style.order = `${Math.floor(Math.random() * 4)}`
     button.textContent=answer;
     box.append(button); 
-
-    //console.log(answer.author);
 }
 
 let getWrongAnswers =(id, box) =>{
@@ -95,7 +71,7 @@ let getWrongAnswers =(id, box) =>{
 function showAnswerPage(type){
             let form = document.querySelector('.page-answer');
             let img = document.querySelector('.image-icon');
-            img.src = `../../assets/svg/answer-page/${type}.svg`
+            img.src = `./assets/svg/answer-page/${type}.svg`
             form.style.zIndex = '1';
             form.style.opacity = '1';
             playSound(`${type}`);
@@ -213,21 +189,15 @@ let Question = {
             getRightAnswer(request.id, answerBox);  
         }
         if(request.resource==="author"){
-           // await getImage(request.id) 
            await getWrongImages(request.id, answerBox);
            await getRightImage(request.id,  answerBox );
         }
-
-        
-
-      
 
         function changeScore(){
             if(request.resource === 'picture') {
                 let numberCategory = Math.floor(request.id/10);
                 let score = pictureCategory[numberCategory].getScore();
                 pictureCategory[numberCategory].setScore(++score);
-              
             }
 
             if(request.resource === 'author') {
@@ -239,7 +209,6 @@ let Question = {
         }
 
         answerBox.addEventListener('click', (e)=>{
-               
                 if((e.target.nodeName === 'BUTTON'|| e.target.nodeName === 'DIV') && e.target.classList.contains('answer')){
                     stopTimer();
                     if(e.target.classList.contains('correct')) { 
@@ -255,15 +224,15 @@ let Question = {
             form.style.zIndex = '-3';
             switch (score) {
                 case 0:
-                    renderResultPage('./../assets/svg/finish-page/gameover.svg', 'Вы проиграли...', score);
+                    renderResultPage('./assets/svg/finish-page/gameover.svg', 'Вы проиграли...', score);
                     playSound('gameover');
                     break;
                 case 10:
-                    renderResultPage('./../assets/svg/finish-page/grand.svg', 'Топ результат! Ура!', score);
+                    renderResultPage('./assets/svg/finish-page/grand.svg', 'Топ результат! Ура!', score);
                     playSound('congratulation');
                     break;
                 default:
-                    renderResultPage('./../assets/svg/finish-page/score.svg', 'Отличный результат!', score);
+                    renderResultPage('./assets/svg/finish-page/score.svg', 'Отличный результат!', score);
                     playSound('congratulation');
                     break;
             }
