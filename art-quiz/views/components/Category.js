@@ -33,7 +33,7 @@ class Category {
                     <span class="correct-answers ${this.isPlayed}">${this.score}/10</span>
                     
                 </div>
-                <a class = "ref-to-questions" href="/#/${this.category}/${numberQuetion}">
+                <a class = "ref-to-questions" href="./#/${this.category}/${numberQuetion}">
                   <div class="card-image-container ${this.isPlayed}">
                     <img class = "category-image-card" src=${this.urlCover}  alt="">
                   </div>

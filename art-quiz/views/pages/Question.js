@@ -199,7 +199,7 @@ let Question = {
                 <h2>${resultTitle}</h2>
                 <p>Ваш результат: ${resultScore} / 10 </p>
                 <button class ="result-button button" 
-                    onclick= "window.location.href = '/#/${request.resource}';" > 
+                    onclick= "window.location.href = './#/${request.resource}';" > 
                     Продолжить </button>
             </div>`
             result.style.opacity = '1';
@@ -276,7 +276,7 @@ let Question = {
                 let numberCategory = Math.floor(request.id/10);
                 let endCategory = pictureCategory[numberCategory].end();
                 if(+request.id < endCategory ){
-                  window.location.href = `/#/picture/${+request.id + 1}`;
+                  window.location.href = `./#/picture/${+request.id + 1}`;
                 } else {
                     localStorage.setItem(`picture${numberCategory}`, pictureCategory[numberCategory].getScore());
                     pictureCategory[numberCategory].isPlayed = 'played';
@@ -289,7 +289,7 @@ let Question = {
                 let numberCategory = Math.floor((request.id-120)/10);
                 let endCategory = authorCategory[numberCategory].end();
                 if(+request.id < endCategory ){
-                  window.location.href = `/#/author/${+request.id + 1}`;
+                  window.location.href = `./#/author/${+request.id + 1}`;
                 } else {
                     localStorage.setItem(`author${numberCategory}`, authorCategory[numberCategory].getScore());
                     authorCategory[numberCategory].isPlayed = 'played';
