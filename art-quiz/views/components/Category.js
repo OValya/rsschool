@@ -1,8 +1,9 @@
 class Category {
-    constructor(number, cover, category, score = 0, title = 'Set'){
+    constructor(number, cover, category, isPlayed, score, title = 'Сет'){
         this.numberCategory = number;
         this.urlCover =  cover; 
         this.category = category;
+        this.isPlayed = isPlayed;
         this.score = score;
         this.title = title;
         
@@ -13,13 +14,6 @@ class Category {
             if(this.category==='author'){return 129 + this.numberCategory*10}
         }
 
-    isPlayed = () =>{
-            if(localStorage.getItem(`isPlayed${category}`)){
-                if(localStorage.getItem(`isPlayed${category}`).split(',')[number] === '1'){
-                    return 'played'
-                }
-            }else return ''
-        }
     setScore(score) {
         this.score = score;
     } 
@@ -36,7 +30,7 @@ class Category {
             `<div class = "category">
                 <div class="category-discription">
                     <p class="number-category">${this.title} ${this.numberCategory}</p>
-                    <span class="correct-answers">${this.score}/10</span>
+                    <span class="correct-answers ${this.isPlayed}">${this.score}/10</span>
                     
                 </div>
                 <a class = "ref-to-questions" href="/#/${this.category}/${numberQuetion}">

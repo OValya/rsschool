@@ -27,12 +27,12 @@ let Settings = {
             <div class="timer-container">
                 <p class="settings-item"> Time game </p>
                 <div class="timer-on-off-container">
-                    <label class ="check" for="timer">ON
+                    <label class ="check" for="timer">On
                          <input class="check-input" type="checkbox"  id="timer" checked>
                          <span class="check-box"></span>
                     </label>
                 </div>
-                <p class="settings-item"> Time to answer </p>
+                <p class="settings-item time-title"> Time to answer </p>
                 <div class="number">
                     <button class="minus" type="button" > - </button>
                     <input class="timer-value" type="number" min="5" max="30" value="${time}" readonly step="5">
@@ -55,14 +55,26 @@ let Settings = {
         let plusTime = document.querySelector('.plus');
         let timerValue = document.querySelector('.timer-value');
         let check = document.querySelector('.check-input');
-        let label = document.querySelector('.check');
-        //let timer = document.querySelector('.timer');
+        let number = document.querySelector('.number');
+        let timeTitle = document.querySelector('.time-title');
+        let defaultSave =  document.querySelector('.default-settings-btn');
+
         
         if( localStorage.getItem('setTimer') != null){check.checked = (localStorage.getItem('setTimer')==='true') }
             else{check.checked = true; }
+        
+        check.addEventListener('change', () => {
+            if(check.checked){
+                number.style.opacity = '1';
+                timeTitle.style.opacity = '1';
+                number.style.transition = '0.3s';
+            }else{
+                number.style.opacity = '0';
+                timeTitle.style.opacity = '0';
+                number.style.transition = '0.3s';
+            }
 
-       // (check.checked) ?  label.textContent = 'ON' : label.value = 'OFF'
-      
+        })
         
         
         let volume = document.querySelector('.volume-range');
@@ -103,12 +115,20 @@ let Settings = {
               localStorage.setItem('time', timerValue.value);
               localStorage.setItem('setTimer', 'true')
             } else {
-                localStorage.setItem('time', Infinity);
+                localStorage.removeItem('time');
                 localStorage.setItem('setTimer', 'false')
-               // timer.classList.add('hide');
             }
 
             localStorage.setItem('volume', volume.value);
+        })
+
+        defaultSave.addEventListener('click', ()=>{
+            setVolume(0.5);
+            check.checked = true;
+            timerValue.value = '30';
+            localStorage.setItem('time', timerValue.value);
+            localStorage.setItem('setTimer', 'true');
+            localStorage.setItem('volume', '0.5');
         })
 
 

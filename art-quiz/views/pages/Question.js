@@ -70,22 +70,27 @@ let getRightAnswer = (id, box) =>{
     let answer = images[id].author;
     let button = document.createElement('button');
     button.classList.add('button-answer', 'button', 'correct', 'answer');
+    button.style.order = `${Math.floor(Math.random() * 4)}`
     button.textContent=answer;
     box.append(button); 
 
     //console.log(answer.author);
 }
 
-let getWrongAnswers =(box) =>{
-    for (let i = 0; i < 3; i++) {
-        let button = document.createElement('button');
-        button.classList.add('button-answer', 'button', 'wrong', 'answer');
-        let num = Math.floor(Math.random() * 240);
-        //console.log(num);
-        button.textContent = images[num].author;  
-        box.append(button);  
-    }
-}
+let getWrongAnswers =(id, box) =>{
+    let check = [];
+        while(check.length<3){
+            let button = document.createElement('button');
+            button.classList.add('button-answer', 'button', 'wrong', 'answer');
+            let num = Math.floor(Math.random() * 240);
+            if (check.includes(num)!=true && images[num].author != images[id].author) {   
+                button.textContent = images[num].author;  
+                button.style.order = `${Math.floor(Math.random() * 4)}`;
+                box.append(button); 
+                check.push(num);
+            }
+        }
+    }   
 
 function showAnswerPage(type){
             let form = document.querySelector('.page-answer');
@@ -95,6 +100,10 @@ function showAnswerPage(type){
             form.style.opacity = '1';
             playSound(`${type}`);
         }
+
+function pressContinue(){
+    
+}
 
 let Question = {
 
@@ -189,7 +198,8 @@ let Question = {
                 </div>
                 <h2>${resultTitle}</h2>
                 <p>Ваш результат: ${resultScore} / 10 </p>
-                <button class ="result-button button" onclick= "window.location.href = '/#/${request.resource}'" > 
+                <button class ="result-button button" 
+                    onclick= "window.location.href = '/#/${request.resource}';" > 
                     Продолжить </button>
             </div>`
             result.style.opacity = '1';
@@ -198,9 +208,9 @@ let Question = {
         
         let answerBox = document.querySelector('.answers-container');
         if(request.resource==="picture"){
-            await getImage(request.id)
-            getRightAnswer(request.id, answerBox);        
-            getWrongAnswers(answerBox);
+            await getImage(request.id);
+            getWrongAnswers(request.id, answerBox);
+            getRightAnswer(request.id, answerBox);  
         }
         if(request.resource==="author"){
            // await getImage(request.id) 
@@ -269,6 +279,8 @@ let Question = {
                   window.location.href = `/#/picture/${+request.id + 1}`;
                 } else {
                     localStorage.setItem(`picture${numberCategory}`, pictureCategory[numberCategory].getScore());
+                    pictureCategory[numberCategory].isPlayed = 'played';
+                    localStorage.setItem(`isPlayed${request.resource}${numberCategory}`, 'played');
                     setParamForRender(pictureCategory[numberCategory].getScore())
                 } 
             }
@@ -280,6 +292,8 @@ let Question = {
                   window.location.href = `/#/author/${+request.id + 1}`;
                 } else {
                     localStorage.setItem(`author${numberCategory}`, authorCategory[numberCategory].getScore());
+                    authorCategory[numberCategory].isPlayed = 'played';
+                    localStorage.setItem(`isPlayed${request.resource}${numberCategory}`, 'played');
                     setParamForRender(authorCategory[numberCategory].getScore());
                 }
             }

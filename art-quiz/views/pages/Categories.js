@@ -56,7 +56,7 @@ let Categories = {
         let typeCategory = Utils.parseRequestURL().resource; //author || picture
         if(typeCategory==='picture'){
              allSets = pictureCategory;
-             console.log(allSets);
+             //console.log(allSets);
 
         } else allSets = authorCategory;
         
@@ -83,11 +83,8 @@ let Categories = {
                 <a class = "button-settings" href="/#/">
                     <img class = "category-logo" src="./assets/svg/start-page/logo_art-quiz.svg" alt="">
                 </a>
-               <!-- <a href ="#" ><h2 class = "score-icon">Score</h2></a>-->
-                <input class="score-icon" type="button" value="Score">
-                <input class="settings-icon" type="button" value="">
-
-                <!--<a class = "button-settings" href=""></a>-->
+               <!-- <input class="score-icon" type="button" value="Score">-->
+                <input class="settings-icon" type="button" value="" onclick="window.location.href='/#/settings'">
               </div>
               <p class = "title">${typeCategory.toUpperCase()} QUIZ. Let's go!</p>
               <div class = "categories">
@@ -106,6 +103,8 @@ let Categories = {
         `*/
     }
     , afterRender: async () => {
+       // let settings = document.querySelector('.settings-icon');
+       // settings.addEventListener
         
        /* let container = document.querySelector('.categories');
         container.addEventListener('click', (e)=>{
