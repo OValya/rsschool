@@ -19,7 +19,7 @@ let Settings = {
             <div class="volume-container">
                 <label class= "settings-item" for=""> Volume
                 </label>
-                <input class = "volume-range" type="range">
+                <input class = "volume-range" type="range" value= "0.5" min = "0" max = "1" step="0.1">
                 <input class="volume-mute-icon" type="button" value="">
                 <input class="volume-up-icon" type="button" value="">
 
@@ -64,9 +64,40 @@ let Settings = {
        // (check.checked) ?  label.textContent = 'ON' : label.value = 'OFF'
       
         
-        let save = document.querySelector('.save-settings-btn');
-      //  check.addEventListener('change', (e) => {  } )
         
+        let volume = document.querySelector('.volume-range');
+
+        function setVolume(value){
+            volume.value = value;
+            volume.style.background = `linear-gradient(to right, #FFBCA2 0%, #FFBCA2 ${value*100}%, #fff ${value*100}%, white 100%)`;
+        }
+
+        if (localStorage.getItem('volume')){
+            let value = localStorage.getItem('volume');
+            setVolume(value);
+          
+        } else {
+            setVolume(0.5);
+          
+        }
+        volume.addEventListener('input', function() {
+            let value = this.value;
+            setVolume(value)
+           
+        })  
+        
+        let mute = document.querySelector('.volume-mute-icon');
+        let loud = document.querySelector('.volume-up-icon');
+
+        mute.addEventListener('click', () => {
+            setVolume(0);
+        })
+        loud.addEventListener('click', () => {
+            setVolume(1);
+        })
+
+        
+        let save = document.querySelector('.save-settings-btn');
         save.addEventListener('click', (e) => {
             if(check.checked){
               localStorage.setItem('time', timerValue.value);
@@ -76,6 +107,8 @@ let Settings = {
                 localStorage.setItem('setTimer', 'false')
                // timer.classList.add('hide');
             }
+
+            localStorage.setItem('volume', volume.value);
         })
 
 

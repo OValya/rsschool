@@ -2,6 +2,9 @@ import playList from '../../data/sounds.js'
 
 function playSound(type){
     const audio = new Audio();
+    (localStorage.getItem('volume'))? 
+            audio.volume = localStorage.getItem('volume'):
+            audio.volume = 0.5; 
     switch (type) {
         case 'congratulation':
             audio.src = playList[0].src;
