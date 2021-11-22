@@ -4,6 +4,8 @@ import Categories     from '../pages/Categories.js'
 import  {pictureCategory}  from '../../js/getAllSetsOfCategory.js';
 import  {authorCategory}  from '../../js/getAllSetsOfCategory.js';
 import playList from '../../data/sounds.js'
+import {showTimer, stopTimer} from '../components/timer.js' 
+import playSound from '../components/audio.js' 
 
 let getImage = async (id) => {
     let image = document.querySelector('.question-picture');
@@ -85,83 +87,85 @@ let getWrongAnswers =(box) =>{
     }
 }
 
-function clickNext() {
-    if(request.resource = 'picture') {
-        let numberCategory = Math.ceil(request.id/12);
-
-    }
-
-};
+function showAnswerPage(type){
+            let form = document.querySelector('.page-answer');
+            let img = document.querySelector('.image-icon');
+            img.src = `../../assets/svg/answer-page/${type}.svg`
+            form.style.zIndex = '1';
+            form.style.opacity = '1';
+            playSound(`${type}`);
+        }
 
 let Question = {
 
     render : async () => {
-        if(Utils.parseRequestURL().resource==="picture"){/*
-            let fragment = new DocumentFragment();
-            let entry = document.createElement('div');
-            entry.classList.add('container', 'pageEntry');
-            entry.id = "page_container"; 
-         //   <div id="page_container" class="container pageEntry"></div>
-            let page = document.createElement('div');
-            page.classList.add('page-question');
-            let timerBox = document.createElement('div');
-            timerBox.classList.add('timer-container');
-            let timer = document.createElement('span');
-            timer.classList.add('timer');
-            timerBox.appendChild(timer);
-            page.innerHTML = `
-                <p class = "title"> Кто автор картины "${images[Utils.parseRequestURL().id].name}"? </p>
-                <div class="question-picture"></div>
-                <div class="answers-container"></div>`
-           // let title = document.querySelector('.title');
-            page.insertAdjacentElement('beforebegin', timerBox);
-            entry.appendChild(page);
-            fragment.append(page);
-
-            return fragment;*/
-
-
-
-        return `
-            <div class = "page-question">
-                <div class = "header-page-question">
-                    <input class="cancel-icon" type="button" value="X">
-                    <div class="timer-box"> 
-                        <span id="timer">Время: 00 секунд </span>
+        let request = Utils.parseRequestURL();
+        let fragment;
+        if(request.resource==="picture"){
+            
+            fragment =`
+                <div class = "page-question">
+                    <div class = "header-page-question">
+                        <input class="cancel-icon" type="button" value="X">
+                        <div class="timer-box"> 
+                            <span id="timer">Время: 00 секунд </span>
+                        </div>
                     </div>
-                </div>
-                <p class = "title"> Кто автор картины "${images[Utils.parseRequestURL().id].name}"? </p>
-                <div class="question-picture"></div>
-                <div class="answers-container"></div>
-            </div> 
-            <div class = "page-answer"></div>
-            <div class = "page-result"></div>`
+                    <p class = "title"> Кто автор картины "${images[request.id].name}"? </p>
+                    <div class="question-picture"></div>
+                    <div class="answers-container"></div>
+                </div> 
+                `
         }
-        if(Utils.parseRequestURL().resource==="author"){
-            return /*html*/` 
-            <div class = "page-question">
+
+        if(request.resource==="author"){
+           
+           fragment = 
+          ` <div class = "page-question">
                 <div class="timer-box"> 
                     <span id="timer"> Время: 00 секунд</span>
                 </div>
-                <p class = "title"> Какую картину написал ${images[Utils.parseRequestURL().id].author} ? </p>
-                <div class="answers-container">
+                <p class = "title"> Какую картину написал ${images[request.id].author} ? </p>
+                <div class="answers-container"></div>
+            </div>
+            `
+        }
+        fragment +=   `
+           <div class = "page-answer">
+                <div class ="page-content">
+                    <div class="answer-image">
+                        <img class = "image-card" src = 'https://raw.githubusercontent.com/OValya/image-data/master/img/${request.id}.jpg' >
+                        <img class = "image-icon">
+                    </div>
+                    <h2>${images[request.id].name}</h2>
+                    <p>${images[request.id].author}, ${images[request.id].year}</p>
+                    <button class ="next-button button" > Продолжить </button>
                 </div>
             </div>
-            <div class = "page-answer"></div>
-            <div class = "page-result"></div>
-            
-             `
-        }
 
-
+            <div class = "page-result">
+                <div class ="page-content">
+                    <div class="result-image">
+                        <img class = "result-image-card" src = "" >
+                    </div>
+                    <h2></h2>
+                    <p>Ваш результат: / 10 </p>
+                    <button class ="result-button button" > Продолжить </button>
+                </div>
+            </div>`
+     
+        return fragment;
     }
     , afterRender: async () => {
+        
+        let request = Utils.parseRequestURL();
+
+        //---------Timer-----//
+        let timerView = document.getElementById('timer');
+        showTimer(timerView);
+
         //----------окно ответа------------//
         let form = document.querySelector('.page-answer');
-        form.style.opacity = '0';
-        form.style.zIndex = '-3';
-        let request = Utils.parseRequestURL();
-        
         form.innerHTML = `
         <div class ="page-content">
             <div class="answer-image">
@@ -172,31 +176,6 @@ let Question = {
             <p>${images[request.id].author}, ${images[request.id].year}</p>
             <button class ="next-button button" > Next </button>
         </div>`
-
-        //---------Timer-----//
-        let timerView = document.getElementById('timer');
-
-        //!!! сделать проверку на localstorage!!
-        let end =  Date.now() + localStorage.getItem('time') * 1000;
-        let timer = setInterval( function() {
-          let start = Date.now();
-          let diff = end - start;
-          if (diff >= 0) {
-           let secs = Math.ceil((diff % (1000 * 60)) / 1000)+1;
-           if(secs <= 5) {timerView.style.color = 'red'; timerView.style.fontSize = '24px';}
-           timerView.innerHTML = `Время: ${("0"+secs).slice(-2)} секунд`;
-          } else {
-              timerView.style.color = 'red'; 
-              timerView.style.fontSize = '24px';
-              timerView.innerHTML = "Упс...Время вышло!";
-              clearInterval(timer);
-              showWrongAnswerPage();
-              timeOutSound();
-             }
-         
-        }, 1000);
-
-        const audio = new Audio();
 
         //-------------результаты----------//
         function renderResultPage(resultImageSrc, resultTitle, resultScore){
@@ -210,45 +189,13 @@ let Question = {
                 </div>
                 <h2>${resultTitle}</h2>
                 <p>Ваш результат: ${resultScore} / 10 </p>
-                <button class ="result-button button" > Продолжить </button>
+                <button class ="result-button button" onclick= "window.location.href = '/#/${request.resource}'" > 
+                    Продолжить </button>
             </div>`
             result.style.opacity = '1';
             result.style.zIndex = '3';
         }
         
-        //----------
-
-
-        function congratulationsSound() {
-            audio.src = playList[0].src; // ссылка на аудио-файл;
-            audio.currentTime = 0;
-            audio.play();
-        }
-
-        function wrongSound(){
-            audio.src = playList[2].src; // ссылка на аудио-файл;
-            audio.currentTime = 0;
-            audio.play();
-        }
-
-        function correctSound(){
-            audio.src = playList[1].src; // ссылка на аудио-файл;
-            audio.currentTime = 0;
-            audio.play();
-        }
-
-        function gameOverSound(){
-            audio.src = playList[3].src; // ссылка на аудио-файл;
-            audio.currentTime = 0;
-            audio.play();
-        }
-
-        function timeOutSound(){
-            audio.src = playList[4].src; // ссылка на аудио-файл;
-            audio.currentTime = 0;
-            audio.play();
-        }
-
         let answerBox = document.querySelector('.answers-container');
         if(request.resource==="picture"){
             await getImage(request.id)
@@ -261,22 +208,9 @@ let Question = {
            await getRightImage(request.id,  answerBox );
         }
 
-        function showWrongAnswerPage(){
-            let img = document.querySelector('.image-icon');
-            img.src = '../../assets/svg/answer-page/wrong.svg'
-            form.style.zIndex = '1';
-            form.style.opacity = '1';
-            wrongSound();
+        
 
-        }
-
-        function showCorrectAnswerPage(){
-            let img = document.querySelector('.image-icon');
-            img.src = '../../assets/svg/answer-page/correct.svg'
-            form.style.zIndex = '1';
-            form.style.opacity = '1';
-            correctSound();
-        }
+      
 
         function changeScore(){
             if(request.resource === 'picture') {
@@ -297,11 +231,11 @@ let Question = {
         answerBox.addEventListener('click', (e)=>{
                
                 if((e.target.nodeName === 'BUTTON'|| e.target.nodeName === 'DIV') && e.target.classList.contains('answer')){
-                    clearTimeout(timer);
+                    stopTimer();
                     if(e.target.classList.contains('correct')) { 
-                        showCorrectAnswerPage(); changeScore();  
+                        showAnswerPage('correct'); changeScore();  
                     }else {
-                        showWrongAnswerPage(); 
+                        showAnswerPage('wrong'); 
                     }
                 }
         })
@@ -312,15 +246,15 @@ let Question = {
             switch (score) {
                 case 0:
                     renderResultPage('./../assets/svg/finish-page/gameover.svg', 'Вы проиграли...', score);
-                    gameOverSound();
+                    playSound('gameover');
                     break;
                 case 10:
                     renderResultPage('./../assets/svg/finish-page/grand.svg', 'Топ результат! Ура!', score);
-                    congratulationsSound();
+                    playSound('congratulation');
                     break;
                 default:
                     renderResultPage('./../assets/svg/finish-page/score.svg', 'Отличный результат!', score);
-                    congratulationsSound();
+                    playSound('congratulation');
                     break;
             }
         }
@@ -333,8 +267,10 @@ let Question = {
                 let endCategory = pictureCategory[numberCategory].end();
                 if(+request.id < endCategory ){
                   window.location.href = `/#/picture/${+request.id + 1}`;
-                } else { setParamForRender(pictureCategory[numberCategory].getScore())}
-                
+                } else {
+                    localStorage.setItem(`picture${numberCategory}`, pictureCategory[numberCategory].getScore());
+                    setParamForRender(pictureCategory[numberCategory].getScore())
+                } 
             }
 
             if(request.resource === 'author') {
@@ -342,21 +278,14 @@ let Question = {
                 let endCategory = authorCategory[numberCategory].end();
                 if(+request.id < endCategory ){
                   window.location.href = `/#/author/${+request.id + 1}`;
-                } else setParamForRender(authorCategory[numberCategory].getScore());
+                } else {
+                    localStorage.setItem(`author${numberCategory}`, authorCategory[numberCategory].getScore());
+                    setParamForRender(authorCategory[numberCategory].getScore());
+                }
             }
         });
-
-        function setLocalStorage(){
-            
-        }
-
-        let continueButton = document.querySelector('.result-button');
-        continueButton.addEventListener('click', (e) => 
-         {  
-            if(request.resource === 'picture') {}
-         });
 
     }
 }
 
-export default Question;
+export {Question, showAnswerPage};

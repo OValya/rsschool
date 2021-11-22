@@ -4,7 +4,7 @@ import Home         from './views/pages/Home.js'
 import Settings     from './views/pages/Settings.js'
 import Error404     from './views/pages/Error404.js'
 import Categories     from './views/pages/Categories.js'
-import Question     from './views/pages/Question.js'
+import {Question}     from './views/pages/Question.js'
 
 import  {pictureCategory}  from './js/getAllSetsOfCategory.js';
 import  {authorCategory}  from './js/getAllSetsOfCategory.js';
