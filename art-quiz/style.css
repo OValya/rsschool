@@ -125,17 +125,17 @@ a {
   /*color:#ffffff*/
   width: 30px;
   height: 25px;
-  background: url("../assets/svg/settings-page/back.svg") center/contain
+  background: url("./assets/svg/settings-page/back.svg") center/contain
     no-repeat;
 }
 
 .back-to-start-page:hover {
-  background: url("../assets/svg/settings-page/back-hover.svg") center/contain
+  background: url("./assets/svg/settings-page/back-hover.svg") center/contain
     no-repeat;
   transition: 0.5s;
 }
 .back-to-start-page:active {
-  background: url("../assets/svg/settings-page/back-active.svg") center/contain
+  background: url("./assets/svg/settings-page/back-active.svg") center/contain
     no-repeat;
   transition: 0.5s;
 }
@@ -207,7 +207,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .volume-mute-icon,
 .volume-up-icon {
-  background: url("../assets/svg/settings-page/volume-mute.svg") no-repeat
+  background: url("./assets/svg/settings-page/volume-mute.svg") no-repeat
     center/contain;
   width: 30px;
   height: 30px;
@@ -215,16 +215,16 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
 }
 .volume-up-icon {
-  background: url("../assets/svg/settings-page/volume-up.svg") no-repeat
+  background: url("./assets/svg/settings-page/volume-up.svg") no-repeat
     center/contain;
 }
 
 .volume-mute-icon:hover {
-  background: url("../assets/svg/settings-page/volume-mute-hover.svg") no-repeat
+  background: url("./assets/svg/settings-page/volume-mute-hover.svg") no-repeat
     center/contain;
 }
 .volume-up-icon:hover {
-  background: url("../assets/svg/settings-page/volume-up-hover.svg") no-repeat
+  background: url("./assets/svg/settings-page/volume-up-hover.svg") no-repeat
     center/contain;
 }
 .timer-container {
@@ -625,7 +625,7 @@ h2 {
   width: 80%;
   display: flex;
   justify-content: space-between;
-  margin-top: 5%;
+  margin-top: 10%;
 
 }
 
@@ -867,6 +867,7 @@ h2 {
   
 
   .button-container-settings {
+    margin-top: 50px;
     padding: 0;
     justify-content: space-between;
   }

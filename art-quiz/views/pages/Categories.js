@@ -14,16 +14,17 @@ let Categories = {
         
         let allSetsView = allSets.reduce((view, current) => view + current.renderCategory(typeCategory) + '\n', '');
         
+        let quiz =(typeCategory==='picture')? 'Картины': 'Авторы'
         let view = ` 
             <div class = "page-category">
              <div class="categories-button-container">
                 <a class = "button-settings" href="./#/">
-                    <img class = "category-logo" src="./assets/svg/start-page/logo_art-quiz.svg" alt="">
+                    <img class = "category-logo" src="./assets/svg/start-page/logo.svg" alt="">
                 </a>
                <!-- <input class="score-icon" type="button" value="Score">-->
                 <input class="settings-icon" type="button" value="" onclick="window.location.href='./#/settings'">
               </div>
-              <p class = "title">${typeCategory.toUpperCase()} QUIZ. Let's go!</p>
+              <p class = "title">Играем в квиз "${quiz}". Удачи! </p>
               <div class = "categories">
               ${allSetsView}
               </div>

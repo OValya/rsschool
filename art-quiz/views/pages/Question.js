@@ -223,7 +223,7 @@ let Question = {
             form.style.opacity = '0';
             form.style.zIndex = '-3';
             switch (score) {
-                case 0:
+                case '0':
                     renderResultPage('./assets/svg/finish-page/gameover.svg', 'Вы проиграли...', score);
                     playSound('gameover');
                     break;
