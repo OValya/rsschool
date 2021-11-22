@@ -15,14 +15,14 @@ let Home = {
         <div class="footer-row">
                 <a href="https://rs.school/russia/">
                     <img
-                        src="../../assets/svg/footer/rs_school_logo.svg"
+                        src="./assets/svg/footer/rs_school_logo.svg"
                         alt="rsscholl logo"
                         width="80px"
                     />
                 </a>
             <p> 2021 </p>
             <a href="https://github.com/OValya">
-                <img src="../../assets/svg/footer/github.svg" alt="my github" width="80px" />
+                <img src="./assets/svg/footer/github.svg" alt="my github" width="80px" />
             </a>
         </div>
     </div>
@@ -35,14 +35,14 @@ let Home = {
         let categoryPictureQuiz = document.querySelector('.category-pictures-btn');
         let categoryArtistsQuiz = document.querySelector('.category-artist-btn');
         iconSettings.addEventListener('click', (e) => {
-            window.location.href = "/#/settings";             
+            window.location.href = "./#/settings";             
          });
 
         categoryPictureQuiz.addEventListener('click', (e) => {
-            window.location.href = "/#/picture";
+            window.location.href = "./#/picture";
         });
         categoryArtistsQuiz.addEventListener('click', (e) => {
-            window.location.href = "/#/author";
+            window.location.href = "./#/author";
         });
 
 
