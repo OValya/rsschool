@@ -7,10 +7,10 @@ let Home = {
         <div class="settings-button-container">
             <input class="settings-icon" type="button" value="">
         </div>
-        <img class = "logo" src="./assets/svg/start-page/logo_art-quiz.svg" alt="">
+        <img class = "logo" src="./assets/svg/start-page/logo.svg" alt="">
         <div class="button-container">
-                <button class="category-artist-btn button">Artists quiz</button>
-                <button class="category-pictures-btn button">Pictures quiz</button>
+                <button class="category-artist-btn button">Квиз \"Авторы\"</button>
+                <button class="category-pictures-btn button">Квиз \"Картины\"</button>
         </div>
         <div class="footer-row">
                 <a href="https://rs.school/russia/">
