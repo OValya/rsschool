@@ -15,12 +15,12 @@ let Home = {
         <div class="footer-row">
                 <a href="https://rs.school/russia/">
                     <img
-                        src="./assets/svg/footer/rs_school_logo.svg"
+                        src="./assets/svg/footer/rss_logo.svg"
                         alt="rsscholl logo"
                         width="80px"
                     />
                 </a>
-            <p> 2021 </p>
+            <h2> 2021 </h2>
             <a href="https://github.com/OValya">
                 <img src="./assets/svg/footer/github.svg" alt="my github" width="80px" />
             </a>
