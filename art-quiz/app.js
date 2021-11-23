@@ -44,3 +44,12 @@ window.addEventListener('hashchange', router);
 window.addEventListener('load', router);
 window.addEventListener('load', pictureCategory)
 window.addEventListener('load', authorCategory)
+
+
+console.log(`
+    По моей оценке ТЗ выполнено на 135 баллов, по пунктам в пуллреквесте всё расписано.
+    Нет страницы с результами 
+    Соответственно, нет полноценной навигации 
+    Нет доп функционала 
+    Нет сложной анимации и плавной загрузки изображений 
+`)
