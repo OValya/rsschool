@@ -54,6 +54,9 @@ const config = {
                 test: /\.css$/i,
                 use: [stylesHandler, {
                     loader: "css-loader",
+                    // options: {
+                    //     modules: true,
+                    //   },
                     //options: {
                      //  modules: {
 

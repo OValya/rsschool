@@ -1,15 +1,16 @@
 .main-start-page {
-  background: url('./assets/bg.jpg') no-repeat;
+  /*background: url('./assets/bg.jpg') no-repeat;*/
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 
 
 .start-button, .title-start-page {
   width: 300px;
   height: 50px;
+  margin: 50px 0;
   border-radius: 50px;
   background-color: rgba(36, 197, 219, 0.15);
   border: 2px solid #24C5DB;
@@ -17,10 +18,13 @@
   font-size: 24px;
 }
 
+.start-button{
+  cursor: pointer;
+}
+
 .title-start-page {
   width: 600px;
-  height: 250px;
-  margin: 150px 0 50px;
+  height: 220px;
   padding-top: 100px;
   text-align: center;
   font-size: 50px;
@@ -28,7 +32,30 @@
 .footer {
   display: flex;
   justify-content: space-around;
-  background-color: black;
-  height: 70px;
+  max-height: 70px;
+  width: 100%;
+  padding: 15px;
+  background-color: rgba(36, 197, 219, 0.15);
+  color: white;
 }
 
+.route-box{
+  max-height: 50px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 2px solid #24C5DB;
+  border-radius: 15px;
+  background-color: #24c6dba6; /* rgba(36, 197, 219, 0.15); */
+  color: white;
+}
+
+.link{
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  margin: 20px;
+}
+
+.link:hover{
+  text-decoration: underline;
+}

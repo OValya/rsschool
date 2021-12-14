@@ -1,6 +1,6 @@
 import './start-page.css';
 import './settings-page.css';
-import Test from './test'
+import Application from './application/app'
 import CheckForm from './components/checkbox-form';
 import CheckList from './components/checkbox-list';
 import FilterBlock from './components/filter-block';
@@ -8,9 +8,10 @@ import {ToysData} from './dataModel';
 import toysDataUrl from './toys-data.json'
 import Card from './components/card'
 import CardBox from './components/card-box'
-//const page = new Test(document.body);
-//const check = new CheckForm({ parentNode: document.body, type: 'ball' });
 
+const page = new Application(document.body);
+//const check = new CheckForm({ parentNode: document.body, type: 'ball' });
+/*
 const forms = ['ball', 'bell', 'toy', 'snowflake', 'cone'];
 const color = ['white', 'red', 'blue', 'yellow', 'green'];
 const size = ['big', 'medium', 'small'];
@@ -29,3 +30,4 @@ data.build().then(result => {
   new CardBox(document.body,  result.data)
 });
 
+*/
