@@ -8,11 +8,11 @@ export default class Route extends Control {
     super(parentNode, 'div', 'route-box');
   
     this.homeLink = new Control<HTMLAnchorElement>(this.node, 'a', 'link',`Home`);
-    this.homeLink.node.href = `#Home`;
+    this.homeLink.node.href = `#home`;
     this.toysLink = new Control<HTMLAnchorElement>(this.node, 'a', 'link',`Toys`);
-    this.toysLink.node.href = `#Toys`
+    this.toysLink.node.href = `#toys`
     this.treesLink = new Control<HTMLAnchorElement>(this.node, 'a', 'link',`Trees`);
-    this.treesLink.node.href = `#Trees`
+    this.treesLink.node.href = `#trees`
   
     
    

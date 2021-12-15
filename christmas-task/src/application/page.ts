@@ -1,9 +1,15 @@
 import Control from '../common/control';
 import { IToysData } from '../dataModel';
+import CardBox from '../components/card-box';
 
 export default class Page extends Control{
+  onCheck: (type:string, value:string) => void;
   constructor(parentNode: HTMLElement, dataToys?:IToysData[]) {
     super(parentNode, 'div', 'page'); //style.page);
+  }
+
+  updatePage(filtredData:IToysData[]): void{
+    const data = new CardBox(this.node, filtredData);
   }
 /*
   animateIn() {

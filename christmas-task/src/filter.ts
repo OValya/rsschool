@@ -1,8 +1,12 @@
 
-const defaultFilter:Array<string> = []; 
+const defaultFilter:Record<string, Array<string>> = {
+                          'shape':[],
+                          'color':[],
+                          'size':[],
+                          } 
 
 export default class Fiter{
-  filterValues: Array<string>;
+  filterValues: Record<string, Array<string>>;
   constructor(/*values: Array<string>*/){
    // this.filterValues = values;
   }
@@ -16,12 +20,12 @@ export default class Fiter{
     }
   }
 
-  addFilterValue(value:string):void{
-    this.filterValues.push(value);
+  addFilterValue(type:string, value:string):void{
+    this.filterValues[type].push(value);
   }
 
-  removeFilterValue(value:string):void{
-    const index = this.filterValues.indexOf(value);
-    this.filterValues.splice(index, 1);
+  removeFilterValue(type:string, value:string):void{
+    const index = this.filterValues[type].indexOf(value);
+    this.filterValues[type].splice(index, 1);
   }
 }

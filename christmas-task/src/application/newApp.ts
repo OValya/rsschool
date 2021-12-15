@@ -9,7 +9,7 @@ import Page from './page';
 import { ToysData, IToysData } from '../newDataModel'
 
 interface IPageConstructor {
-  new(parentNode: HTMLElement, dataToys?:IToysData[]): Page;
+  new(parentNode: HTMLElement, dataToys?: IToysData[]): Page;
 }
 
 export default class Application extends Control {
@@ -23,45 +23,42 @@ export default class Application extends Control {
   constructor(parentNode: HTMLElement) {
     super(parentNode);
 
+    // const homePage = new HomePage(this.node);
+    // homePage.onClick = () => {
+    //   const toysPage = new ToysPage(this.node, )
+    // }
+
     this.pages = {
-      '#Home': HomePage,
-      '#Toys': ToysPage,
-      '#Trees': TreesPage,
+      '#home': HomePage,
+      '#toys': ToysPage,
+      '#trees': TreesPage,
     }
 
     this.route = new Route(this.node);
-    // let dataToys:Array<IToysData> = [];
     this.filterModel = new Filter();
     this.filterModel.loadFromLocalstorage();
 
     this.model = new ToysData();
     this.dataToys = this.model.loadData();
-    
-    // this.allData.build().then((result: IToysData[]) => {
-    //   this.dataToys = result
-    //   console.log(this.dataToys);
-    //   this.loadWindow();
-    // });
-    // .then(() => {
-
-    //    this.loadWindow();
-    // });
 
     window.onpopstate = this.loadWindow.bind(this);
     this.loadWindow();
-
-    // const createPage = () => {
-    //     console.log(this.dataToys);
-    //     const newPage = new (pages[window.location.hash] || HomePage)(this.node);
-    //     this.currentPage = newPage;
-    //   }
-
-    //
   }
+
+
   createPage() {
-    console.log('test', this.dataToys);
     const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, this.dataToys);
+    newPage.onCheck = (type: string, value: string) => {
+      if (this.filterModel.filterValues[type].includes(value)) {
+        this.filterModel.removeFilterValue(type, value)
+      } else {
+        this.filterModel.addFilterValue(type, value);
+      }
+      console.log('filter', this.filterModel);
+      console.log('values', this.filtrate())
+    }
     this.currentPage = newPage;
+
   }
   loadWindow() {
     if (this.currentPage) {
@@ -73,26 +70,17 @@ export default class Application extends Control {
     }
   }
 
-  //(window as any).onpopstate = this.loadWindow;
-  //this.loadWindow();
+  filtrate() {
+    const arr: Array<IToysData> = [];
+    const fil = this.dataToys.map((value) => {
+      this.filterModel.filterValues['shape'].forEach(elem => {
+        if (value['shape'] == elem) {
+          arr.push(value);
+        }
+      })
 
-}
-
-
-
-
-/*
-class ToysPage extends Page{
-  constructor(parentNode: HTMLElement) {
-    super(parentNode);
-    const title = new Control(this.node, 'h1', 'settings-page', 'Toys');
+    })
+    return arr;
   }
-}
 
-class TreesPage extends Page{
-  constructor(parentNode: HTMLElement) {
-    super(parentNode);
-    const title = new Control(this.node, 'h1', 'trees-page', 'Trees');
-  }
 }
-*/

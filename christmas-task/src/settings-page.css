@@ -62,12 +62,12 @@ body{
 	cursor: pointer;
 }
 
-.form input:hover,
+.shape input:hover,
 .size input:hover{
   background-color: lightcoral;
 }
 
-.form input:checked,
+.shape input:checked,
 .size input:checked{
   background-color: blueviolet;
 }
