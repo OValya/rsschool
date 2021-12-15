@@ -8,6 +8,7 @@ export default class CardBox extends Control{
   constructor(parentNode:HTMLElement, toys:Array<IToysData>){
     super(parentNode, 'div', 'card-box');
     this.blockTitle = new Control(this.node, 'h1', 'title-card-box', 'Коробка с игрушками')
+    console.log('toys', toys); 
     toys.forEach(toy => {
       new Card(this.node, toy);
     });

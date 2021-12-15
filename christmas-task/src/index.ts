@@ -1,6 +1,6 @@
 import './start-page.css';
 import './settings-page.css';
-import Application from './application/app'
+import Application from './application/newApp'
 import CheckForm from './components/checkbox-form';
 import CheckList from './components/checkbox-list';
 import FilterBlock from './components/filter-block';

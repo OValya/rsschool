@@ -1,7 +1,8 @@
 import Control from '../common/control';
+import { IToysData } from '../dataModel';
 
 export default class Page extends Control{
-  constructor(parentNode: HTMLElement) {
+  constructor(parentNode: HTMLElement, dataToys?:IToysData[]) {
     super(parentNode, 'div', 'page'); //style.page);
   }
 /*

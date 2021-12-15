@@ -1,12 +1,12 @@
 import Control from '../common/control';
-import * as style from './style.css';
+//import * as style from './style.css';
 import HomePage from './start-page';
 import ToysPage from './toys-page';
 import TreesPage from './trees-page';
 import Route from '../components/route'
 import Filter from '../filter'
 import Page from './page';
-import { ToysData, IToysData } from '../dataModel'
+import { ToysData, IToysData } from '../newDataModel'
 
 interface IPageConstructor {
   new(parentNode: HTMLElement, dataToys?:IToysData[]): Page;
@@ -16,7 +16,7 @@ export default class Application extends Control {
   currentPage: Page;
   route: Route;
   filterModel: Filter;
-  allData: any;
+  model: ToysData;
   dataToys: IToysData[];
   pages: Record<string, IPageConstructor>;
 
@@ -34,19 +34,21 @@ export default class Application extends Control {
     this.filterModel = new Filter();
     this.filterModel.loadFromLocalstorage();
 
-    this.allData = new ToysData();
-    this.allData.build().then((result: IToysData[]) => {
-      this.dataToys = result
-      console.log(this.dataToys);
-      this.loadWindow();
-    });
+    this.model = new ToysData();
+    this.dataToys = this.model.loadData();
+    
+    // this.allData.build().then((result: IToysData[]) => {
+    //   this.dataToys = result
+    //   console.log(this.dataToys);
+    //   this.loadWindow();
+    // });
     // .then(() => {
 
     //    this.loadWindow();
     // });
 
     window.onpopstate = this.loadWindow.bind(this);
-   
+    this.loadWindow();
 
     // const createPage = () => {
     //     console.log(this.dataToys);

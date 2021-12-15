@@ -1,6 +1,6 @@
 import toysDataUrl from './toys-data.json'
 import Fiter from './filter';
-
+import data from './data'
 
 export interface IToysData{
   num: string,
@@ -31,19 +31,26 @@ export class ToysData {
   constructor() {
   }
  
-  public async build(){
-    this.data = await this.loadData(toysDataUrl)
-    return this;
+
+  loadData(){
+    const modelData:IToysData[] = data.map((it, index) => {
+      const item = data[index];
+      return {
+        num: item.num,
+        name: item.name,
+        count: Number(item.count),
+        year: Number(item.year),
+        shape: item.shape,
+        color: item.color,
+        size: item.size,
+        favorite: item.favorite
+      }
+    })
+    return modelData;
   }
-
-  // public async filtrate(data:Array<IToysData>){
-  //   const filteredArray = data.filter((value) => {
-  //    return value.count > 5;
-  //   })
-  // }
-
- private async loadData(url:string): Promise<Array<IToysData>> {
-    return fetch(url).then(res=>res.json());/*.then((toysData: IToysDto)=>{
+// private async loadData(url:string): Promise<Array<IToysData>> {
+//    return fetch(url).then(res=>res.json());
+/*.then((toysData: IToysDto)=>{
       const modelData: Array<IToysData> = Object.keys(toysData).map(it=>{
         const item = toysData[it];
         const record: IToysData = {
@@ -59,5 +66,5 @@ export class ToysData {
       });
       return modelData;
     });*/
-  } 
+ // } 
 }
