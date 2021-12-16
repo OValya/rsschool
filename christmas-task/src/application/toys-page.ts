@@ -15,17 +15,23 @@ const forms = [{type:'ball', filterType:'шар'},
                {type:'snowflake', filterType:'снежинка'},
                {type:'cone', filterType:'сосулька'}
               ];
-const color = ['white', 'red', 'blue', 'yellow', 'green'];
+const color = [{type:'white', typeFilter:'белый'},
+               {type:'red', typeFilter: 'красный'},
+               {type:'blue', typeFilter: 'синий'},
+               {type:'yellow', typeFilter:'желтый'},
+               {type:'green', typeFilter: 'зеленый'}
+              ];
 const size = ['big', 'medium', 'small'];
 const favorite = ['favorite'];
 
 export default class ToysPage extends Page {
-  formFilter: CheckList;
-  colorFilter: CheckList;
-  sizeFilter: CheckList;
-  favoriteFilter: CheckList;
+  // formFilter: CheckList;
+  // colorFilter: CheckList;
+  // sizeFilter: CheckList;
+  // favoriteFilter: CheckList;
   filterByValue: FilterBlock;
   onCheck: (type:string, value:string) => void;
+  cardBox: CardBox;
   constructor(parentNode: HTMLElement, dataToys: IToysData[]) {
     super(parentNode);
     //this.formFilter = new CheckList(document.body, 'Форма:', 'form', forms);
@@ -42,7 +48,7 @@ export default class ToysPage extends Page {
    // console.log(data);
    console.log('page', dataToys)
 
-   const data = new CardBox(this.node, dataToys);
+   this.cardBox = new CardBox(this.node, dataToys);
    //const cardBox = new CardBox(this.node, data);
    
     // const data = new ToysData();
@@ -51,7 +57,9 @@ export default class ToysPage extends Page {
     // });
 
   }
+
   updatePage(filtredData:IToysData[]): void{
-    const data = new CardBox(this.node, filtredData);
+    this.cardBox.destroy();
+    this.cardBox = new CardBox(this.node, filtredData);
   }
 }

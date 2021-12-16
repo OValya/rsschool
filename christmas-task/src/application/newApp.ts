@@ -23,10 +23,7 @@ export default class Application extends Control {
   constructor(parentNode: HTMLElement) {
     super(parentNode);
 
-    // const homePage = new HomePage(this.node);
-    // homePage.onClick = () => {
-    //   const toysPage = new ToysPage(this.node, )
-    // }
+    const route = new Route(this.node);
 
     this.pages = {
       '#home': HomePage,
@@ -34,7 +31,6 @@ export default class Application extends Control {
       '#trees': TreesPage,
     }
 
-    this.route = new Route(this.node);
     this.filterModel = new Filter();
     this.filterModel.loadFromLocalstorage();
 
@@ -47,15 +43,17 @@ export default class Application extends Control {
 
 
   createPage() {
-    const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, this.dataToys);
+    const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, this.filteredData());
     newPage.onCheck = (type: string, value: string) => {
       if (this.filterModel.filterValues[type].includes(value)) {
         this.filterModel.removeFilterValue(type, value)
       } else {
         this.filterModel.addFilterValue(type, value);
       }
+      newPage.updatePage(this.filteredData());
+      //this.loadWindow();
       console.log('filter', this.filterModel);
-      console.log('values', this.filtrate())
+      console.log('values', this.filteredData())
     }
     this.currentPage = newPage;
 
@@ -70,17 +68,48 @@ export default class Application extends Control {
     }
   }
 
-  filtrate() {
-    const arr: Array<IToysData> = [];
-    const fil = this.dataToys.map((value) => {
-      this.filterModel.filterValues['shape'].forEach(elem => {
-        if (value['shape'] == elem) {
-          arr.push(value);
-        }
-      })
 
-    })
-    return arr;
+  filteredData() {
+    let arr: Array<IToysData> = [];
+    let arr2: Array<IToysData> = [];
+    let arr3: Array<IToysData> = [];
+
+
+    if (this.filterModel.filterValues['shape'].length == 0 &&
+      this.filterModel.filterValues['color'].length == 0 &&
+      this.filterModel.filterValues['size'].length == 0) {
+      arr3 = this.dataToys;
+    } else {
+      if (this.filterModel.filterValues['shape'].length) {
+        arr = this.dataToys.filter(value =>
+          !!this.filterModel.filterValues['shape'].includes(value['shape']))
+      } else {arr = this.dataToys}
+      if (this.filterModel.filterValues['color'].length) {
+        arr2 = arr.filter(value =>
+          !!this.filterModel.filterValues['color'].includes(value['color']))
+      } else { arr2 = arr };
+      if (this.filterModel.filterValues['size'].length) {
+        arr3 = arr2.filter(value =>
+          !!this.filterModel.filterValues['size'].includes(value['size']))
+      } else { arr3 = arr2 };
+
+      // this.dataToys.map((value) => {
+      //   if(this.filterModel.filterValues['shape'].length==0)
+      //   this.filterModel.filterValues['shape'].forEach(elem => {
+      //     if (value['shape'] == elem) {
+      //       arr1.push(value);
+      //     }
+      //   });
+      // })
+    }
+    console.log('shape', arr3);
+    // var arr1 = [1,2,3,4],
+    // arr2 = [2,4],
+    // res = arr1.filter(item => !arr2.includes(item));
+
+    return arr3;
   }
+
+
 
 }

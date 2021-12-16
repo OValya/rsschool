@@ -9,7 +9,7 @@ export default class HomePage extends Page {
   title: Control<HTMLElement>;
   startButton: Control<HTMLElement>;
   footer: Control<HTMLElement>;
-  onClick: () => {};
+  
   constructor(parentNode: HTMLElement) {
     super(parentNode);
     this.main = new Control(this.node, 'div', 'main-start-page');
@@ -23,8 +23,8 @@ export default class HomePage extends Page {
       this.onClick();
     }
   }
-  // onClick() {
-  //     this.destroy();    
-  //     window.location.href = '#Toys';
-  // }
+  onClick() {
+      this.destroy();    
+      window.location.href = '#toys';
+  }
 }
