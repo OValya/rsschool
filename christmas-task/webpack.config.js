@@ -34,7 +34,8 @@ const config = {
 
         new CopyPlagin({
             patterns: [
-                {from: 'public'}
+                {from: 'src/assets/',
+                to:'assets'}
             ]
         }),
         new CleanWebpackPlugin({cleanStaleWebpackAssets:false}),

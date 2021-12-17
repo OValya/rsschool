@@ -10,7 +10,8 @@ export default class CardBox extends Control{
     this.blockTitle = new Control(this.node, 'h1', 'title-card-box', 'Коробка с игрушками')
     console.log('toys', toys); 
     toys.forEach(toy => {
-      new Card(this.node, toy);
+      const toyCard = new Card(this.node, toy);
+      
     });
   }
 }

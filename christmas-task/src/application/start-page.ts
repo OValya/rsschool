@@ -9,10 +9,12 @@ export default class HomePage extends Page {
   title: Control<HTMLElement>;
   startButton: Control<HTMLElement>;
   footer: Control<HTMLElement>;
+  boxBall: Control<HTMLElement>;
   
   constructor(parentNode: HTMLElement) {
     super(parentNode);
     this.main = new Control(this.node, 'div', 'main-start-page');
+    this.boxBall = new Control(this.main.node, 'div', 'box-ball');
     this.title = new Control(this.main.node, 'div', 'title-start-page', `Новогодняя игра <br/> "Наряди ёлку"`);
     this.startButton = new Control(this.main.node, 'button', 'start-button', 'Начать');
     this.footer = new Control(this.node, 'footer', 'footer', 
