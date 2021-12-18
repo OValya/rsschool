@@ -19,8 +19,6 @@ export default class FormCheck extends Control {
         this.onCheck(type, typeForFilter);
     }
   }
- 
-  
 }
 
 

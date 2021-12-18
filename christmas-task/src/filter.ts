@@ -1,31 +1,83 @@
+import { IToysData } from "./newDataModel";
+const defaultFilter: Record<string, Array<string>> = {
+  'shape': [],
+  'color': [],
+  'size': [],
+  'count': ['0', '12'],
+  'year': ['1950', '2010'],
+}
 
-const defaultFilter:Record<string, Array<string>> = {
-                          'shape':[],
-                          'color':[],
-                          'size':[],
-                          } 
-
-export default class Fiter{
+export default class Fiter {
   filterValues: Record<string, Array<string>>;
-  constructor(/*values: Array<string>*/){
-   // this.filterValues = values;
+  toys: IToysData[];
+  constructor(toys: IToysData[]) {
+    this.toys = toys;
+    this.loadFromLocalstorage();
   }
 
-  loadFromLocalstorage(){
-    const storageData:string|null = localStorage.getItem('filter');
-    if(storageData){
+  filtrateData(){
+    let arr: Array<IToysData> = [];
+    let arr2: Array<IToysData> = [];
+    let arr3: Array<IToysData> = [];
+    let arr4: Array<IToysData> = [];
+
+
+    if (this.filterValues['shape'].length == 0 &&
+      this.filterValues['color'].length == 0 &&
+      this.filterValues['size'].length == 0) {
+      arr3 = this.toys;
+    } else {
+      if (this.filterValues['shape'].length) {
+        arr = this.toys.filter(value =>
+          !!this.filterValues['shape'].includes(value['shape']))
+      } else { arr = this.toys }
+      if (this.filterValues['color'].length) {
+        arr2 = arr.filter(value =>
+          !!this.filterValues['color'].includes(value['color']))
+      } else { arr2 = arr };
+      if (this.filterValues['size'].length) {
+        arr3 = arr2.filter(value =>
+          !!this.filterValues['size'].includes(value['size']))
+      } else { arr3 = arr2 };
+    }
+
+    arr4 = arr3.filter(value =>
+    //console.log('count', this.filterModelByRanges.filterValues['count'][0]);
+    (value['count'] >= +this.filterValues['count'][0] &&
+      //console.log(value['count'] >= +this.filterModelByRanges.filterValues['count'][0]) //&&
+      value['count'] <= +this.filterValues['count'][1])
+
+      //  !!this.filterModel.filterValues['shape'].includes(value['shape'])
+    )
+    console.log('arr4', arr4);
+    // var arr1 = [1,2,3,4],
+    // arr2 = [2,4],
+    // res = arr1.filter(item => !arr2.includes(item));
+    
+    return arr4;
+  }
+
+  loadFromLocalstorage() {
+    const storageData: string | null = localStorage.getItem('filter');
+    if (storageData) {
       // write data from localstorage;
-    }else {
+    } else {
       this.filterValues = defaultFilter;
     }
   }
 
-  addFilterValue(type:string, value:string):void{
+  addFilterValue(type: string, value: string): void {
     this.filterValues[type].push(value);
   }
 
-  removeFilterValue(type:string, value:string):void{
+  removeFilterValue(type: string, value: string): void {
     const index = this.filterValues[type].indexOf(value);
     this.filterValues[type].splice(index, 1);
+  }
+
+  changeFilterValue(type: string, min: string, max: string): void {
+    this.filterValues[type][0] = min;
+    this.filterValues[type][1] = max;
+
   }
 }

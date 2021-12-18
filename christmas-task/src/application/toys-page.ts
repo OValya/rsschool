@@ -36,8 +36,6 @@ export default class ToysPage extends Page {
   updatePage(filtredData:IToysData[]): void{
     this.cardBox.destroy();
     this.cardBox = new CardBox(this.node, filtredData);
+    
   }
-
-  
-
 }

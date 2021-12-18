@@ -53,25 +53,6 @@ export default class FilterBlock extends Control {
       //const test = new Control(this.node, 'p','', str)
       this.onCheck(str, value);
     }
-
-    // this.colorFilter = new CheckList(document.body, 'Цвет:', 'color', color);
-    //this.sizeFilter = new CheckList(document.body, 'Размер:', 'size', size);
-    //this.favoriteFilter = new CheckList(document.body, 'Только любимые:', 'favorite', favorite);
-
-    //let arrayOfFilter: Array<CheckList> = [this.formFilter];//, this.colorFilter, this.sizeFilter, this.favoriteFilter];
-
-
-
-    // arr.forEach(element => {
-    //   this.node.append(element.node);
-    // });
   }
 }
 
-// class FilterBlock<HTMLElement> {
-//   constructor(title:string, filters: Array<HTMLElement> ){
-//     const element = document.createElement('div');
-
-
-//   }
-// }
