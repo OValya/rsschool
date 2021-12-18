@@ -48,6 +48,8 @@ export class ToysData {
     })
     return modelData;
   }
+
+  
 // private async loadData(url:string): Promise<Array<IToysData>> {
 //    return fetch(url).then(res=>res.json());
 /*.then((toysData: IToysDto)=>{

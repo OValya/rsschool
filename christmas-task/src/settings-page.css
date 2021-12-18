@@ -173,3 +173,44 @@ body{
   list-style: none;
   margin-left: 50px;
 }
+
+/****input range**/
+
+.double-range{
+  display: flex;
+  justify-content: space-around;
+}
+
+.value-range{
+  width: 10%;
+  height: 20px;
+  margin: 15px 0;
+  background-color: white;
+  color: red;
+}
+.container-range{
+  position: relative;
+  pointer-events: none;
+}
+
+.container-range input[type="range"]{
+  -webkit-appearance: none;
+  height: 10px;
+  width: 70%;
+  display: block;
+  margin: 20px;
+}
+
+.container-range input[type="range"]:last-child{
+  margin-top: -30px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  pointer-events: all;
+}
+input[type="range"]::-moz-range-thumb {
+  pointer-events: all;
+}
+input[type="range"]::-ms-thumb {
+  pointer-events: all;
+}

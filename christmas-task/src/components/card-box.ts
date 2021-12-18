@@ -1,6 +1,6 @@
 import Control from '../common/control';
 import Card from './card';
-import { IToysData } from '../dataModel';
+import { IToysData } from '../newDataModel';
 
 export default class CardBox extends Control{
   public blockTitle: Control<HTMLHeadingElement>;

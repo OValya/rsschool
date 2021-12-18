@@ -11,8 +11,8 @@
 
 .box-ball{
   position: absolute;
-  left: 90%;
-  top:100px;
+  left: 70%;
+  top:250px;
   width:200px;
   height: 250px;
   background: url('./assets/ball/1.png')  top left/200px 250px no-repeat ;

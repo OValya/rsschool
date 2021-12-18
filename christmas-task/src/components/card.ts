@@ -1,5 +1,5 @@
 import Control from '../common/control';
-import { IToysData } from '../dataModel'
+import { IToysData } from '../newDataModel'
 
 export default class Card extends Control {
   title: Control<HTMLHeadingElement>;

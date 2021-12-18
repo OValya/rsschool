@@ -5,6 +5,7 @@ import ToysPage from './toys-page';
 import TreesPage from './trees-page';
 import Route from '../components/route'
 import Filter from '../filter'
+import FiterByRanges from '../filterByRanges'
 import Page from './page';
 import { ToysData, IToysData } from '../newDataModel'
 
@@ -19,6 +20,7 @@ export default class Application extends Control {
   model: ToysData;
   dataToys: IToysData[];
   pages: Record<string, IPageConstructor>;
+  filterModelByRanges: FiterByRanges;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode);
@@ -31,8 +33,11 @@ export default class Application extends Control {
       '#trees': TreesPage,
     }
 
-    this.filterModel = new Filter();
+    this.filterModel = new Filter();  //по значению форм, цвета...
     this.filterModel.loadFromLocalstorage();
+
+    this.filterModelByRanges = new FiterByRanges(); //фильтр по диапазону
+    this.filterModelByRanges.loadFromLocalstorage();
 
     this.model = new ToysData();
     this.dataToys = this.model.loadData();
@@ -44,6 +49,7 @@ export default class Application extends Control {
 
   createPage() {
     const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, this.filteredData());
+    
     newPage.onCheck = (type: string, value: string) => {
       if (this.filterModel.filterValues[type].includes(value)) {
         this.filterModel.removeFilterValue(type, value)
@@ -51,13 +57,16 @@ export default class Application extends Control {
         this.filterModel.addFilterValue(type, value);
       }
       newPage.updatePage(this.filteredData());
-      //this.loadWindow();
-      console.log('filter', this.filterModel);
-      console.log('values', this.filteredData())
+    }
+
+    newPage.onChange = (min, max) => {
+      this.filterModelByRanges.changeFilterValue('count', min, max);
+      newPage.updatePage(this.filteredData());
     }
     this.currentPage = newPage;
 
   }
+
   loadWindow() {
     if (this.currentPage) {
       let currentPage = this.currentPage;
@@ -73,6 +82,7 @@ export default class Application extends Control {
     let arr: Array<IToysData> = [];
     let arr2: Array<IToysData> = [];
     let arr3: Array<IToysData> = [];
+    let arr4: Array<IToysData> = [];
 
 
     if (this.filterModel.filterValues['shape'].length == 0 &&
@@ -83,7 +93,7 @@ export default class Application extends Control {
       if (this.filterModel.filterValues['shape'].length) {
         arr = this.dataToys.filter(value =>
           !!this.filterModel.filterValues['shape'].includes(value['shape']))
-      } else {arr = this.dataToys}
+      } else { arr = this.dataToys }
       if (this.filterModel.filterValues['color'].length) {
         arr2 = arr.filter(value =>
           !!this.filterModel.filterValues['color'].includes(value['color']))
@@ -92,22 +102,22 @@ export default class Application extends Control {
         arr3 = arr2.filter(value =>
           !!this.filterModel.filterValues['size'].includes(value['size']))
       } else { arr3 = arr2 };
-
-      // this.dataToys.map((value) => {
-      //   if(this.filterModel.filterValues['shape'].length==0)
-      //   this.filterModel.filterValues['shape'].forEach(elem => {
-      //     if (value['shape'] == elem) {
-      //       arr1.push(value);
-      //     }
-      //   });
-      // })
     }
-    console.log('shape', arr3);
+
+    arr4 = arr3.filter(value =>
+    //console.log('count', this.filterModelByRanges.filterValues['count'][0]);
+    (value['count'] >= +this.filterModelByRanges.filterValues['count'][0] &&
+      //console.log(value['count'] >= +this.filterModelByRanges.filterValues['count'][0]) //&&
+      value['count'] <= +this.filterModelByRanges.filterValues['count'][1])
+
+      //  !!this.filterModel.filterValues['shape'].includes(value['shape'])
+    )
+    console.log('arr4', arr4);
     // var arr1 = [1,2,3,4],
     // arr2 = [2,4],
     // res = arr1.filter(item => !arr2.includes(item));
 
-    return arr3;
+    return arr4;
   }
 
 
