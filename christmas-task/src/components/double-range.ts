@@ -12,8 +12,8 @@ export default class DoubleRange extends Control {
   minValueText: Control<HTMLElement>;
   maxValueText: Control<HTMLElement>;
   containerRange: Control<HTMLElement>;
-  onChange: (min:string, max:string) => void;
-  constructor(parentNode: HTMLElement, min: string, max: string, step: string, minValue: string, maxValue: string) {
+  onChange: (type: string, min: string, max: string) => void;
+  constructor(parentNode: HTMLElement, type: string, min: string, max: string, step: string, minValue: string, maxValue: string) {
     super(parentNode, 'div', 'double-range')
     this.minValueText = new Control(this.node, 'span', 'value-range');
 
@@ -54,7 +54,7 @@ export default class DoubleRange extends Control {
     this.inputUp.node.oninput = () => {
       this.setGradient();
       this.setValueToSpan();
-     
+
       if (+this.inputUp.node.value > +this.inputDown.node.value) {
         this.inputDown.node.value = this.inputUp.node.value;
       }
@@ -69,21 +69,24 @@ export default class DoubleRange extends Control {
     }
 
     this.inputUp.node.onchange = () => {
-      this.onChange(this.inputUp.node.value, this.inputDown.node.value)
+      this.onChange(type, this.inputUp.node.value, this.inputDown.node.value)
     }
 
     this.inputDown.node.onchange = () => {
-      this.onChange(this.inputUp.node.value, this.inputDown.node.value)
+      console.log('max', this.inputDown.node.value);
+      this.onChange(type, this.inputUp.node.value, this.inputDown.node.value)
     }
   }
 
-  setValueToSpan(){
+
+
+  setValueToSpan() {
     this.maxValueText.node.textContent = this.inputDown.node.value;
     this.minValueText.node.textContent = this.inputUp.node.value;
   }
   setGradient() {
-    const changeValueUp = (+this.inputUp.node.value * 100 / +this.inputUp.node.max);
-    const changeValueDown = (+this.inputDown.node.value * 100 / +this.inputDown.node.max);//(this.inputDown.node.width/+this.inputDown.node.max)*+this.inputDown.node.value;
+    const changeValueUp = (+this.inputUp.node.value - +this.inputUp.node.min) * 100 / (+this.inputUp.node.max - +this.inputUp.node.min);
+    const changeValueDown = (+this.inputDown.node.value - +this.inputDown.node.min) * 100 / (+this.inputDown.node.max - +this.inputDown.node.min);//(+this.inputDown.node.value * 100 / +this.inputDown.node.max);
     this.inputUp.node.style.background = `linear-gradient(90deg, #fff ${changeValueUp}%, #f00 ${changeValueUp}%, #f00 ${changeValueDown}%, #fff ${changeValueDown}%)`;
     this.inputDown.node.style.background = `linear-gradient(90deg, #fff ${changeValueUp}%, #f00 ${changeValueUp}%, #f00 ${changeValueDown}%, #fff ${changeValueDown}%)`;
   }

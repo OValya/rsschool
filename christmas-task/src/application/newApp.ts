@@ -9,7 +9,7 @@ import Page from './page';
 import { ToysData, IToysData } from '../newDataModel'
 
 interface IPageConstructor {
-  new(parentNode: HTMLElement, dataToys?: IToysData[]): Page;
+  new(parentNode: HTMLElement, dataToys?: IToysData[], fiter?:Record<string, Array<string>>): Page;
 }
 
 export default class Application extends Control {
@@ -44,8 +44,8 @@ export default class Application extends Control {
 
   createPage() {
     const filterToys = this.filterModel.filtrateData();
-    const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, filterToys);
-    
+    const filterValues = this.filterModel.filterValues;
+    const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, filterToys, filterValues);
     newPage.onCheck = (type: string, value: string) => {
       if (this.filterModel.filterValues[type].includes(value)) {
         this.filterModel.removeFilterValue(type, value)
@@ -55,8 +55,8 @@ export default class Application extends Control {
       newPage.updatePage(this.filterModel.filtrateData());
     }
 
-    newPage.onChange = (min, max) => {
-      this.filterModel.changeFilterValue('count', min, max);
+    newPage.onChange = (type:string, min:string, max:string) => {
+      this.filterModel.changeFilterValue(type, min, max);
       newPage.updatePage(this.filterModel.filtrateData());
     }
     this.currentPage = newPage;

@@ -15,12 +15,11 @@ export default class Fiter {
     this.loadFromLocalstorage();
   }
 
-  filtrateData(){
+  filtrateData() {
     let arr: Array<IToysData> = [];
     let arr2: Array<IToysData> = [];
     let arr3: Array<IToysData> = [];
     let arr4: Array<IToysData> = [];
-
 
     if (this.filterValues['shape'].length == 0 &&
       this.filterValues['color'].length == 0 &&
@@ -42,18 +41,13 @@ export default class Fiter {
     }
 
     arr4 = arr3.filter(value =>
-    //console.log('count', this.filterModelByRanges.filterValues['count'][0]);
-    (value['count'] >= +this.filterValues['count'][0] &&
-      //console.log(value['count'] >= +this.filterModelByRanges.filterValues['count'][0]) //&&
-      value['count'] <= +this.filterValues['count'][1])
-
-      //  !!this.filterModel.filterValues['shape'].includes(value['shape'])
+      (value['count'] >= +this.filterValues['count'][0] &&
+        value['count'] <= +this.filterValues['count'][1])
+      && (
+        value['year'] >= +this.filterValues['year'][0] &&
+        value['year'] <= +this.filterValues['year'][1]
+      )
     )
-    console.log('arr4', arr4);
-    // var arr1 = [1,2,3,4],
-    // arr2 = [2,4],
-    // res = arr1.filter(item => !arr2.includes(item));
-    
     return arr4;
   }
 
@@ -64,6 +58,10 @@ export default class Fiter {
     } else {
       this.filterValues = defaultFilter;
     }
+  }
+
+  setFilter() {
+
   }
 
   addFilterValue(type: string, value: string): void {
@@ -78,6 +76,5 @@ export default class Fiter {
   changeFilterValue(type: string, min: string, max: string): void {
     this.filterValues[type][0] = min;
     this.filterValues[type][1] = max;
-
   }
 }

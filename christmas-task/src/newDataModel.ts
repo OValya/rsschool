@@ -12,7 +12,7 @@ export interface IToysData{
   size: string,
   favorite: boolean
 }
-
+/*
 interface IDataDto{
   name: string,
   count: string,
@@ -24,7 +24,7 @@ interface IDataDto{
 }
 
 type IToysDto = Record<string, IDataDto>
-
+*/
 
 export class ToysData {
   data: Array<IToysData>;
