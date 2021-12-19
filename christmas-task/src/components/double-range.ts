@@ -78,8 +78,6 @@ export default class DoubleRange extends Control {
     }
   }
 
-
-
   setValueToSpan() {
     this.maxValueText.node.textContent = this.inputDown.node.value;
     this.minValueText.node.textContent = this.inputUp.node.value;

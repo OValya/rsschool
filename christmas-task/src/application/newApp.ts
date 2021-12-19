@@ -4,12 +4,12 @@ import HomePage from './start-page';
 import ToysPage from './toys-page';
 import TreesPage from './trees-page';
 import Route from '../components/route'
-import Filter from '../filter'
+import Filter from '../model/filter'
 import Page from './page';
-import { ToysData, IToysData } from '../newDataModel'
+import { ToysData, IToysData } from '../model/newDataModel'
 
 interface IPageConstructor {
-  new(parentNode: HTMLElement, dataToys?: IToysData[], fiter?:Record<string, Array<string>>): Page;
+  new(parentNode: HTMLElement, dataToys?: IToysData[], fiter?: Record<string, Array<string>>): Page;
 }
 
 export default class Application extends Control {
@@ -35,8 +35,8 @@ export default class Application extends Control {
     this.dataToys = this.model.loadData();
 
 
-    this.filterModel = new Filter(this.dataToys);  
- 
+    this.filterModel = new Filter(this.dataToys);
+
     window.onpopstate = this.loadWindow.bind(this);
     this.loadWindow();
   }
@@ -55,10 +55,18 @@ export default class Application extends Control {
       newPage.updatePage(this.filterModel.filtrateData());
     }
 
-    newPage.onChange = (type:string, min:string, max:string) => {
+    newPage.onChange = (type: string, min: string, max: string) => {
       this.filterModel.changeFilterValue(type, min, max);
       newPage.updatePage(this.filterModel.filtrateData());
     }
+
+    newPage.onReset = () => {
+      this.filterModel.resetFilter();
+     
+      newPage.destroy();
+      this.createPage();
+    }
+
     this.currentPage = newPage;
   }
 

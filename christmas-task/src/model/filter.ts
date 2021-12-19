@@ -5,9 +5,9 @@ const defaultFilter: Record<string, Array<string>> = {
   'size': [],
   'count': ['0', '12'],
   'year': ['1950', '2010'],
-}
+};
 
-export default class Fiter {
+export default class Filter {
   filterValues: Record<string, Array<string>>;
   toys: IToysData[];
   constructor(toys: IToysData[]) {
@@ -56,12 +56,20 @@ export default class Fiter {
     if (storageData) {
       // write data from localstorage;
     } else {
+      //this.resetFilter();
       this.filterValues = defaultFilter;
     }
   }
 
-  setFilter() {
-
+  resetFilter() {
+    this.filterValues = {
+      'shape': [],
+      'color': [],
+      'size': [],
+      'count': ['0', '12'],
+      'year': ['1940', '2020'],
+    }
+    console.log('filtervalues', this.filterValues);
   }
 
   addFilterValue(type: string, value: string): void {

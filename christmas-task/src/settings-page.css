@@ -19,9 +19,11 @@ body{
 .counter-toys {
 }
 .filter-section{
+  display: flex;
+  justify-content: space-between;
 }
 .filter-block {
-  width: 33%;
+  width: 30%;
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -186,7 +188,12 @@ body{
   height: 20px;
   margin: 15px 0;
   background-color: white;
+  border: 1px solid #24C5DB;
+  border-radius: 5px;
   color: red;
+  font-weight: 700;
+  text-align: center;
+  line-height: 20px;
 }
 .container-range{
   position: relative;
@@ -213,4 +220,25 @@ input[type="range"]::-moz-range-thumb {
 }
 input[type="range"]::-ms-thumb {
   pointer-events: all;
+}
+
+
+/******sort-select***/
+
+.sort-select, .reset-button{
+  width: 80%;
+  height: 30px;
+  margin: 0 0 0 20px;
+  background-color: rgba(36, 197, 219, 0.15);
+  color:white;
+  border: 1px solid #24C5DB;
+  border-radius: 5px;
+  cursor: pointer;
+ } 
+
+.reset-button{
+  width: 70%;
+  align-self: center;
+  border-radius: 15px;
+  margin: 0 0 20px;
 }

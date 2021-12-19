@@ -1,6 +1,6 @@
-import toysDataUrl from './toys-data.json'
+import toysDataUrl from '../toys-data.json'
 import Fiter from './filter';
-import data from './data'
+import data from '../data'
 
 export interface IToysData{
   num: string,

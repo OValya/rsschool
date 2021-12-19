@@ -8,9 +8,11 @@ export default class FilterBlockRange extends Control {
   rangeCount: DoubleRange;
   constructor(parentNode: HTMLElement, title: string, filter:Record<string, Array<string>> /*, arr:Array<CheckList>*/) {
     super(parentNode, 'div', 'filter-block');
+
     this.blockTitle = document.createElement('h2');
     this.blockTitle.textContent = title;
     this.node.append(this.blockTitle);
+
     this.rangeCount = new DoubleRange(this.node, 'count', '0', '12', '1', filter['count'][0], filter['count'][1]);
     let event = new Event('input');
     this.rangeCount.inputUp.node.dispatchEvent(event);
@@ -25,9 +27,6 @@ export default class FilterBlockRange extends Control {
     this.rangeYears.onChange = (type:string, min:string, max:string) =>{
       this.onChange(type, min, max);
     }
-
-
-    
   }
 }
 

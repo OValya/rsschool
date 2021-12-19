@@ -1,10 +1,11 @@
 import Control from '../common/control';
-import { IToysData } from '../newDataModel';
+import { IToysData } from '../model/newDataModel';
 import CardBox from '../components/card-box';
 
 export default class Page extends Control{
   onCheck: (type:string, value:string) => void;
   onChange: (type:string, min:string, max:string) => void;
+  onReset: ()=>void;
   constructor(parentNode: HTMLElement, dataToys?:IToysData[]) {
     super(parentNode, 'div', 'page'); //style.page);
   }
