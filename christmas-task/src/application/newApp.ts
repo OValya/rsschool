@@ -23,7 +23,7 @@ export default class Application extends Control {
   constructor(parentNode: HTMLElement) {
     super(parentNode);
 
-    const route = new Route(this.node);
+    this.route = new Route(this.node);
 
     this.pages = {
       '#home': HomePage,
@@ -37,6 +37,8 @@ export default class Application extends Control {
 
     this.filterModel = new Filter(this.dataToys);
 
+    //this.route.selectedToys.node.innerText = '5';
+
     window.onpopstate = this.loadWindow.bind(this);
     this.loadWindow();
   }
@@ -46,6 +48,7 @@ export default class Application extends Control {
     const filterToys = this.filterModel.filtrateData();
     const filterValues = this.filterModel.filterValues;
     const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, filterToys, filterValues);
+    
     newPage.onCheck = (type: string, value: string) => {
       if (this.filterModel.filterValues[type].includes(value)) {
         this.filterModel.removeFilterValue(type, value)
@@ -62,9 +65,16 @@ export default class Application extends Control {
 
     newPage.onReset = () => {
       this.filterModel.resetFilter();
-     
       newPage.destroy();
       this.createPage();
+    }
+
+    newPage.onSelect = (num:string) => {
+      this.filterModel.selectToy(num);
+      //let counter = +this.route.selectedToys.node.textContent +1;
+      this.route.selectedToys.node.textContent =  this.filterModel.countSelectedToys().toString(); 
+      newPage.updatePage(this.filterModel.filtrateData());
+
     }
 
     this.currentPage = newPage;

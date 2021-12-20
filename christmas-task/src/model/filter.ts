@@ -4,7 +4,7 @@ const defaultFilter: Record<string, Array<string>> = {
   'color': [],
   'size': [],
   'count': ['0', '12'],
-  'year': ['1950', '2010'],
+  'year': ['1940', '2020'],
 };
 
 export default class Filter {
@@ -49,6 +49,22 @@ export default class Filter {
       )
     )
     return arr4;
+  }
+
+  selectToy(num: string) {
+    this.toys.map(item => {
+      if (item['num'] == num) {
+        item['selected'] = (item['selected'] == false);
+      }
+    })
+  }
+
+  countSelectedToys(): number {
+    let sum: number = 0;
+    this.toys.forEach((current) => {
+      if (current.selected == true) { sum++ }
+    })
+    return sum;
   }
 
   loadFromLocalstorage() {

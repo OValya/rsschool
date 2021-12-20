@@ -89,6 +89,7 @@
 }
 
 .route-box{
+  position: relative;
   max-height: 50px;
   padding: 15px;
   margin-bottom: 20px;
@@ -107,4 +108,19 @@
 
 .link:hover{
   text-decoration: underline;
+}
+
+.selected-toys-counter{
+  position: absolute;
+  right: 10px;
+  top:5px;
+  
+  width: 45px;
+  height: 45px;
+  float: right;
+  color: red;
+  font-size: 24px;
+  line-height: 45px;
+  text-align: center;
+  background: url('./assets/svg/ball.svg') no-repeat 0 0/cover;
 }

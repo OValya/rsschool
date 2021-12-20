@@ -10,7 +10,8 @@ export interface IToysData{
   shape: string,
   color: string,
   size: string,
-  favorite: boolean
+  favorite: boolean,
+  selected: boolean
 }
 /*
 interface IDataDto{
@@ -43,7 +44,8 @@ export class ToysData {
         shape: item.shape,
         color: item.color,
         size: item.size,
-        favorite: item.favorite
+        favorite: item.favorite,
+        selected: false
       }
     })
     return modelData;

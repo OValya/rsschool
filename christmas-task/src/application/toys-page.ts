@@ -22,6 +22,9 @@ export default class ToysPage extends Page {
   filters: Control<HTMLElement>;
   sortBlock: SortSelect;
   onReset: () => void;
+  onSelect: (num:string) => void;
+  //updatePage: (filtredData: IToysData[]) => void;
+  
 
   constructor(parentNode: HTMLElement, dataToys: IToysData[], filter: Record<string, Array<string>>) {
     super(parentNode);
@@ -44,11 +47,22 @@ export default class ToysPage extends Page {
     }
 
     this.cardBox = new CardBox(this.node, dataToys);
+    this.cardBox.onSelect = (num:string) => {
+      this.onSelect(num);
+    }
   }
 
   updatePage(filtredData: IToysData[]): void {
-    this.cardBox.destroy();
+    console.log('fdlkfjakl');
+
+    let currentBox = this.cardBox;
+    currentBox.destroy();
+   // this.cardBox.destroy();
     this.cardBox = new CardBox(this.node, filtredData);
+    this.cardBox.onSelect = (num:string) => {
+      this.onSelect(num);
+    }
+
   }
 
 }

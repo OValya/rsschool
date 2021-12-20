@@ -3,20 +3,21 @@ import { IToysData } from '../model/newDataModel';
 import CardBox from '../components/card-box';
 
 export default class Page extends Control{
+  updatePage(arg0: IToysData[]) {
+    throw new Error('Method not implemented.');
+  }
   onCheck: (type:string, value:string) => void;
   onChange: (type:string, min:string, max:string) => void;
   onReset: ()=>void;
+  onSelect: (num: string) => void;
+  
   constructor(parentNode: HTMLElement, dataToys?:IToysData[]) {
     super(parentNode, 'div', 'page'); //style.page);
   }
 
-  updatePage(filtredData:IToysData[]): void{
-    const data = new CardBox(this.node, filtredData);
-  }
+  
 
-  // setFilter(filter:Record<string, Array<string>>):void{
 
-  // }
 /*
   animateIn() {
     return new Promise(resolve => {

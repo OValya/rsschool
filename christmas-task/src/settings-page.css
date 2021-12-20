@@ -154,8 +154,14 @@ body{
   width: 100%;
   text-align: center;
   color: white;
-
 }
+
+.card-title{
+  width: 80%;
+  margin: 30px 10px 15px;
+  text-align: left;
+}
+
 .card-box{
   display: flex;
   flex-wrap: wrap;
@@ -163,17 +169,45 @@ body{
 }
 
 .card{
+  position: relative;
   width: 19%;
   margin-bottom: 10px;
   background-color: rgba(36, 197, 219, 0.15);
   border: 2px solid #24C5DB;
   color: white;
   border-radius: 15px;
+  cursor: pointer;
 }
+
+.card:hover{
+  transform: scale(1.05);
+}
+
 
 .card-description{
   list-style: none;
-  margin-left: 50px;
+  margin-left: -25px;
+}
+
+.select-img{
+  width: 50px;
+  height: 37px;
+  position: absolute;
+  top: -3px;
+  right: 0;
+  /* url('./assets/svg/badge.svg') no-repeat;*/
+  -webkit-mask-image:url('./assets/svg/badge-2.svg');
+  -webkit-mask-size: 50px 37px;
+  background-color: white;
+  transform: rotate(-90deg);
+}
+
+.select-img:hover{
+ /* background-color: lightcoral;*/
+}
+
+.selected{
+  background-color: red;
 }
 
 /****input range**/
@@ -225,7 +259,9 @@ input[type="range"]::-ms-thumb {
 
 /******sort-select***/
 
-.sort-select, .reset-button{
+.sort-select, 
+.reset-button, 
+.search{
   width: 80%;
   height: 30px;
   margin: 0 0 0 20px;
@@ -242,3 +278,25 @@ input[type="range"]::-ms-thumb {
   border-radius: 15px;
   margin: 0 0 20px;
 }
+
+.box-search{
+  position: relative;
+  width: 80%;
+}
+
+.search{
+  width: 100%;
+}
+
+.search-button{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -10px;
+  top:3px;
+  border: 0;
+  background: url('./assets/svg/search.svg') 0 0/cover;
+  cursor: pointer;
+
+}
+
