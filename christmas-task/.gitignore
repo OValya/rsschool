@@ -3,3 +3,4 @@ dist
 test.ts
 style.css
 old
+webpack1.config.js
