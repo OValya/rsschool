@@ -17,10 +17,7 @@ export default class HomePage extends Page {
     this.boxBall = new Control(this.main.node, 'div', 'box-ball');
     this.title = new Control(this.main.node, 'div', 'title-start-page', `Новогодняя игра <br/> "Наряди ёлку"`);
     this.startButton = new Control(this.main.node, 'button', 'start-button', 'Начать');
-    this.footer = new Control(this.main.node, 'footer', 'footer', 
-      `<span class="year-logo"> 2021 </span>
-      <a class = "github-logo" href="https://github.com/OValya">Valentina Frolina</a>
-      <a href="https://rs.school"><img src="./assets/svg/footer/rss_logo.svg" alt="rsschool-logo" >`);
+    
     this.startButton.node.onclick = () => {
       this.onClick();
     }

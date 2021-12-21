@@ -1,5 +1,6 @@
 .main-container{
-  min-height: 100vh;
+  position: relative;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -75,6 +76,7 @@
 
 .start-button{
   cursor: pointer;
+  margin-bottom: 30px ;
 }
 
 .title-start-page {

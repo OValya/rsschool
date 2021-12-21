@@ -39,11 +39,11 @@ export default class Card extends Control {
       //   this.select.node.classList.remove('selected');
       // }else{this.select.node.classList.add('selected');}
       this.onSelect(this.num);
-      if (dataCard.selected == true) { this.select.node.classList.add('selected') }
-      else {
-        if (this.select.node.classList.contains('selected'))
-          this.select.node.classList.remove('selected');
-      }
+      // if (dataCard.selected == true) { this.select.node.classList.add('selected') }
+      // else {
+      //   if (this.select.node.classList.contains('selected'))
+      //     this.select.node.classList.remove('selected');
+      // }
      // console.log('classlist', this.select.node.classList)
 
     }

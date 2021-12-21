@@ -8,6 +8,7 @@ import Filter from '../model/filter'
 import Page from './page';
 import { ToysData, IToysData } from '../model/newDataModel';
 import Popup from '../components/popup';
+import Footer from '../components/footer'
 
 interface IPageConstructor {
   new(parentNode: HTMLElement, dataToys?: IToysData[], fiter?: Record<string, Array<string>>): Page;
@@ -21,13 +22,14 @@ export default class Application extends Control {
   dataToys: IToysData[];
   pages: Record<string, IPageConstructor>;
   popup: Popup;
+  footer: Footer;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', 'main-container');
 
     this.route = new Route(this.node);
 
-   // this.popup = new Popup(this.node, 'Больше нельзя добавить игрушек!')
+    this.popup = new Popup(this.node, 'Больше нельзя добавить игрушек!')
 
     this.pages = {
       '#home': HomePage,
@@ -45,6 +47,9 @@ export default class Application extends Control {
 
     window.onpopstate = this.loadWindow.bind(this);
     this.loadWindow();
+
+    this.footer = new Footer(this.node);
+    this.footer.node.style.order = '10';
   }
 
 
@@ -52,7 +57,7 @@ export default class Application extends Control {
     const filterToys = this.filterModel.filtrateData();
     const filterValues = this.filterModel.filterValues;
     const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, filterToys, filterValues);
-    
+
     newPage.onCheck = (type: string, value: string) => {
       if (this.filterModel.filterValues[type].includes(value)) {
         this.filterModel.removeFilterValue(type, value)
@@ -73,13 +78,19 @@ export default class Application extends Control {
       this.createPage();
     }
 
-    newPage.onSelect = (num:string) => {
+    newPage.onSelect = (num: string) => {
       this.filterModel.selectToy(num);
       let counter = this.filterModel.countSelectedToys();
-      if(counter > 20) {}
-      this.route.selectedToys.node.textContent =  this.filterModel.countSelectedToys().toString(); 
-      
-      newPage.updatePage(this.filterModel.filtrateData());
+      if (counter <= 20) {
+        this.route.selectedToys.node.textContent = this.filterModel.countSelectedToys().toString();
+        newPage.updatePage(this.filterModel.filtrateData());
+      }
+      else {
+        this.popup.node.classList.remove('hidden-popup');
+        this.filterModel.selectToy(num);
+
+      }
+
 
     }
 
