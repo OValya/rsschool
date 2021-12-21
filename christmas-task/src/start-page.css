@@ -1,14 +1,19 @@
+.main-container{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .main-start-page {
   /*background: url('./assets/bg.jpg') no-repeat;*/
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 100px);
   position: relative;
 }
-
-
 
 .box-ball{
   position: absolute;
@@ -85,7 +90,7 @@
   justify-content: space-around;
   max-height: 50px;
   width: 100%;
-  padding: 15px;
+  padding: 15px 0;
   background-color: rgba(36, 197, 219, 0.15);
   color: white;
 }

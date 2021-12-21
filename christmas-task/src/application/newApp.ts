@@ -6,7 +6,8 @@ import TreesPage from './trees-page';
 import Route from '../components/route'
 import Filter from '../model/filter'
 import Page from './page';
-import { ToysData, IToysData } from '../model/newDataModel'
+import { ToysData, IToysData } from '../model/newDataModel';
+import Popup from '../components/popup';
 
 interface IPageConstructor {
   new(parentNode: HTMLElement, dataToys?: IToysData[], fiter?: Record<string, Array<string>>): Page;
@@ -19,11 +20,14 @@ export default class Application extends Control {
   model: ToysData;
   dataToys: IToysData[];
   pages: Record<string, IPageConstructor>;
+  popup: Popup;
 
   constructor(parentNode: HTMLElement) {
-    super(parentNode);
+    super(parentNode, 'div', 'main-container');
 
     this.route = new Route(this.node);
+
+   // this.popup = new Popup(this.node, 'Больше нельзя добавить игрушек!')
 
     this.pages = {
       '#home': HomePage,
