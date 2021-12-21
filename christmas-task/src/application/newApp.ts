@@ -71,8 +71,10 @@ export default class Application extends Control {
 
     newPage.onSelect = (num:string) => {
       this.filterModel.selectToy(num);
-      //let counter = +this.route.selectedToys.node.textContent +1;
+      let counter = this.filterModel.countSelectedToys();
+      if(counter > 20) {}
       this.route.selectedToys.node.textContent =  this.filterModel.countSelectedToys().toString(); 
+      
       newPage.updatePage(this.filterModel.filtrateData());
 
     }

@@ -23,11 +23,17 @@ export default class ToysPage extends Page {
   sortBlock: SortSelect;
   onReset: () => void;
   onSelect: (num:string) => void;
+  popup: Control<HTMLElement>;
+  buttonPopup: Control<HTMLElement>;
   //updatePage: (filtredData: IToysData[]) => void;
   
 
   constructor(parentNode: HTMLElement, dataToys: IToysData[], filter: Record<string, Array<string>>) {
     super(parentNode);
+
+    //this.popup = new Control(this.node, 'div', 'popup hide-popup');
+    //this.buttonPopup = new Control(this.popup.node, 'button', 'button button-popup', 'Понятно!');
+
 
     this.filters = new Control(this.node, 'div', 'filter-section');
 
