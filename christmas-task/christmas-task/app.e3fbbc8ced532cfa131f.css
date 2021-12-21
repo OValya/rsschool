@@ -2,8 +2,9 @@
   /*background: url('./assets/bg.jpg') no-repeat;*/
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   position: relative;
 }
 
@@ -59,7 +60,7 @@
 .start-button, .title-start-page {
   width: 300px;
   height: 50px;
-  margin: 50px 0;
+  /*margin: 50px 0;*/
   border-radius: 50px;
   background-color: rgba(36, 197, 219, 0.15);
   border: 2px solid #24C5DB;
@@ -73,7 +74,8 @@
 
 .title-start-page {
   width: 600px;
-  height: 220px;
+  height: 250px;
+  margin-top: 50px;
   padding-top: 100px;
   text-align: center;
   font-size: 50px;
@@ -81,7 +83,7 @@
 .footer {
   display: flex;
   justify-content: space-around;
-  max-height: 70px;
+  max-height: 50px;
   width: 100%;
   padding: 15px;
   background-color: rgba(36, 197, 219, 0.15);
@@ -99,14 +101,17 @@
   color: white;
 }
 
-.link{
+.link, 
+.github-logo,
+.year-logo{
   color: white;
   font-size: 24px;
   text-decoration: none;
   margin: 20px;
 }
 
-.link:hover{
+.link:hover, 
+.github-logo:hover{
   text-decoration: underline;
 }
 
@@ -124,6 +129,7 @@
   text-align: center;
   background: url(assets/f934119716840dd7a47f.svg) no-repeat 0 0/cover;
 }
+
 .settings-page {
   height: 100%;
   /*background: url('./assets/bg.jpg');*/
@@ -426,6 +432,14 @@ input[type="range"]::-ms-thumb {
 
 }
 
+/******popup*****/
+.popup{
+  
+
+} 
+
+.hide-popup{
+
+}
 
 
-/*# sourceMappingURL=app.d91df19f33ec437d1198.css.map*/
