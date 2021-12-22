@@ -85,7 +85,7 @@ export default class Filter {
       'count': ['0', '12'],
       'year': ['1940', '2020'],
     }
-    console.log('filtervalues', this.filterValues);
+    //console.log('filtervalues', this.filterValues);
   }
 
   addFilterValue(type: string, value: string): void {

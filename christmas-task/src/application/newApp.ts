@@ -23,13 +23,15 @@ export default class Application extends Control {
   pages: Record<string, IPageConstructor>;
   popup: Popup;
   footer: Footer;
+  // popupNotToys: Popup;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', 'main-container');
 
     this.route = new Route(this.node);
 
-    this.popup = new Popup(this.node, 'Больше нельзя добавить игрушек!')
+    this.popup = new Popup(this.node, 'Больше нельзя добавить игрушек!');
+    // this.popupNotToys = new Popup(this.node, 'Игрушек с выбранными параметрами не найдено!');
 
     this.pages = {
       '#home': HomePage,
@@ -64,7 +66,15 @@ export default class Application extends Control {
       } else {
         this.filterModel.addFilterValue(type, value);
       }
+      // const toys = this.filterModel.filtrateData();
+      // if (toys.length == 0) {
+
+      //   this.filterModel.removeFilterValue(type, value);
+      //   this.popupNotToys.node.classList.remove('hidden-popup');
+      // } else {
       newPage.updatePage(this.filterModel.filtrateData());
+      // }
+
     }
 
     newPage.onChange = (type: string, min: string, max: string) => {

@@ -59,8 +59,8 @@ export default class ToysPage extends Page {
   }
 
   updatePage(filtredData: IToysData[]): void {
-    console.log('fdlkfjakl');
-
+    //console.log('fdlkfjakl');
+    
     let currentBox = this.cardBox;
     currentBox.destroy();
    // this.cardBox.destroy();

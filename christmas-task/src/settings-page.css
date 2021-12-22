@@ -160,7 +160,7 @@ body{
   color: white;
 }
 
-.card-title{
+.card-title, .content-message{
   width: 80%;
   margin: 30px 10px 15px;
   text-align: left;
@@ -170,6 +170,10 @@ body{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.content-message{
+  color:white;
 }
 
 .card{
@@ -351,6 +355,7 @@ input[type="range"]::-ms-thumb {
   text-align: center;
   font-weight: 700;
 }
+
 
 
 
