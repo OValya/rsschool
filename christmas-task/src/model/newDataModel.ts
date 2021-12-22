@@ -13,6 +13,8 @@ export interface IToysData{
   favorite: boolean,
   selected: boolean
 }
+
+
 /*
 interface IDataDto{
   name: string,
@@ -50,6 +52,8 @@ export class ToysData {
     })
     return modelData;
   }
+
+
 
   
 // private async loadData(url:string): Promise<Array<IToysData>> {

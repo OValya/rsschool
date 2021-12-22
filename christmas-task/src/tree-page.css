@@ -1,0 +1,48 @@
+.tree-page{
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-section, .toys-section{
+  width: 25%;
+  height: 100%; 
+}
+
+.content-section{
+  width: 45%;
+}
+
+.toys-section{
+  
+  display: flex;
+  flex-direction: column;
+ 
+  
+}
+
+.pictures-box{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  margin: 20px;
+  width: 100%;
+  background-color: rgba(36, 197, 219, 0.15);
+  border: 2px solid #24C5DB;
+  color: white;
+  border-radius: 15px;
+}
+
+.title-pictures-box{
+  width: 100%;
+  margin: 5px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.picture-icon{
+  height: 80px;
+  width: 80px;
+  margin: 3px;
+}
