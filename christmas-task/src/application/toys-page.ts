@@ -11,6 +11,7 @@ import Card from '../components/card'
 import CardBox from '../components/card-box';
 import SortSelect from '../components/sort-select';
 import Fiter from '../model/filter';
+import { IData } from './newApp';
 
 
 export default class ToysPage extends Page {
@@ -28,7 +29,7 @@ export default class ToysPage extends Page {
   //updatePage: (filtredData: IToysData[]) => void;
   
 
-  constructor(parentNode: HTMLElement, dataToys: IToysData[], filter: Record<string, Array<string>>) {
+  constructor(parentNode: HTMLElement, data:IData/*dataToys: IToysData[], filter: Record<string, Array<string>>*/) {
     super(parentNode);
 
     //this.popup = new Control(this.node, 'div', 'popup hide-popup');
@@ -37,12 +38,12 @@ export default class ToysPage extends Page {
 
     this.filters = new Control(this.node, 'div', 'filter-section');
 
-    this.filterByValue = new FilterBlock(this.filters.node, 'Фильтр по значению', filter);//, arrayOfFilter)
+    this.filterByValue = new FilterBlock(this.filters.node, 'Фильтр по значению', data.filterValues);//, arrayOfFilter)
     this.filterByValue.onCheck = (str: string, value: string) => {
       this.onCheck(str, value);
     }
 
-    this.filterByRange = new FilterBlockRange(this.filters.node, 'Фильтр по диапазону:', filter);
+    this.filterByRange = new FilterBlockRange(this.filters.node, 'Фильтр по диапазону:', data.filterValues);
     this.filterByRange.onChange = (type:string, min: string, max: string) => {
       this.onChange(type, min, max)
     }
@@ -52,7 +53,7 @@ export default class ToysPage extends Page {
       this.onReset();
     }
 
-    this.cardBox = new CardBox(this.node, dataToys);
+    this.cardBox = new CardBox(this.node, data.filterToys);
     this.cardBox.onSelect = (num:string) => {
       this.onSelect(num);
     }

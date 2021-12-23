@@ -8,10 +8,17 @@ import Filter from '../model/filter'
 import Page from './page';
 import { ToysData, IToysData } from '../model/newDataModel';
 import Popup from '../components/popup';
-import Footer from '../components/footer'
+import Footer from '../components/footer';
+import Canvas from './canvas'
+
+export interface IData{
+  filterToys?: IToysData[],
+  filterValues?: Record<string, Array<string>>,
+  selectedToys?: IToysData[]
+}
 
 interface IPageConstructor {
-  new(parentNode: HTMLElement, dataToys?: IToysData[], fiter?: Record<string, Array<string>>): Page;
+  new(parentNode: HTMLElement, data:IData/*dataToys?: IToysData[], fiter?: Record<string, Array<string>>*/): Page;
 }
 
 export default class Application extends Control {
@@ -71,9 +78,17 @@ export default class Application extends Control {
 
 
   createPage() {
-    const filterToys = this.filterModel.filtrateData();
-    const filterValues = this.filterModel.filterValues;
-    const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, filterToys, filterValues);
+    // const filterToys = this.filterModel.filtrateData();
+    // const filterValues = this.filterModel.filterValues;
+    // const selectedToys = this.filterModel.selectedToys;
+
+    const data:IData ={
+      filterToys : this.filterModel.filtrateData(),
+      filterValues : this.filterModel.filterValues,
+      selectedToys : this.filterModel.selectedToys,
+    }
+
+    const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, data);// filterToys, filterValues, );
 
     newPage.onCheck = (type: string, value: string) => {
       if (this.filterModel.filterValues[type].includes(value)) {
@@ -105,18 +120,25 @@ export default class Application extends Control {
 
     newPage.onSelect = (num: string) => {
       this.filterModel.selectToy(num);
-      let counter = this.filterModel.countSelectedToys();
+      let counter = this.filterModel.selectedToys.length;
+      //this.route.selectedToys.node.textContent = counter.toString();
+      // let counter = this.filterModel.countSelectedToys();
       if (counter <= 20) {
-        this.route.selectedToys.node.textContent = this.filterModel.countSelectedToys().toString();
+        this.route.selectedToys.node.textContent = counter.toString();//this.filterModel.countSelectedToys().toString();
         newPage.updatePage(this.filterModel.filtrateData());
       }
       else {
         this.popup.node.classList.remove('hidden-popup');
         this.filterModel.selectToy(num);
-
       }
+    }
 
+    newPage.onSelectFon = (img:HTMLImageElement) => {
+      
+    }
 
+    newPage.onSelectTree = (img:HTMLImageElement) => {
+      
     }
 
     this.currentPage = newPage;
