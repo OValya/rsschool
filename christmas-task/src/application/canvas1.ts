@@ -1,7 +1,7 @@
 import Control from '../common/control'
 
 interface IPicture {
-  image: HTMLImageElement,
+  image: string,// HTMLImageElement,
   sX: number,
   sY: number,
   widthImage: number,
@@ -12,9 +12,9 @@ export default class CanvasTrees {
 
   canvas: Control<HTMLCanvasElement>
   ctx: CanvasRenderingContext2D
-  fon: IPicture;
-  tree: IPicture;
-  toys: IPicture[];
+  fon: IPicture[] = [];
+  tree: IPicture[] = [];
+  toys: IPicture[] = [];
   onDrop: (ev: DragEvent) => void;
   constructor(parentNode: HTMLElement) {
 
@@ -26,11 +26,11 @@ export default class CanvasTrees {
     this.canvas.node.ondrop = (ev) => {
       ev.preventDefault();
       const data = ev.dataTransfer.getData('text/plain');
-      console.log(data);
-      console.log('x', ev.offsetX)
+      // console.log(data);
+      // console.log('x', ev.offsetX)
 
-      const mousePositionX = ev.dataTransfer.getData('mpX')
-      const mousePositionY = ev.dataTransfer.getData('mpY')
+      // const mousePositionX = ev.dataTransfer.getData('mpX')
+      // const mousePositionY = ev.dataTransfer.getData('mpY')
       this.setToyValues(data, ev.offsetX, ev.offsetY);
     }
 
@@ -40,70 +40,73 @@ export default class CanvasTrees {
   }
 
   setToyValues(path: string, sX: number, sY: number) {
-    const image = new Image();
-    const startX = sX - image.width / 2;
-    const startY = sY - image.height / 2;
     const imageWidth = this.canvas.node.width * 0.07;
     const imageHeight = this.canvas.node.height * 0.1;
-    image.onload = () => {
-     this.ctx.drawImage(image, startX, startY, imageWidth, imageHeight);
-    }
-    image.src = path;
-
+    const startX = sX - imageWidth / 2;
+    const startY = sY - imageHeight / 2;
     this.toys.push({
-      image: image,
+      image: path,
       sX: startX,
       sY: startY,
       widthImage: imageWidth,
       heightImage: imageHeight
     });
-
+    this.render();
   }
 
   setFonValues(imgSrc: string) {
-    const image = new Image();
+    
     const startX = 0;
     const startY = 0;
     const imageWidth = this.canvas.node.width;
     const imageHeight = this.canvas.node.height;
-
-    image.onload = () => {
-      this.ctx.drawImage(image, startX, startY, imageWidth, imageHeight);
-    }
-    image.src = imgSrc;
-
-    this.fon = {
-      image: image,
+    const fon = {
+      image: imgSrc,
       sX: startX,
       sY: startY,
       widthImage: imageWidth,
       heightImage: imageHeight
-    }
+    };
+    this.fon[0] = fon;
+    this.render();
+   // this.drawImage(this.fon);
   }
+
+
 
   setTreeValues(imgSrc: string) {
     const startX = this.canvas.node.width * 0.25;
     const startY = this.canvas.node.height * 0.1;
     const imageWidth = this.canvas.node.width * 0.5;
     const imageHeight = this.canvas.node.height - 2 * startY;
-
-    const image = new Image();
-    image.onload = () => {
-      this.ctx.drawImage(image, startX, startY, imageWidth, imageHeight);
-    }
-    image.src = imgSrc;
-
-    this.tree = {
-      image: image,
+    this.tree[0] = {
+      image: imgSrc,
       sX: startX,
       sY: startY,
       widthImage: imageWidth,
       heightImage: imageHeight
     }
+    this.render();
   }
 
-  drawImage(param: IPicture) {
+  drawImage(param: IPicture[]) {
+    param.forEach(item => {
+      const image = new Image();
+      image.onload = () => {
+        this.ctx.drawImage(image, item.sX, item.sY, item.widthImage, item.heightImage);
+      }
+      image.src = item.image;
+    })
   }
+
+  render(){
+    //this.ctx.clearRect(0, 0, this.canvas.node.width, this.canvas.node.height);
+    if(this.fon.length>0) this.drawImage(this.fon);
+    if(this.tree.length>0) this.drawImage(this.tree);
+    if(this.toys.length>0) this.drawImage(this.toys);
+  }
+
+
 
 
 }
