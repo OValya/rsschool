@@ -9,7 +9,7 @@ import Page from './page';
 import { ToysData, IToysData } from '../model/newDataModel';
 import Popup from '../components/popup';
 import Footer from '../components/footer';
-import Canvas from './canvas'
+import CanvasTrees from './canvas1'
 
 export interface IData{
   filterToys?: IToysData[],
@@ -34,7 +34,7 @@ export default class Application extends Control {
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', 'main-container');
-    console.log(`
+    /*console.log(`
     1. [+10] Страница с игрушками содержит карточки всех игрушек а также фильтры, строку поиска, поле для сортировки
     2. [+10] Карточка игрушки содержит её изображение, название, текстом или условным значком обозначено количество экземпляров, год покупки, форма, цвет, размер, является ли игрушка любимой
     3. [+20] Добавление игрушек в избранное 
@@ -48,7 +48,7 @@ export default class Application extends Control {
     11.[0]   доп функционал
     
     140/220`)
-
+*/
     
     this.route = new Route(this.node);
 
@@ -81,6 +81,14 @@ export default class Application extends Control {
     // const filterToys = this.filterModel.filtrateData();
     // const filterValues = this.filterModel.filterValues;
     // const selectedToys = this.filterModel.selectedToys;
+
+    if(this.filterModel.selectedToys.length==0){
+      for(let i=1; i<=20; i++){
+        this.filterModel.selectToy(i.toString());
+      }
+      let counter = this.filterModel.selectedToys.length;
+      this.route.selectedToys.node.textContent = counter.toString();
+    }
 
     const data:IData ={
       filterToys : this.filterModel.filtrateData(),
@@ -133,12 +141,14 @@ export default class Application extends Control {
       }
     }
 
-    newPage.onSelectFon = (img:HTMLImageElement) => {
-      
+    newPage.onSelectFon = (img:string) => { 
+      //newPage.canvas = new CanvasTrees(newPage.content.node, img);
+      newPage.canvas.setFonValues(img);
     }
 
-    newPage.onSelectTree = (img:HTMLImageElement) => {
-      
+    newPage.onSelectTree = (img:string) => {
+     // newPage.canvas = new CanvasTrees(newPage.content.node, img);
+      newPage.canvas.setTreeValues(img);
     }
 
     this.currentPage = newPage;

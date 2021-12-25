@@ -3,8 +3,9 @@ import Picture from './picture'
 
 export default class PicturesBox extends Control {
   public blockTitle: Control<HTMLHeadingElement>;
-  onSelect: (img: HTMLImageElement) => void;
+  onSelect: (imgSrc:string) => void;
   picture: Picture;
+ 
 
   constructor(parentNode: HTMLElement, count: number, path: string, ext: string, title: string) {
     super(parentNode, 'div', 'pictures-box');
@@ -18,9 +19,13 @@ export default class PicturesBox extends Control {
       // this.picture.src = `${path}${i}.${ext}`;
       this.picture = new Picture(`${path}${i}.${ext}`)
       this.node.append(this.picture.el);
-      this.picture.onSelect = (img:HTMLImageElement) => {
-        this.onSelect(img);
+      this.picture.onSelect = (imgSrc/*img:HTMLImageElement*/) => {
+        this.onSelect(imgSrc);
       }
+
+     
+
+
     }
 
     

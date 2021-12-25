@@ -1,10 +1,13 @@
 import Control from '../common/control';
 import { IToysData } from '../model/newDataModel';
 import CardBox from '../components/card-box';
+import CanvasTrees from './canvas1';
 
 export default class Page extends Control{
-  onSelectFon: (img: HTMLImageElement) => void;
-  onSelectTree: (img: HTMLImageElement) => void;
+  onSelectFon: (img: string) => void;
+  onSelectTree: (img: string) => void;
+  canvas: CanvasTrees;   ///
+  content: any;  ///
   updatePage(arg0: IToysData[]) {
     throw new Error('Method not implemented.');
   }
