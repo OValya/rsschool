@@ -18,6 +18,7 @@ export default class PicturesBox extends Control {
       // this.picture.classList.add('picture-icon')
       // this.picture.src = `${path}${i}.${ext}`;
       this.picture = new Picture(`${path}${i}.${ext}`)
+      this.picture.el.draggable = false;
       this.node.append(this.picture.el);
       this.picture.onSelect = (imgSrc/*img:HTMLImageElement*/) => {
         this.onSelect(imgSrc);
