@@ -22,7 +22,7 @@ export default class CanvasTrees {
     this.canvas.node.width = document.body.clientWidth * 0.55;
     this.canvas.node.height = document.body.clientHeight * 0.75;
     this.ctx = this.canvas.node.getContext('2d');
-
+   // this.canvasMask = 
     this.canvas.node.ondrop = (ev) => {
       ev.preventDefault();
       const data = ev.dataTransfer.getData('text/plain');

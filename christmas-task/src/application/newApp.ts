@@ -74,6 +74,7 @@ export default class Application extends Control {
 
     this.footer = new Footer(this.node);
     this.footer.node.style.order = '10';
+
   }
 
 
@@ -144,7 +145,7 @@ export default class Application extends Control {
     newPage.onSelectFon = (img:string) => { 
       //newPage.canvas = new CanvasTrees(newPage.content.node, img);
       newPage.canvas.setFonValues(img);
-      
+
     }
 
     newPage.onSelectTree = (img:string) => {
