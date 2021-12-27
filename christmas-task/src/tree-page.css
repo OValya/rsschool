@@ -37,6 +37,10 @@
   border-radius: 15px;
 }
 
+.toys-box{
+  position: relative;
+}
+
 .title-pictures-box, .title-settings-panel{
   width: 100%;
   margin: 5px 0 15px;
@@ -45,6 +49,7 @@
 }
 
 .picture-icon{
+  
   width: 50px;
   height: 50px;
   margin: 5px;

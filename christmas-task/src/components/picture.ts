@@ -16,9 +16,22 @@ export default class Picture {
 
     this.el.ondragstart = (ev) => {
         ev.dataTransfer.setData("text/plain", this.el.src);
+       // console.log(ev);
+         ev.dataTransfer.setData("mouse_position_x",  ev.offsetX.toString() );
+         ev.dataTransfer.setData("mouse_position_y", ev.offsetY.toString()  );
         //ev.dataTransfer.setDragImage(img, 35, 0);
+     //  console.log(ev.offsetX.toString());
         ev.dataTransfer.dropEffect = "copy";
+        
       //console.log('img', this.el.src);
     };
+
+    this.el.onmousedown = (e) => {
+      
+    }
+  }
+
+  getPosition(){
+
   }
 }

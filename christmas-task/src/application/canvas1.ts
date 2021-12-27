@@ -24,16 +24,22 @@ export default class CanvasTrees {
     this.canvas.node.height = 500;//document.body.clientHeight * 0.75;
     this.ctx = this.canvas.node.getContext('2d');
     // this.canvasMask = 
+
     this.canvas.node.ondrop = (ev) => {
       ev.preventDefault();
       const data = ev.dataTransfer.getData('text/plain');
+      const positionX = ev.dataTransfer.getData('mouse_position_x');
+      const positionY = ev.dataTransfer.getData('mouse_position_y');
+
       // console.log(data);
       // console.log('x', ev.offsetX)
 
       // const mousePositionX = ev.dataTransfer.getData('mpX')
       // const mousePositionY = ev.dataTransfer.getData('mpY')
-      if (this.mask.data[((ev.offsetY * (this.mask.width * 4)) + (ev.offsetX * 4) + 3)]) {
-        this.setToyValues(data, ev.offsetX, ev.offsetY);
+      const posX = ev.offsetX - +positionX / 2;
+      const posY = ev.offsetY - +positionY;
+      if (this.mask.data[((/*ev.offsetY*/posY * (this.mask.width * 4)) + (/*ev.offsetX*/posX * 4) + 3)]) {
+        this.setToyValues(data, ev.offsetX - +positionX, ev.offsetY - +positionY);
       }
     }
 
@@ -47,36 +53,64 @@ export default class CanvasTrees {
       console.log(this.toys)
       for (let i = 0, len = this.toys.length; i < len; i++) {
         const obj = this.toys[i];
-        console.log('eoffsetX', downX)
-        console.log('eoffsetY', downY)
-        console.log('objX', obj.sX)
-        console.log('objY', obj.sY)
+        // console.log('eoffsetX', downX)
+        // console.log('eoffsetY', downY)
+        // console.log('objX', obj.sX)
+        // console.log('objY', obj.sY)
+        if (!this.isPointInRange(downX, downY, obj)) {
+          continue;
+          //console.log(obj);
+        }
 
-
-        // if (this.isPointInRange(downX, downY, obj)) {
-        //   console.log(obj);
-        // }
-
-        //this.startMove(obj, downX, downY);
+        this.startMove(obj, downX, downY);
         //break;
       }
     }
   }
 
   isPointInRange(x: number, y: number, obj: IPicture) {
-    return (x < obj.sX &&
-      x > obj.sX + obj.widthImage &&
-      y < obj.sY &&
+    return !(x < obj.sX ||
+      x > obj.sX + obj.widthImage ||
+      y < obj.sY ||
       y > obj.sY + obj.heightImage);
   }
 
+  startMove(obj: IPicture, downX: number, downY: number) {
+    //var canvas = document.getElementById('canvas');
+    this.toys.splice(this.toys.indexOf(obj), 1);
+    console.log('obj', obj)
+    console.log('toys', this.toys)
+    var origX = obj.sX, origY = obj.sY;
+    this.canvas.node.onmousemove = (e) => {
+      var moveX = e.offsetX, moveY = e.offsetY;
+      var diffX = moveX - downX, diffY = moveY - downY;
+      //this.setToyValues(path: string, offsetX: number, offsetY: number)
+      const posX = obj.sX = origX + diffX;
+      const posY = obj.sY = origY + diffY;
+      this.render()
+
+      //this.toys.slice(this.)
+    }
+
+    this.canvas.node.onmouseup = () => {
+      const posX = obj.sX
+      const posY = obj.sY
+      if (this.mask.data[((/*ev.offsetY*/posY * (this.mask.width * 4)) + (/*ev.offsetX*/posX * 4) + 3)]) {
+        this.setToyValues(obj.image, posX, posY/*ev.offsetX - +positionX, ev.offsetY - +positionY*/);
+      } else { this.setToyValues(obj.image, origX, origY) }
+
+      //this.setToyValues(obj.image, obj.sX, obj.sY);
+      // stop moving
+      this.canvas.node.onmousemove = function () { };
+    }
+  }
 
 
-  setToyValues(path: string, sX: number, sY: number) {
+  setToyValues(path: string, offsetX: number, offsetY: number) {
     const imageWidth = this.canvas.node.width * 0.07;
     const imageHeight = this.canvas.node.height * 0.1;
-    const startX = sX - imageWidth / 2;
-    const startY = sY - imageHeight / 2;
+    const startX = offsetX;// - imageWidth / 2;
+    const startY = offsetY;// - imageHeight / 2;
     this.toys.push({
       image: path,
       sX: startX,
@@ -103,8 +137,6 @@ export default class CanvasTrees {
     this.render();
     // this.drawImage(this.fon);
   }
-
-
 
   setTreeValues(imgSrc: string) {
     const startX = this.canvas.node.width * 0.25;
