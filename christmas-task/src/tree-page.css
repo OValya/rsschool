@@ -56,6 +56,24 @@
   cursor: pointer;
 }
 
+.contaner-toy-count{
+  position: relative;
+}
+
+.count-toy{ 
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  /*padding: 2px;*/
+  text-align: center;
+  top: 8px;
+  left: 8px;
+  background-color: rgb(88, 197, 212);
+  border: 1px solid white ;
+  border-radius: 10px;
+}
+
 .picture-icon:hover, .icon-button:hover{
   border: 2px solid rgb(88, 197, 212);
   border-radius: 5px;
@@ -107,7 +125,7 @@
 
 /*************snow***************/
 
-.snowflake {
+.snowflakes {
 	color: white;
 	position: absolute;
 	top: -20px;

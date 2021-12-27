@@ -4,7 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlagin = require('copy-webpack-plugin');
-const { CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
 const isProduction = process.env.NODE_ENV == 'production';
@@ -14,9 +14,10 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 
 const config = {
     entry: {
-        app: './src/index.ts'},
-    devtool: "source-map",
-    
+        app: './src/index.ts'
+    },
+
+
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[contenthash].js',
@@ -34,18 +35,20 @@ const config = {
 
         new CopyPlagin({
             patterns: [
-                {from: 'src/assets/',
-                to:'assets'}
+                {
+                    from: 'src/assets/',
+                    to: 'assets'
+                }
             ]
         }),
-        new CleanWebpackPlugin({cleanStaleWebpackAssets:false}),
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
 
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
     module: {
         rules: [
-            
+
             {
                 test: /\.(ts|tsx)$/i,
                 loader: 'ts-loader',
@@ -59,11 +62,11 @@ const config = {
                     //     modules: true,
                     //   },
                     //options: {
-                     //  modules: {
+                    //  modules: {
 
                     //        exportLocalsConvention: "camelCase",
-                      //  },
-                   // }
+                    //  },
+                    // }
                 }],
             },
             {
@@ -90,7 +93,7 @@ module.exports = () => {
         config.mode = 'production';
 
         config.plugins.push(new MiniCssExtractPlugin({
-            filename:'[name].[contenthash].css',
+            filename: '[name].[contenthash].css',
         }));
 
 

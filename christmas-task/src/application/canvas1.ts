@@ -21,8 +21,8 @@ export default class CanvasTrees {
   constructor(parentNode: HTMLElement) {
 
     this.canvas = new Control(parentNode, 'canvas', 'canvas');
-    this.canvas.node.width = 700;//document.body.clientWidth * 0.55;
-    this.canvas.node.height = 500;//document.body.clientHeight * 0.75;
+    this.canvas.node.width = document.body.clientWidth * 0.55;//700;
+    this.canvas.node.height = document.body.clientHeight * 0.75;//500;
     this.ctx = this.canvas.node.getContext('2d');
     // this.canvasMask = 
 
@@ -203,8 +203,8 @@ export default class CanvasTrees {
 
   drawMask(param: IPicture) {
     const dobble = document.createElement('canvas');
-    dobble.width = 700;
-    dobble.height = 500;
+    dobble.width = document.body.clientWidth * 0.55;//700;
+    dobble.height = document.body.clientHeight * 0.75;//500;
     const ctx = dobble.getContext('2d');
     this.loadImage(param)
       .then(image => {

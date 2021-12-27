@@ -1,13 +1,20 @@
+import Control from "../common/control";
+
 export default class Picture {
   el: HTMLImageElement;
   onSelect: (imgSrc: string) => void;
   count: string;
+  countView: Control<HTMLElement>;
 
   constructor(path: string, count?: string) {
     this.el = new Image();
     this.el.classList.add('picture-icon')
     this.el.src = path;
     this.count = count;
+
+    // if(this.count){
+    //   this.countView = new Control(this.el, 'div', 'count-toys', this.count)
+    // }
     this.el.onclick = () => {
       //console.log('el', this.el)
       this.onSelect(this.el.src);
