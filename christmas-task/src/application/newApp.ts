@@ -10,6 +10,7 @@ import { ToysData, IToysData } from '../model/newDataModel';
 import Popup from '../components/popup';
 import Footer from '../components/footer';
 import CanvasTrees from './canvas1'
+import Music from './audio'
 
 export interface IData{
   filterToys?: IToysData[],
@@ -30,6 +31,7 @@ export default class Application extends Control {
   pages: Record<string, IPageConstructor>;
   popup: Popup;
   footer: Footer;
+  music: Music;
   // popupNotToys: Popup;
 
   constructor(parentNode: HTMLElement) {
@@ -74,6 +76,8 @@ export default class Application extends Control {
 
     this.footer = new Footer(this.node);
     this.footer.node.style.order = '10';
+
+    this.music = new Music(false);
 
   }
 
@@ -153,12 +157,22 @@ export default class Application extends Control {
       newPage.canvas.setTreeValues(img);
     }
 
+    newPage.playMusic = () =>{
+      //(this.music.isPlay)?newPage.
+        
+        this.music.play();
+        
+      
+    }
+
     this.currentPage = newPage;
   }
 
   loadWindow() {
     if (this.currentPage) {
       let currentPage = this.currentPage;
+      //this.music.isPlay = true;
+      //this.music.play();
       currentPage.destroy();
       this.createPage();
     } else {

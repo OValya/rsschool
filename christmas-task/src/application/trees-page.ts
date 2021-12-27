@@ -22,6 +22,7 @@ export default class TreesPage extends Page {
   toyPictures: ToysBox;
   audioAndSnow: SettingPanel;
   snow: Snowfall;
+  playMusic: () => void;
   
   constructor(parentNode: HTMLElement, data:IData) {
     super(parentNode);
@@ -46,8 +47,13 @@ export default class TreesPage extends Page {
     this.toyPictures = new ToysBox(this.toys.node, './assets/toys/', 'png', 'Выберите игрушку', data.selectedToys);
     this.toyPictures.onSelect = (img) => {};
     this.audioAndSnow = new SettingPanel(this.toys.node);
-    this.audioAndSnow.onClick = () => {
+    //if(app.this.audioAndSnow.node.classList.add('play')
+    this.audioAndSnow.showSnow = () => {
      setInterval(this.createSnow, 100);      
+    }
+    this.audioAndSnow.playMusic = () =>{
+      //console.log('music')
+      this.playMusic()
     }
 
   }

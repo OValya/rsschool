@@ -91,15 +91,17 @@
 }
 
 .snowfall-button{
-  background: url('./assets/svg/audio.svg') 0 0/cover;
-}
-
-.audio-button{
   background: url('./assets/svg/snow.svg') 0 0/cover;
 }
 
+.audio-button{
+  background: url('./assets/svg/audio.svg') 0 0/cover;
+}
+
 .play{
-  border: 2px solid rgb(88, 197, 212);
+  background: url('./assets/svg/mute.svg') 0 0/cover;
+  /*border: 2px solid rgb(88, 197, 212);
+  transform: scale(1.1);*/
 }
 
 

@@ -8,6 +8,7 @@ export default class Page extends Control{
   onSelectTree: (img: string) => void;
   canvas: CanvasTrees;   ///
   content: any;  ///
+  playMusic: () => void;
   updatePage(arg0: IToysData[]) {
     throw new Error('Method not implemented.');
   }

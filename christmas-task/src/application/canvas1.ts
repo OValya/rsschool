@@ -17,6 +17,7 @@ export default class CanvasTrees {
   toys: IPicture[] = [];
   onDrop: (ev: DragEvent) => void;
   mask: ImageData;
+ // raf: number;
   constructor(parentNode: HTMLElement) {
 
     this.canvas = new Control(parentNode, 'canvas', 'canvas');
@@ -85,8 +86,8 @@ export default class CanvasTrees {
       var moveX = e.offsetX, moveY = e.offsetY;
       var diffX = moveX - downX, diffY = moveY - downY;
       //this.setToyValues(path: string, offsetX: number, offsetY: number)
-      const posX = obj.sX = origX + diffX;
-      const posY = obj.sY = origY + diffY;
+      obj.sX = origX + diffX;
+      obj.sY = origY + diffY;
       this.render()
 
       //this.toys.slice(this.)
@@ -104,7 +105,6 @@ export default class CanvasTrees {
       this.canvas.node.onmousemove = function () { };
     }
   }
-
 
   setToyValues(path: string, offsetX: number, offsetY: number) {
     const imageWidth = this.canvas.node.width * 0.07;
@@ -172,18 +172,38 @@ export default class CanvasTrees {
       const image = new Image();
       image.onload = () => {
         resolve(image)
-        //this.ctx.drawImage(image, param.sX, param.sY, param.widthImage, param.heightImage);
-        //this.drawMask();
       }
       image.src = param.image;
     })
   }
 
+  draw(param: IPicture) {
+    // const dobble = document.createElement('canvas');
+    // dobble.width = 700;
+    // dobble.height = 500;
+    // const ctx = dobble.getContext('2d');
+    this.loadImage(param)
+      .then(image => {
+        this.ctx.drawImage(image, param.sX, param.sY, param.widthImage, param.heightImage);
+        
+        //document.body.append(dobble);
+        /*console.log(param.sX)
+        console.log(param.sY)
+        console.log(param.widthImage)
+        console.log(param.heightImage)*/
+      })
+      // .then(() => {
+      //   const mask = ctx.getImageData(0, 0, dobble.width, dobble.height);
+      //   //const data = mask.data;
+      //   this.mask = mask;
+      //   //console.log('data', this.mask.data);
+      // })
 
+  }
 
   drawMask(param: IPicture) {
     const dobble = document.createElement('canvas');
-    dobble.width = 500;
+    dobble.width = 700;
     dobble.height = 500;
     const ctx = dobble.getContext('2d');
     this.loadImage(param)
@@ -205,8 +225,18 @@ export default class CanvasTrees {
 
   render() {
     this.ctx.clearRect(0, 0, this.canvas.node.width, this.canvas.node.height);
-    if (this.fon.length > 0) this.drawPicture(this.fon);
-    if (this.tree.length > 0) this.drawPicture(this.tree);
+    if (this.fon.length > 0) /*this.draw(this.fon[0]);*/this.drawPicture(this.fon);
+    if (this.tree.length > 0) /*this.draw(this.tree[0])*/this.drawPicture(this.tree);
     if (this.toys.length > 0) this.drawPicture(this.toys);
   }
+
+  // loadImageDouble: function (src: string): Promise<HTMLImageElement>{       
+  //   // console.log('loadImage src = ', src)       
+  //   return new Promise((resolve) => {         
+  //     let startFon = new Image();         
+  //     startFon.onload = () => {           
+  //       resolve(startFon);}         
+  //       startFon.src = src;       
+  //     })     
+  //   }
 }
