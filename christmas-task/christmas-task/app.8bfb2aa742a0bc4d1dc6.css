@@ -1,5 +1,7 @@
 .main-container{
   position: relative;
+  width: 95%;
+  margin: 0 auto;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -90,7 +92,7 @@
 .footer {
   display: flex;
   justify-content: space-around;
-  max-height: 50px;
+  max-height: 70px;
   width: 100%;
   padding: 15px 0;
   background-color: rgba(36, 197, 219, 0.15);
@@ -99,7 +101,7 @@
 
 .route-box{
   position: relative;
-  max-height: 50px;
+  max-height: 70px;
   padding: 15px;
   margin-bottom: 20px;
   border: 2px solid #24C5DB;
@@ -132,17 +134,17 @@
   float: right;
   color: red;
   font-size: 24px;
-  line-height: 45px;
+  line-height: 50px;
   text-align: center;
   background: url(assets/f934119716840dd7a47f.svg) no-repeat 0 0/cover;
 }
 
 .settings-page {
   height: 100%;
-  /*background: url('./assets/bg.jpg');*/
   color: white;
   font-size: 24px;
 }
+
 html,
 body{
   height: 100%;
@@ -333,7 +335,7 @@ body{
 
 .card-description{
   list-style: none;
-  margin-left: -25px;
+  margin: 0 15px 10px;
 }
 
 .select-img{
@@ -371,7 +373,7 @@ body{
   background-color: white;
   border: 1px solid #24C5DB;
   border-radius: 5px;
-  color: red;
+  color: rgb(57, 144, 156);
   font-weight: 700;
   text-align: center;
   line-height: 20px;
@@ -383,26 +385,19 @@ body{
 
 .container-range input[type="range"]{
   -webkit-appearance: none;
-  height: 10px;
-  width: 70%;
+  height: 5px;
+  width: 100%;
   display: block;
   margin: 20px;
 }
 
 .container-range input[type="range"]:last-child{
-  margin-top: -30px;
+  margin-top: -25px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   pointer-events: all;
 }
-input[type="range"]::-moz-range-thumb {
-  pointer-events: all;
-}
-input[type="range"]::-ms-thumb {
-  pointer-events: all;
-}
-
 
 /******sort-select***/
 
@@ -499,3 +494,142 @@ input[type="range"]::-ms-thumb {
 
 
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.tree-page{
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-section, .toys-section{
+  width: 20%;
+  height: 100%;  
+  display: flex;
+  flex-direction: column;
+}
+
+.content-section{
+  position: relative;
+  width: 55%;
+  max-height: 500px;
+
+}
+
+.pictures-box, .toys-box, .settings-panel{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px 5px;
+  margin: 20px;
+  width: 90%;
+  /*height: 100%;*/
+  background-color: rgb(15, 69, 77);
+  border: 2px solid #24C5DB;
+  color: white;
+  border-radius: 15px;
+}
+
+.toys-box{
+  position: relative;
+}
+
+.title-pictures-box, .title-settings-panel{
+  width: 100%;
+  margin: 5px 0 15px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.picture-icon{
+  
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.contaner-toy-count{
+  position: relative;
+}
+
+.count-toy{ 
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  /*padding: 2px;*/
+  text-align: center;
+  top: 8px;
+  left: 8px;
+  background-color: rgb(88, 197, 212);
+  border: 1px solid white ;
+  border-radius: 10px;
+}
+
+.picture-icon:hover, .icon-button:hover{
+  border: 2px solid rgb(88, 197, 212);
+  border-radius: 5px;
+  transition: 0.1s;
+}
+
+.canvas-box{
+  
+}
+
+.canvas{ 
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-height: 600px;
+  min-width: 550px;
+
+}
+
+/****settings-panel*******/
+.settings-panel{
+  column-gap: 30px;
+
+}
+.icon-button{
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.snowfall-button{
+  background: url(assets/98ad36ee1340dc675588.svg) 0 0/cover;
+}
+
+.audio-button{
+  background: url(assets/1eecc4fca630f9e97974.svg) 0 0/cover;
+}
+
+.play{
+  background: url(assets/5a044e6f31193c7df223.svg) 0 0/cover;
+  /*border: 2px solid rgb(88, 197, 212);
+  transform: scale(1.1);*/
+}
+
+
+/*************snow***************/
+
+.snowflakes {
+	color: white;
+	position: absolute;
+	top: -20px;
+	animation: downfall cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+@keyframes downfall {
+	to {
+		transform: translateY(100vh);
+	}
+}
