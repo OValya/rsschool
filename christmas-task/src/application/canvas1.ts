@@ -12,18 +12,34 @@ export default class CanvasTrees {
 
   canvas: Control<HTMLCanvasElement>
   ctx: CanvasRenderingContext2D
-  fon: IPicture[] = [];
-  tree: IPicture[] = [];
+  fon: IPicture;
+  tree: IPicture;
   toys: IPicture[] = [];
   onDrop: (ev: DragEvent) => void;
   mask: ImageData;
- // raf: number;
+  // raf: number;
   constructor(parentNode: HTMLElement) {
 
     this.canvas = new Control(parentNode, 'canvas', 'canvas');
     this.canvas.node.width = document.body.clientWidth * 0.55;//700;
     this.canvas.node.height = document.body.clientHeight * 0.75;//500;
     this.ctx = this.canvas.node.getContext('2d');
+    this.tree = {
+      image: './assets/tree/1.png',// HTMLImageElement,
+      sX: this.canvas.node.width * 0.25,
+      sY: this.canvas.node.height * 0.1,
+      widthImage: this.canvas.node.width * 0.5,
+      heightImage: this.canvas.node.height - 2 * this.canvas.node.height * 0.1
+    }
+    this.fon = {
+      image: './assets/bg/1.jpg',// HTMLImageElement,
+      sX: 0,
+      sY: 0,
+      widthImage: this.canvas.node.width,
+      heightImage: this.canvas.node.height
+    }
+    this.drawMask(this.tree);
+    this.update();
     // this.canvasMask = 
 
     this.canvas.node.ondrop = (ev) => {
@@ -48,11 +64,13 @@ export default class CanvasTrees {
       ev.preventDefault();
     }
 
+    //this.canvas.node.ondrag
+
     this.canvas.node.onmousedown = (e) => {
       const downX = e.offsetX;
       const downY = e.offsetY;
-      console.log(this.toys)
-      for (let i = 0, len = this.toys.length; i < len; i++) {
+      //console.log(this.toys)
+      for (let i = 0; i < this.toys.length; i++) {
         const obj = this.toys[i];
         // console.log('eoffsetX', downX)
         // console.log('eoffsetY', downY)
@@ -79,16 +97,21 @@ export default class CanvasTrees {
   startMove(obj: IPicture, downX: number, downY: number) {
     //var canvas = document.getElementById('canvas');
     this.toys.splice(this.toys.indexOf(obj), 1);
-    console.log('obj', obj)
-    console.log('toys', this.toys)
-    var origX = obj.sX, origY = obj.sY;
+    this.update();
+    //console.log('obj', obj)
+    //console.log('toys', this.toys)
+    const origX = obj.sX;
+    const origY = obj.sY;
     this.canvas.node.onmousemove = (e) => {
-      var moveX = e.offsetX, moveY = e.offsetY;
-      var diffX = moveX - downX, diffY = moveY - downY;
+      const moveX = e.offsetX;
+      const moveY = e.offsetY;
+      const diffX = moveX - downX;
+      const diffY = moveY - downY;
       //this.setToyValues(path: string, offsetX: number, offsetY: number)
       obj.sX = origX + diffX;
       obj.sY = origY + diffY;
-      this.render()
+     //this.update()
+
 
       //this.toys.slice(this.)
     }
@@ -118,7 +141,7 @@ export default class CanvasTrees {
       widthImage: imageWidth,
       heightImage: imageHeight
     });
-    this.render();
+    this.update();
   }
 
   setFonValues(imgSrc: string) {
@@ -133,8 +156,8 @@ export default class CanvasTrees {
       widthImage: imageWidth,
       heightImage: imageHeight
     };
-    this.fon[0] = fon;
-    this.render();
+    this.fon = fon;
+    this.update();
     // this.drawImage(this.fon);
   }
 
@@ -143,7 +166,7 @@ export default class CanvasTrees {
     const startY = this.canvas.node.height * 0.1;
     const imageWidth = this.canvas.node.width * 0.5;
     const imageHeight = this.canvas.node.height - 2 * startY;
-    this.tree[0] = {
+    this.tree = {
       image: imgSrc,
       sX: startX,
       sY: startY,
@@ -151,24 +174,26 @@ export default class CanvasTrees {
       heightImage: imageHeight
     }
     ///////////////////
-    this.drawMask(this.tree[0]);
+    this.drawMask(this.tree);
     /////////////////////
-    this.render();
+    this.update();
   }
 
-  drawPicture(param: IPicture[]) {
-    param.forEach(item => {
-      const image = new Image();
-      image.onload = () => {
-        this.ctx.drawImage(image, item.sX, item.sY, item.widthImage, item.heightImage);
-        //this.drawMask();
-      }
-      image.src = item.image;
-    })
+  drawPicture(param: IPicture/*param: IPicture[]*/) {
+    //param.forEach(item => {
+    // const image = new Image();
+    //  image.onload = () => {
+    this.loadImage(param)
+      .then(image =>
+        this.ctx.drawImage(image, param.sX, param.sY, param.widthImage, param.heightImage));
+    //this.drawMask();
+    //  }
+    //  image.src = item.image;
+    // })
   }
 
-  loadImage(param: IPicture) {
-    return new Promise<HTMLImageElement>((resolve) => {
+  loadImage(param: IPicture): Promise<HTMLImageElement> {
+    return new Promise((resolve) => {
       const image = new Image();
       image.onload = () => {
         resolve(image)
@@ -177,29 +202,34 @@ export default class CanvasTrees {
     })
   }
 
-  draw(param: IPicture) {
+
+  drawToys(params: IPicture[]) {
     // const dobble = document.createElement('canvas');
     // dobble.width = 700;
     // dobble.height = 500;
     // const ctx = dobble.getContext('2d');
-    this.loadImage(param)
-      .then(image => {
-        this.ctx.drawImage(image, param.sX, param.sY, param.widthImage, param.heightImage);
-        
-        //document.body.append(dobble);
-        /*console.log(param.sX)
-        console.log(param.sY)
-        console.log(param.widthImage)
-        console.log(param.heightImage)*/
+    const allPictures = params.map(param => { return this.loadImage(param) });
+    Promise.all(allPictures).then((images) => {
+      params.forEach((param, index) => {
+        this.ctx.drawImage(images[index], param.sX, param.sY, param.widthImage, param.heightImage)
       })
-      // .then(() => {
-      //   const mask = ctx.getImageData(0, 0, dobble.width, dobble.height);
-      //   //const data = mask.data;
-      //   this.mask = mask;
-      //   //console.log('data', this.mask.data);
-      // })
+    })
 
+
+    //document.body.append(dobble);
+    /*console.log(param.sX)
+    console.log(param.sY)
+    console.log(param.widthImage)
+    console.log(param.heightImage)*/
   }
+  // .then(() => {
+  //   const mask = ctx.getImageData(0, 0, dobble.width, dobble.height);
+  //   //const data = mask.data;
+  //   this.mask = mask;
+  //   //console.log('data', this.mask.data);
+  // })
+
+
 
   drawMask(param: IPicture) {
     const dobble = document.createElement('canvas');
@@ -221,13 +251,14 @@ export default class CanvasTrees {
         this.mask = mask;
         //console.log('data', this.mask.data);
       })
+      dobble.remove();
   }
-
-  render() {
+ 
+  update() {
     this.ctx.clearRect(0, 0, this.canvas.node.width, this.canvas.node.height);
-    if (this.fon.length > 0) /*this.draw(this.fon[0]);*/this.drawPicture(this.fon);
-    if (this.tree.length > 0) /*this.draw(this.tree[0])*/this.drawPicture(this.tree);
-    if (this.toys.length > 0) this.drawPicture(this.toys);
+    /*if (this.fon.length > 0) this.draw(this.fon[0]);*/this.drawPicture(this.fon);
+    /*if (this.tree.length > 0) this.draw(this.tree[0])*/this.drawPicture(this.tree);
+    if (this.toys.length > 0) this.drawToys(this.toys);//this.drawPicture(this.toys);
   }
 
   // loadImageDouble: function (src: string): Promise<HTMLImageElement>{       

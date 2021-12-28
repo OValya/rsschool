@@ -39,8 +39,8 @@ export default class TreesPage extends Page {
 
     this.content = new Control(this.container.node, 'div', 'content-section');
     this.canvas = new CanvasTrees(this.content.node);
-    this.canvas.setFonValues('./assets/bg/1.jpg');
-    this.canvas.setTreeValues('./assets/tree/1.png');
+    //this.canvas.setFonValues('./assets/bg/1.jpg');
+    //this.canvas.setTreeValues('./assets/tree/1.png');
 
     this.toys = new Control(this.container.node, 'div', 'toys-section');
     
