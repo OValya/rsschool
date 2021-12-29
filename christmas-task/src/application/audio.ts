@@ -11,7 +11,7 @@ export default class Music {
       this.audio = new Audio();//Control(document.body, 'audio', 'audio');
       //this.audio.src = playList[0].src;
       this.audio.onended = () => {
-         this.play();
+         this.audio.play();
       }
    }
 
@@ -33,54 +33,3 @@ export default class Music {
 
 }
 
-// audio.addEventListener('ended', playNext);
-
-// audio.play();
-
-//    playAudio() {
-//       if (this.isPlay) {
-//          this.audio.pause();
-//          this.isPlay = false;
-//       }
-//       else {
-//          this.audio.play();
-//          this.isPlay = true;
-//       }
-//    }
-// }
-
-/*function
-
-PLAY.addEventListener('click', playAudio);
-
-function changePlay(){
-  AUDIO.currentTime = 0;
-  AUDIO.src = playList[numPlay].src;
-  AUDIO.play();
-  isPlay = true;
-  PLAY.classList.add('pause');
- // PLAYLIST.childNodes[numPlay].classList.add('_sound');
-}
-function playNext(){
-   if(numPlay===playList.length-1) {numPlay=0;}
-   else numPlay++;
-   changePlay();
-}
-function playPrev(){
-   if(numPlay===0) {numPlay=playList.length-1;}
-   else numPlay--;
-   changePlay();
-}
-
-
-btnPlayNEXT.addEventListener('click', playNext);
-btnPlayPREV.addEventListener('click', playPrev);
-
-//console.log(playList[1].src);
-
-playList.forEach(el => {
-   const LI = document.createElement('li');
-   LI.classList.add('play-item');
-   LI.textContent = el.title;
-   PLAYLIST.append(LI);
-})*/

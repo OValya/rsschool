@@ -11,15 +11,16 @@ import Popup from '../components/popup';
 import Footer from '../components/footer';
 import CanvasTrees from './canvas1'
 import Music from './audio'
+import Snowfall from '../application/snowfall'
 
-export interface IData{
+export interface IData {
   filterToys?: IToysData[],
   filterValues?: Record<string, Array<string>>,
   selectedToys?: IToysData[]
 }
 
 interface IPageConstructor {
-  new(parentNode: HTMLElement, data:IData/*dataToys?: IToysData[], fiter?: Record<string, Array<string>>*/): Page;
+  new(parentNode: HTMLElement, data: IData/*dataToys?: IToysData[], fiter?: Record<string, Array<string>>*/): Page;
 }
 
 export default class Application extends Control {
@@ -32,13 +33,15 @@ export default class Application extends Control {
   popup: Popup;
   footer: Footer;
   music: Music;
+  snow: Snowfall;
+  // isMusicPlay: boolean = false;
   // popupNotToys: Popup;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, 'div', 'main-container');
     console.log(`
     1. [+30] есть верстка, страница с елками, есть навигация
-    2. [+40] есть смена фона, смена ёлок, музыка, снег (над отключением работаю)
+    2. [+40] есть смена фона, смена ёлок, музыка, снег 
     3. [ 0 ] нет гирлянды 
     4. [+60]  есть выбранные игрушки, 
               если нет, то первые 20, 
@@ -51,7 +54,7 @@ export default class Application extends Control {
     
     130/220`)
 
-    
+
     this.route = new Route(this.node);
 
     this.popup = new Popup(this.node, 'Больше нельзя добавить игрушек!');
@@ -78,6 +81,7 @@ export default class Application extends Control {
     this.footer.node.style.order = '10';
 
     this.music = new Music(false);
+    this.snow = new Snowfall();
 
   }
 
@@ -87,18 +91,18 @@ export default class Application extends Control {
     // const filterValues = this.filterModel.filterValues;
     // const selectedToys = this.filterModel.selectedToys;
 
-    if(this.filterModel.selectedToys.length==0){
-      for(let i=1; i<=20; i++){
+    if (this.filterModel.selectedToys.length == 0) {
+      for (let i = 1; i <= 20; i++) {
         this.filterModel.selectToy(i.toString());
       }
       let counter = this.filterModel.selectedToys.length;
       this.route.selectedToys.node.textContent = counter.toString();
     }
 
-    const data:IData ={
-      filterToys : this.filterModel.filtrateData(),
-      filterValues : this.filterModel.filterValues,
-      selectedToys : this.filterModel.selectedToys,
+    const data: IData = {
+      filterToys: this.filterModel.filtrateData(),
+      filterValues: this.filterModel.filterValues,
+      selectedToys: this.filterModel.selectedToys,
     }
 
     const newPage = new (this.pages[window.location.hash] || HomePage)(this.node, data);// filterToys, filterValues, );
@@ -146,24 +150,30 @@ export default class Application extends Control {
       }
     }
 
-    newPage.onSelectFon = (img:string) => { 
+    newPage.onSelectFon = (img: string) => {
       //newPage.canvas = new CanvasTrees(newPage.content.node, img);
       newPage.canvas.setFonValues(img);
 
     }
 
-    newPage.onSelectTree = (img:string) => {
-     // newPage.canvas = new CanvasTrees(newPage.content.node, img);
+    newPage.onSelectTree = (img: string) => {
+      // newPage.canvas = new CanvasTrees(newPage.content.node, img);
       newPage.canvas.setTreeValues(img);
     }
 
-    newPage.playMusic = () =>{
-      //(this.music.isPlay)?newPage.
-        
-        this.music.play();
-        
-      
+    newPage.playMusic = () => {
+      //(this.music.isPlay)?newPage.    
+      //this.isMusicPlay = true; 
+      this.music.play();
     }
+
+    newPage.runSnow = () => {
+      //(this.music.isPlay)?newPage.    
+      //this.isMusicPlay = true; 
+      this.snow.play();
+    }
+
+
 
     this.currentPage = newPage;
   }

@@ -23,6 +23,7 @@ export default class TreesPage extends Page {
   audioAndSnow: SettingPanel;
   snow: Snowfall;
   playMusic: () => void;
+  fallSnow: () => void;
   
   constructor(parentNode: HTMLElement, data:IData) {
     super(parentNode);
@@ -49,7 +50,8 @@ export default class TreesPage extends Page {
     this.audioAndSnow = new SettingPanel(this.toys.node);
     //if(app.this.audioAndSnow.node.classList.add('play')
     this.audioAndSnow.showSnow = () => {
-     setInterval(this.createSnow, 100);      
+      this.runSnow();
+     //const snow = setInterval(this.createSnow, 100);      
     }
     this.audioAndSnow.playMusic = () =>{
       //console.log('music')
@@ -60,10 +62,10 @@ export default class TreesPage extends Page {
 
  
 
-  createSnow(){
-    this.snow = new Snowfall(document.body);
-   // this.snow.node.classList.add('go');
-  }
+  // createSnow(){
+  //   this.snow = new Snowfall(document.body);
+  //  // this.snow.node.classList.add('go');
+  // }
 
 
 

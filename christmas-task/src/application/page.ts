@@ -9,6 +9,7 @@ export default class Page extends Control{
   canvas: CanvasTrees;   ///
   content: any;  ///
   playMusic: () => void;
+  runSnow: () => void;
   updatePage(arg0: IToysData[]) {
     throw new Error('Method not implemented.');
   }
