@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
+		<style>
+			.svg-box{
+				display: flex;
+  			flex-wrap: wrap;
+  			justify-content: space-between;
+			}
+
+			.svg-1 path, 
+			.svg-2 path, 
+			.svg-3 path{
+				fill: none;
+  			stroke: #000;
+  			stroke-linecap: round;
+  			stroke-linejoin: round;
+  			transition: 0.2s;
+			}
+			.svg-1:hover path {
+				 transition: 0.2s;
+ 				 d: path("M8,2 L2,8");
+			}
+			.svg-2:hover path{
+				transition: 0.2s;
+				d: path("M2,2 L5,8 L8,2");
+			}
+			.svg-3:hover path{
+				transition: 0.2s;
+					d: path("M2,2 Q2,8 8,8");
+			}
+			.svg-1:hover,
+			.svg-2:hover, 
+			.svg-3:hover
+			{
+				cursor: pointer;
+			}
+			.svg-1, 
+			.svg-2, 
+			.svg-3{
+				width: 30%;
+  			height: 30%;
+				background: #eee;
+			}
+			.section-coordinates{
+				display: flex;
+				column-gap: 30px;
+			}
+			.parag-code{
+				text-align: left;
+				font-size: 28px;
+			}
+			
+
+		</style>
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-color="rgb(70, 70, 255)">
+          <h1>SVG</h1>
+          <h3>Coordinates, Basic Shapes, Accessibility, Animations</h3>
+					<svg  width="150" height="200">
+  <circle fill="#fff" stroke="none" cx="30" cy="50" r="10">
+    <animate
+      attributeName="opacity"
+      dur="1s"
+      values="0;1;0"
+      repeatCount="indefinite"
+      begin="0.1"/>    
+  </circle>
+  <circle fill="#fff" stroke="none" cx="70" cy="50" r="10">
+    <animate
+      attributeName="opacity"
+      dur="1s"
+      values="0;1;0"
+      repeatCount="indefinite" 
+      begin="0.2"/>       
+  </circle>
+  <circle fill="#fff" stroke="none" cx="110" cy="50" r="10">
+    <animate
+      attributeName="opacity"
+      dur="1s"
+      values="0;1;0"
+      repeatCount="indefinite" 
+      begin="0.3"/>     
+  </circle>
+</svg>
+        </section>
+        <section data-background-color="rgb(180, 187, 196)">
+          <h2>INTRO</h2>
+          <p>
+            SVG (Scalable Vector Graphics) are an XML-based markup language for
+            describing two-dimensional based vector graphics.
+          </p>
+					<pre>
+						<code>
+							<svg ...>
+								<ellipse class="my-ellipse" .../>
+								<path class="my-path" .../>
+							</svg>
+						</code>
+					</pre>
+        </section>
+        <section data-background-color="rgb(145, 202, 209)">
+          <h2>Coordinates and position</h2>
+					<div class = 'section-coordinates'>
+          <img src="./assets/canvas_default_grid.png" alt="coordinate-system" />
+          <p class ="parag-code">
+            SVG uses a coordinate system similar to the one used by canvas. That
+            is, the top left corner of the document is considered to be the
+            point (0,0). <br> <br> Example: <br> &lt;rect x="0" y="0" width="100" height="100" /&gt;
+          </p>
+				</div>
+					<p class="fragment" data-fragment-index="1">&lt;svg width="100" height="100"&gt;</p>
+					<p class="fragment" data-fragment-index="2">&lt;svg width="200" height="200" viewBox="0 0 100 100"&gt;</p>
+					
+        </section>
+        <section data-background-color="rgb(10, 117, 173)">
+					<section>
+						<h2>Basic shapes</h2>
+						<hr>
+						<ul>
+							<li>Rectangle</li>
+							<li>Circle</li>
+							<li>Ellipse</li>
+							<li>Line</li>
+							<li>Polyline</li>
+							<li>Polygone</li>
+							<li>Path</li>
+						</ul>
+					</section>
+          <section>
+            <h2>Rectangle</h2>
+						<hr>
+
+            <svg
+              width="250"
+              height="250"
+            >
+              <rect
+                x="10"
+                y="10"
+                width="230"
+                height="130"
+                stroke="red"
+                fill="yellow"
+                stroke-width="5"
+              />
+              <rect
+                x="90"
+                y="40"
+                rx="10"
+                ry="10"
+                width="70"
+                height="70"
+                stroke="black"
+                fill="green"
+                stroke-width="10"
+              />
+            </svg>
+
+            <pre> 
+							<code>	
+	<svg  width="250" height="250">
+    <rect x="10" y="10" width="230" height="130" 
+								stroke="red" fill="yellow" stroke-width="5"/>
+	  <rect x="90" y="40" rx="10" ry="10" width="70" height="70"
+								 stroke="black" fill="green" stroke-width="10"/>
+	</svg>
+						</code>
+						</pre>
+          </section>
+          <section>
+						
+							<h2>Circle</h2>
+							<hr>
+								<svg width="250" height="250">
+									<circle cx="125" cy="125" r="100" stroke="red" fill="transparent" stroke-width="5"/>
+								</svg>
+								<pre>
+									<code>
+	<svg>
+
+    <circle circle cx="125" cy="125" r="100" stroke="red" fill="transparent" stroke-width="5"/>
+	
+	</svg>
+									</code>
+								</pre>
+					</section>
+         
+          <section>
+						<h2>Ellipse</h2>
+						<hr>
+						<svg width="250" height="250">
+							<ellipse cx="125" cy="75" rx="100" ry="55" stroke="red" fill="blue" stroke-width="10"/>
+						</svg>
+						<pre>
+							<code>
+<svg width="250" height="250">								
+	<ellipse  cx="125" cy="75" rx="100" ry="55" stroke="red" fill="blue" stroke-width="10"/>
+</svg>							
+	</code>
+							</pre>
+
+					</section>
+          <section>
+						<h2>Line, Polyline</h2>
+						<hr>
+						<svg width="300" height="250"> 
+							<line x1="10" x2="50" y1="10" y2="150" stroke="orange" stroke-width="10"/>
+							<polyline points="260 10 160 10 260 150 160 150 " stroke="orange" fill="transparent" stroke-width="7"/>
+						</svg>
+						<pre>
+							<code>
+<svg width="250" height="250"> 
+	<line x1="10" x2="50" y1="10" y2="150" stroke="orange" stroke-width="10"/>
+	<polyline points="260 10 160 10 260 150 160 150 " stroke="orange" fill="transparent" stroke-width="7"/>
+</svg>						
+	</code>
+							</pre>
+					</section>
+					<section>
+						<h2>Polygone</h2>
+						<hr>
+						<svg width = "150" height = "150"  > 
+							<polygon points="50 50 50 100 100 100 100 50 75 10" stroke="yellow" fill="transparent" stroke-width="7"/>
+						</svg>
+						<pre>
+							<code>
+<svg width="250" height="250"> 
+	<polygon points="50 50 50 100 100 100 100 50 75 10"
+      stroke="yellow" fill="transparent" stroke-width="5"/>
+</svg>						
+	</code>
+							</pre>
+					</section>
+        <section>
+					<h2>Path</h2>
+					<hr>
+					<svg width="250" height="250"> 
+						<path d="M 10 210 C 10 210, 100 0, 210 210" stroke="red" fill="none" stroke-width="10"/>
+						<path d="M 10 190 C 10 190, 100 5, 210 190" stroke="orange" fill="none" stroke-width="10"/>
+						<path d="M 10 170 C 10 170, 100 10, 210 170" stroke="yellow" fill="none" stroke-width="10"/>
+					</svg>
+					<pre>
+						<code>
+<svg width="250" height="250"> 
+	<path d="M 10 210 C 10 210, 100 0, 210 210" stroke="red" fill="none" stroke-width="10"/>
+	<path d="M 10 190 C 10 190, 100 5, 210 190" stroke="orange" fill="none" stroke-width="10"/>
+	<path d="M 10 170 C 10 170, 100 10, 210 170" stroke="yellow" fill="none" stroke-width="10"/>
+</svg>						
+</code>
+						</pre>
+				</section>
+
+
+        </section>
+
+        
+        <section>
+					<h2>SVG Accessibility</h2>
+					<ul> If SVG does not contain any visible text that describes the graphic, 
+						we need to add the alternative text (invisible) by:
+						<li>
+							inside the &lt;svg&gt;, add &lt;title&gt;
+						</li>
+						<li>
+							a description can be added if needed
+						</li>
+					</ul>
+
+
+						<pre>
+							<code>
+<svg viewBox="0 0 720 800" aria-labelledby="uniqueTitleID uniqueDescID" role="img">
+	<title id="uniqueTitleID">The title of the SVG</title>
+	<desc id="uniqueDescID">A longer, more complete description for complex graphics.</desc>
+</svg>
+
+							</code>
+						</pre>
+					
+
+				</section>
+        
+				<section>
+					<section>
+						<h2>SVG animation with SMIL</h2>
+						<ul> SMIL allows you to:
+							<li>animate the numeric attributes of an element</li>
+							<li>animate transform attributes </li>
+							<li>follow a motion path</li>
+						</ul>
+						<svg width="400" height="200">
+							<rect	
+							x='0'
+							y='25'
+							width="50"
+							height="50"
+							fill="green">
+							</rect>
+
+							<circle cx="180" cy="50" r="25" fill="blue" ></circle>
+
+							<polygon points='300, 40, 320, 40, 325, 25, 330, 40, 350, 40, 335, 50, 345, 75, 325, 60, 305, 75, 315, 50' stroke="yellow" fill="transparent" stroke-width="5"/>
+
+
+						</svg>
+
+					</section>
+						<section>
+						<h2>Animating attributes of an element</h2>
+						<p>
+							Add an &lt;animate&gt; element inside the attribute element, for example &lt;rect&gt;. 
+						</p> 
+
+						<svg width="350" height="100">
+							<rect	
+							width="70"
+							height="70"
+							fill="green">
+								<animate attributeName="rx" values="0;35;0"
+									  dur="10s" fill="green" repeatCount="indefinite" />
+								<animate 	 attributeName="x" values="150;50;150"
+										dur="10s" fill="green" repeatCount="indefinite" />
+								<animate 	 attributeName="width" values="70;270;70"
+										dur="10s" fill="green" repeatCount="indefinite" />
+							</rect>
+						</svg>
+						<pre>
+							<code>
+<svg width="350" height="100">
+	<rect	
+	width="70"
+	height="70"
+	fill="green">
+		<animate attributeName="rx" values="0;35;0"
+				dur="10s" fill="green" repeatCount="indefinite" />
+		<animate 	 attributeName="x" values="150;50;150"
+				dur="10s" fill="green" repeatCount="indefinite" />
+		<animate 	 attributeName="width" values="70;270;70"
+				dur="10s" fill="green" repeatCount="indefinite" />
+	</rect> </svg>
+							</code>
+						</pre>
+
+					</section>
+					<section>
+
+						<h2>Animating the transform attributes</h2>
+						<p>
+							The &lt;animateTransform&gt; element let you animate transform attributes. 
+						</p> 
+
+						<svg width="350" height="100">
+							<circle cx="180" cy="50" r="25" fill="blue" >
+								<animateTransform
+									 attributeName="transform"
+									 begin="0s"
+									 dur="5s"
+									 type="rotate"
+									 from="0 160 50"
+									 to="360 160 50"
+									 repeatCount="indefinite"
+								/>
+							</circle>
+						</svg>
+						<pre>
+							<code>
+<svg width="350" height="100">
+	<circle cx="180" cy="50" r="25" fill="blue" >
+		<animateTransform
+			 attributeName="transform"
+			 begin="0s"
+			 dur="5s"
+			 type="rotate"
+			 from="0 160 50"
+			 to="360 160 50"
+			 repeatCount="indefinite"
+		/>
+	</circle>
+</svg>
+							</code>
+						</pre>
+
+					</section>
+					<section>
+						<h2>Animation following a path</h2>
+						<p>
+	            The &lt;animateMotion&gt; element lets you animate
+								 an element position and rotation according to a path. 
+								<br> The path is defined the same way as in &lt;path&gt;.
+						</p> 
+
+						<svg  width="200" height="100">
+							<path fill="none" stroke="lightgrey"
+								d="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
+						
+							<circle r="15" fill="red">
+								<animateMotion dur="10s" repeatCount="indefinite"
+									path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
+							</circle>
+						</svg>
+						<pre>
+							<code>
+<svg  width="200" height="100">
+	<path fill="none" stroke="lightgrey"
+		d="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
+
+	<circle r="15" fill="red">
+		<animateMotion dur="10s" repeatCount="indefinite"
+			path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
+	</circle>
+</svg>
+							</code>
+						</pre>
+
+					</section>
+				
+				</section>
+				
+
+        <section>
+					<h2>animating SVG with CSS</h2>
+					<div class = "svg-box">
+						<svg viewBox="0 0 10 10" class="svg-1">
+						  <path fill="none" stroke="lightgrey" d="M2,2 L8,8"  />
+						</svg>
+						
+						<svg viewBox="0 0 10 10" class="svg-2">
+							<path d="M2,8 L5,2 L8,8" />
+						</svg>
+						
+						<svg viewBox="0 0 10 10" class="svg-3">
+							<path d="M2,2 Q8,2 8,8" />
+						</svg>
+					</div>
+					
+				</section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
