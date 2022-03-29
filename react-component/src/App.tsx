@@ -1,16 +1,19 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import {BrowserRouter, Route, Routes, Link, Outlet} from 'react-router-dom';
 import './App.css';
+import NavBar from './components/NavBar';
+import AboutUs from './routes/about';
+import Error404 from './routes/error';
+import Home from './routes/home';
+
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <header className="App-header">
-        <nav className='App-nav'>
-          <Link className='App-link' to='/about'>About us</Link>
-        </nav>
+        <NavBar/>
       </header>
-      <Outlet/>
+      <Outlet />
     </div>
   );
 }
