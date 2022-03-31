@@ -1,0 +1,16 @@
+.counterContainer{
+   display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.btn{
+  width: 15%;
+  height: 20px;
+  font-size: 16px;
+}
+
+.inputCount{
+  width: 60%;
+  text-align: center;
+}

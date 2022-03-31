@@ -1,0 +1,26 @@
+.btn{
+  width: 70px;
+  height: 30px;
+  border: 1px solid rgb(39, 61, 39);
+  box-shadow: 3px 3px 3px rgb(102, 99, 99);
+  padding: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btnImage{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  
+}
+
+.btnName{
+  
+  
+}

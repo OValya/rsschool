@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import classes from './ClassCounter.module.css'
 
@@ -11,6 +12,7 @@ export default class ClassCounter extends Component<Props, State> {
     this.state = {count: 0}
     this.increment = this.increment.bind(this)
     this.decrement = this.decrement.bind(this)
+    this.onChangeHandler = this.onChangeHandler.bind(this)
   }
 
   increment() {
@@ -21,11 +23,18 @@ export default class ClassCounter extends Component<Props, State> {
     this.setState({count: this.state.count - 1})
   }
  
+  onChangeHandler(event:React.ChangeEvent<HTMLInputElement>){
+    this.setState({count: parseInt(event.target.value, 10)})
+  }
   render() {
     return (
-      <div className={classes.counterContainer}>
+      <div className={classes.counterContainer} >
         <button className={classes.btn} onClick={this.decrement}> - </button>
-        <input type="text" style={{ width: '50px' }} value={this.state.count} />
+        <input className={classes.inputCount}
+               type="text" 
+                
+               value={this.state.count} 
+               onChange={this.onChangeHandler} />
         <button className={classes.btn} onClick={this.increment}> + </button>
       </div>
     );

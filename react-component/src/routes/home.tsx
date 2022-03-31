@@ -5,7 +5,7 @@ export default function Home(){
   return(
     <main>
       <ClassSearch/>
-      <ClassCards/>
+      <ClassCards cost={100} name={'Sofa'} img={'/svg/cart.svg'} stock={true}/>
     </main>
   )
 }
