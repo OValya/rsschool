@@ -1,0 +1,33 @@
+[
+{
+  "name":"chair",
+  "cost":"100",
+  "stock": true,
+  "img": 1
+},
+{
+  "name":"sofa",
+  "cost":"500",
+  "stock": true,
+  "img": 2
+},
+{
+  "name":"table",
+  "cost":"300",
+  "stock": false,
+  "img": 3
+},
+{
+  "name":"shelf",
+  "cost":"50",
+  "stock": true,
+  "img": 4
+},
+{
+  "name":"wardrobe",
+  "cost":"800",
+  "stock": false,
+  "img": 5
+}
+
+]
